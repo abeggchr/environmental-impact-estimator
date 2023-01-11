@@ -37,9 +37,9 @@ export class Impact {
     }
   }
 
-  add(key: string, impact: Impact): void {
+  add(keyAndImpact: [string, Impact]): void {
     if (this._kWh === 0 && this._gC02eq == 0) {
-      this._children.set(key, impact);
+      this._children.set(keyAndImpact[0], keyAndImpact[1]);
     } else {
       throw new Error("can not add to leaf impact");
     }
@@ -48,7 +48,7 @@ export class Impact {
   print(key: string, parentKWh: number = 0, parentGC02eq: number = 0): string {
     let lines = [];
     let childKWhPercentage = parentKWh === 0 ? 1 : this.kWh / parentKWh;
-    let childGC02eqPercentage = parentGC02eq === 0 ? 1 :this.gC02eq / parentGC02eq;
+    let childGC02eqPercentage = parentGC02eq === 0 ? 1 : this.gC02eq / parentGC02eq;
     lines.push(`${key},${this.kWh},${childKWhPercentage},${this.gC02eq},${childGC02eqPercentage}`);
     for (let [childKey, value] of this._children) {
       if (value) {
@@ -56,5 +56,9 @@ export class Impact {
       }
     }
     return lines.join("\n");
+  }
+
+  get(key: string) {
+    return this._children.get(key);
   }
 }

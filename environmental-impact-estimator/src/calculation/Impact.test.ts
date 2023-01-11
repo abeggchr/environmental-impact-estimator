@@ -1,5 +1,5 @@
-import { assert, beforeEach, describe, expect, test } from "vitest";
-import { Impact } from "./Impact";
+import {beforeEach, describe, expect, test} from "vitest";
+import {Impact} from "./Impact";
 
 describe("Impact", () => {
   describe("when initialized with 0", () => {
@@ -15,8 +15,8 @@ describe("Impact", () => {
 
     describe("when adding impacts", () => {
       beforeEach(() => {
-        sut.add("a", new Impact(3, 4));
-        sut.add("b", new Impact(5, 6));
+        sut.add(["a", new Impact(3, 4)]);
+        sut.add(["b", new Impact(5, 6)]);
       });
 
       test("sums up impact values", () => {
@@ -44,7 +44,7 @@ root > b,5,0.625,6,0.6`);
     });
 
     test("can not add another impact", () => {
-      expect(() => sut.add("a", new Impact())).toThrow();
+      expect(() => sut.add(["a", new Impact()])).toThrow();
     });
 
     test("prints path and values", () => {
