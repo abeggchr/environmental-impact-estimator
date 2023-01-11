@@ -16,7 +16,7 @@ export class Impact {
       let sum = 0;
       for (let value of this._children.values()) {
         if (value) {
-          sum += value._kWh;
+          sum += value.kWh;
         }
       }
       return sum;
@@ -30,16 +30,16 @@ export class Impact {
       let sum = 0;
       for (let value of this._children.values()) {
         if (value) {
-          sum += value._gC02eq;
+          sum += value.gC02eq;
         }
       }
       return sum;
     }
   }
 
-  add(keyAndImpact: [string, Impact]): void {
-    if (this._kWh === 0 && this._gC02eq == 0) {
-      this._children.set(keyAndImpact[0], keyAndImpact[1]);
+  add(key: string, impact: Impact): void {
+    if (this._kWh === 0 && this._gC02eq === 0) {
+      this._children.set(key, impact);
     } else {
       throw new Error("can not add to leaf impact");
     }

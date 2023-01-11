@@ -7,20 +7,22 @@ export interface TrafficTypes {
 
 export interface ITeam {
 
-    size: number;
+    teamName: string;
+
+    teamSize_nr: number;
 
     duration_years: number;
 
-    commuteModalSplit_Percentage: TrafficTypes;
+    commuteModalSplit_percentage: TrafficTypes;
 
     commuteEmission_gC02eqPerKm: TrafficTypes;
 
-    commuteDistance_Km: number,
+    commuteDistance_km: number,
 
     workingDays_perYear: number;
     workingHours_perDay: number;
 
-    workLocation_Percentage: {
+    workLocation_percentage: {
         office: number,
         home: number
     }
