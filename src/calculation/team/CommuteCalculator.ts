@@ -1,5 +1,6 @@
 import {ITeam, TrafficTypes} from "./ITeam";
 import {Impact} from "../Impact";
+import {totalWorkingDays} from "./totalWorkingDays";
 
 export class CommuteCalculator {
 
@@ -12,12 +13,8 @@ export class CommuteCalculator {
         return impact;
     }
 
-    private totalWorkingDays(team: ITeam) {
-        return team.workingDays_perYear * team.duration_years * team.teamSize_nr;
-    }
-
     private calculateCommute(team: ITeam, modal: keyof TrafficTypes): [keyof TrafficTypes, Impact] {
-        const gC02eq = this.totalWorkingDays(team) * team.commuteDistance_km * team.workLocation_percentage.office * team.commuteEmission_gC02eqPerKm[modal] * team.commuteModalSplit_percentage[modal];
+        const gC02eq = totalWorkingDays(team) * team.commuteDistance_km * team.workLocation_percentage.office * team.commuteEmission_gC02eqPerKm[modal] * team.commuteModalSplit_percentage[modal];
         return [modal, new Impact(0, gC02eq)];
     }
 }

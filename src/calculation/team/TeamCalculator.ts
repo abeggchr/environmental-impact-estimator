@@ -2,23 +2,22 @@ import {Impact} from "../Impact";
 import {ITeam} from "./ITeam";
 import {CommuteCalculator} from "./CommuteCalculator";
 import {WorkCalculator} from "./WorkCalculator";
+import {TravelCalculator} from "./TravelCalculator";
 
 export class TeamCalculator {
 
-    constructor(private commuteCalculator = new CommuteCalculator(), private workCalculator = new WorkCalculator()) {
+    constructor(private commuteCalculator = new CommuteCalculator(), private workCalculator = new WorkCalculator(), private travelCalculator = new TravelCalculator()) {
     }
 
     public calculate(team: ITeam): Impact {
 
+        // Not included:
         // videoconference
-        // duration per working day * emission per duration * total number of working days * teamsize
-
-        // flights
-        // flight emission per visit and person * visit numbererval per working day * teamsize * total number of working days
 
         const impact = new Impact();
         impact.add("commute", this.commuteCalculator.calculate(team));
         impact.add("work", this.workCalculator.calculate(team));
+        impact.add("travel", this.travelCalculator.calculate(team));
         return impact;
     }
 }

@@ -22,5 +22,7 @@ export const testTeam: ITeam = {
     workLocation_percentage: {home: 0.55, office: 0.45},
     workingDays_perYear: 6,
     workingHours_perDay: 7,
-    powerUsageWorkplace_W: 8
+    powerUsageWorkplace_W: 8,
+    weeksBetweenTravels_nr: 9,
+    travelDistributionFrom_percentage: {mainLocation: 0.3, remoteLocation: 0.6},
 };

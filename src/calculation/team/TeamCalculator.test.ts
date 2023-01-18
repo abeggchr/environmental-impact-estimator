@@ -19,6 +19,14 @@ vi.mock('./WorkCalculator', () => {
     return {WorkCalculator};
 })
 
+vi.mock('./TravelCalculator', () => {
+    const TravelCalculator = vi.fn();
+    TravelCalculator.prototype.calculate = vi.fn(() => {
+        return new Impact(3, 3);
+    })
+    return {TravelCalculator};
+})
+
 describe("TeamCalculator", () => {
     test("calls commute calculators", () => {
         const sut = new TeamCalculator();
@@ -34,6 +42,14 @@ describe("TeamCalculator", () => {
         expect(actual.get("work")).not.toBeUndefined();
         expect(actual.get("work")!.kWh).toBe(2);
         expect(actual.get("work")!.gC02eq).toBe(2);
+    });
+
+    test("calls travel calculators", () => {
+        const sut = new TeamCalculator();
+        const actual = sut.calculate(testTeam);
+        expect(actual.get("travel")).not.toBeUndefined();
+        expect(actual.get("travel")!.kWh).toBe(3);
+        expect(actual.get("travel")!.gC02eq).toBe(3);
     });
 });
 
