@@ -26,5 +26,15 @@ describe("TravelCalculator", () => {
         expect(impact!.gC02eq).toBe(expected);
         expect(impact!.kWh).toBe(0);
     });
+
+    test("when team is not distributed, returns no emissions", () => {
+        const impact = new TravelCalculator().calculate({
+            ...testTeam,
+            teamDistribution_nr: {remoteLocation: 0, mainLocation: 10}
+        });
+
+        expect(impact!.gC02eq).toBe(0);
+        expect(impact!.kWh).toBe(0);
+    });
 });
 
