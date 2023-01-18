@@ -1,4 +1,4 @@
-import {ITeam, TrafficTypes} from "../../scenario/team/ITeam";
+import {ITeam, TrafficTypes} from "./ITeam";
 import {Impact} from "../Impact";
 
 export class CommuteCalculator {

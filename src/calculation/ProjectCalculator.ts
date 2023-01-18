@@ -1,6 +1,6 @@
 import {Impact} from "./Impact";
 import {TeamCalculator} from "./team/TeamCalculator";
-import {IProject} from "../scenario/IProject";
+import {IProject} from "./IProject";
 
 export class ProjectCalculator {
 

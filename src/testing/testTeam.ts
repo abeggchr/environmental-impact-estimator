@@ -1,4 +1,4 @@
-import {ITeam} from "../../scenario/team/ITeam";
+import {ITeam} from "../calculation/team/ITeam";
 
 export const testTeam: ITeam = {
     teamName: "test",

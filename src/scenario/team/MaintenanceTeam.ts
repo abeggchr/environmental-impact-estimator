@@ -2,19 +2,11 @@ import {DevelopmentTeam} from "./DevelopmentTeam";
 
 export class MaintenanceTeam extends DevelopmentTeam {
 
-    get teamName() {
-        return "maintenance";
-    }
+    override teamName = "maintenance";
 
-    get duration_years() {
-        return 6;
-    }
+    override duration_years = 6;
 
-    get teamSize_nr() {
-        return 2;
-    }
+    override teamSize_nr = 2;
 
-    get distribution_percentage() {
-        return {mainLocation: 1, remoteLocation: 0};
-    }
+    override distribution_percentage = {mainLocation: 1, remoteLocation: 0};
 }

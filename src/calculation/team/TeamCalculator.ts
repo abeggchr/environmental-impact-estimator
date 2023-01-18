@@ -1,5 +1,5 @@
 import {Impact} from "../Impact";
-import {ITeam} from "../../scenario/team/ITeam";
+import {ITeam} from "./ITeam";
 import {CommuteCalculator} from "./CommuteCalculator";
 
 export class TeamCalculator {

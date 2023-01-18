@@ -1,6 +1,6 @@
 import {describe, expect, test} from "vitest";
 import {CommuteCalculator} from "./CommuteCalculator";
-import {testTeam} from "./testTeam";
+import {testTeam} from "../../testing/testTeam";
 
 describe("CommuteCalculator", () => {
     test("calculates individual traffic combustion impact", () => {

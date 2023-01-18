@@ -1,7 +1,7 @@
 import {describe, expect, test, vi} from "vitest";
 import {ProjectCalculator} from "./ProjectCalculator";
 import {Impact} from "./Impact";
-import {testTeam} from "./team/testTeam";
+import {testTeam} from "../testing/testTeam";
 
 
 vi.mock('./team/TeamCalculator', () => {

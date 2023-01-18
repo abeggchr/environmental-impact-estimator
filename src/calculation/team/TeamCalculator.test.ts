@@ -1,5 +1,5 @@
 import {describe, expect, test, vi} from "vitest";
-import {testTeam} from "./testTeam";
+import {testTeam} from "../../testing/testTeam";
 import {TeamCalculator} from "./TeamCalculator";
 import {Impact} from "../Impact";
 
