@@ -1,18 +1,14 @@
 import {Impact} from "../Impact";
 import {ITeam} from "./ITeam";
 import {CommuteCalculator} from "./CommuteCalculator";
+import {WorkCalculator} from "./WorkCalculator";
 
 export class TeamCalculator {
 
-    constructor(private commuteCalculator = new CommuteCalculator()) {
+    constructor(private commuteCalculator = new CommuteCalculator(), private workCalculator = new WorkCalculator()) {
     }
 
     public calculate(team: ITeam): Impact {
-
-        // work
-        // const officeWork_kWh = totalWorkingDays * team.workLocation_Percentage.office * team.workingHours_perDay * team.distribution_percentage.mainLocation * team.energyEmission_gC02eqPerKWh.mainLocation;
-        // office work: working hours per day * energy consumption per working hour * percentage at home * total number of working days
-        // home office work: working hours per day * energy consumption per working hour * percentage remote * total number of working days
 
         // videoconference
         // duration per working day * emission per duration * total number of working days * teamsize
@@ -22,6 +18,7 @@ export class TeamCalculator {
 
         const impact = new Impact();
         impact.add("commute", this.commuteCalculator.calculate(team));
+        impact.add("work", this.workCalculator.calculate(team));
         return impact;
     }
 }

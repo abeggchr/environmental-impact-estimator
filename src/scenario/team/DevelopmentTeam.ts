@@ -69,4 +69,11 @@ export class DevelopmentTeam implements ITeam {
     workingDays_perYear = 251;
 
     workingHours_perDay = 8.4;
+
+    /**
+     * Measured my own desk.
+     * Includes laptop, monitor.
+     * Excludes phone, network, lightning, heating, cooling.
+     */
+    powerUsageWorkplace_W = 125;
 }

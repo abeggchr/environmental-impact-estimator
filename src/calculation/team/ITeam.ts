@@ -5,6 +5,11 @@ export interface TrafficTypes {
     publicTraffic: number
 }
 
+export interface LocationTypes {
+    mainLocation: number,
+    remoteLocation: number,
+}
+
 export interface ITeam {
 
     teamName: string;
@@ -27,13 +32,9 @@ export interface ITeam {
         home: number
     }
 
-    distribution_percentage: {
-        mainLocation: number,
-        remoteLocation: number,
-    }
+    distribution_percentage: LocationTypes;
 
-    energyEmission_gC02eqPerKWh: {
-        mainLocation: number,
-        remoteLocation: number,
-    }
+    energyEmission_gC02eqPerKWh: LocationTypes;
+
+    powerUsageWorkplace_W: number
 }

@@ -3,12 +3,15 @@ import {CommuteCalculator} from "./CommuteCalculator";
 import {testTeam} from "../../testing/testTeam";
 
 describe("CommuteCalculator", () => {
+    const baseExpectation = testTeam.workingDays_perYear * testTeam.duration_years * testTeam.teamSize_nr * testTeam.workLocation_percentage.office;
+
     test("calculates individual traffic combustion impact", () => {
-        const expected = 1 * 0.25 * 42 * 100 * 0.5;
+        const expected = baseExpectation * 42 * 100 * 0.2;
         const impact = new CommuteCalculator().calculate({
             ...testTeam,
             commuteDistance_km: 42,
-            commuteEmission_gC02eqPerKm: {...testTeam.commuteEmission_gC02eqPerKm, individualTrafficCombustion: 100}
+            commuteEmission_gC02eqPerKm: {...testTeam.commuteEmission_gC02eqPerKm, individualTrafficCombustion: 100},
+            commuteModalSplit_percentage: {...testTeam.commuteModalSplit_percentage, individualTrafficCombustion: 0.2}
         });
         const actual = impact.get("individualTrafficCombustion");
         expect(actual!.gC02eq).toBe(expected);
@@ -16,11 +19,12 @@ describe("CommuteCalculator", () => {
     });
 
     test("calculates individual traffic slow impact", () => {
-        const expected = 1 * 0.25 * 42 * 50 * 0.5;
+        const expected = baseExpectation * 42 * 50 * 0.3;
         const impact = new CommuteCalculator().calculate({
             ...testTeam,
             commuteDistance_km: 42,
-            commuteEmission_gC02eqPerKm: {...testTeam.commuteEmission_gC02eqPerKm, individualTrafficSlow: 50}
+            commuteEmission_gC02eqPerKm: {...testTeam.commuteEmission_gC02eqPerKm, individualTrafficSlow: 50},
+            commuteModalSplit_percentage: {...testTeam.commuteModalSplit_percentage, individualTrafficSlow: 0.3}
         });
         const actual = impact.get("individualTrafficSlow");
         expect(actual!.gC02eq).toBe(expected);
@@ -28,11 +32,12 @@ describe("CommuteCalculator", () => {
     });
 
     test("calculates individual traffic electric impact", () => {
-        const expected = 1 * 0.25 * 84 * 25 * 0.5;
+        const expected = baseExpectation * 84 * 25 * 0.4;
         const impact = new CommuteCalculator().calculate({
             ...testTeam,
             commuteDistance_km: 84,
-            commuteEmission_gC02eqPerKm: {...testTeam.commuteEmission_gC02eqPerKm, individualTrafficElectric: 25}
+            commuteEmission_gC02eqPerKm: {...testTeam.commuteEmission_gC02eqPerKm, individualTrafficElectric: 25},
+            commuteModalSplit_percentage: {...testTeam.commuteModalSplit_percentage, individualTrafficElectric: 0.4}
         });
         const actual = impact.get("individualTrafficElectric");
         expect(actual!.gC02eq).toBe(expected);
@@ -40,11 +45,12 @@ describe("CommuteCalculator", () => {
     });
 
     test("calculates public traffic impact", () => {
-        const expected = 1 * 0.25 * 21 * 25 * 0.5;
+        const expected = baseExpectation * 21 * 25 * 0.5;
         const impact = new CommuteCalculator().calculate({
             ...testTeam,
             commuteDistance_km: 21,
-            commuteEmission_gC02eqPerKm: {...testTeam.commuteEmission_gC02eqPerKm, publicTraffic: 25}
+            commuteEmission_gC02eqPerKm: {...testTeam.commuteEmission_gC02eqPerKm, publicTraffic: 25},
+            commuteModalSplit_percentage: {...testTeam.commuteModalSplit_percentage, publicTraffic: 0.5}
         });
         const actual = impact.get("publicTraffic");
         expect(actual!.gC02eq).toBe(expected);
