@@ -2,7 +2,7 @@ import './App.css'
 import {ProjectCalculator} from "./calculation/ProjectCalculator";
 import {BaselineProject} from "./scenario/BaselineProject";
 import {NoDistributedDevelopment} from "./decorator/team/NoDistributedDevelopment";
-import useCopyToClipboard from "./useCopyToClipboard";
+import useCopyToClipboard from "./util/useCopyToClipboard";
 
 function App() {
     const baseline = new ProjectCalculator().calculate(new BaselineProject());

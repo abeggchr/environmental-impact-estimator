@@ -12,7 +12,8 @@ export class TeamCalculator {
     public calculate(team: ITeam): Impact {
 
         // Not included:
-        // videoconference
+        // * videoconference
+        // * manufacturing of hardware used
 
         const impact = new Impact();
         impact.add("commute", this.commuteCalculator.calculate(team));
