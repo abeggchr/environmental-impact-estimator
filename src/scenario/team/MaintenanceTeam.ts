@@ -6,7 +6,5 @@ export class MaintenanceTeam extends DevelopmentTeam {
 
     override duration_years = 6;
 
-    override teamSize_nr = 2;
-
-    override distribution_percentage = {mainLocation: 1, remoteLocation: 0};
+    override teamDistribution_nr = {mainLocation: 2, remoteLocation: 0};
 }

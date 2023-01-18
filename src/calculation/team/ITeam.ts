@@ -14,8 +14,6 @@ export interface ITeam {
 
     teamName: string;
 
-    teamSize_nr: number;
-
     duration_years: number;
 
     commuteModalSplit_percentage: TrafficTypes;
@@ -32,7 +30,7 @@ export interface ITeam {
         home: number
     }
 
-    distribution_percentage: LocationTypes;
+    teamDistribution_nr: LocationTypes;
 
     energyEmission_gC02eqPerKWh: LocationTypes;
 

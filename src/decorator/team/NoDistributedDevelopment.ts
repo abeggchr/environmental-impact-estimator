@@ -4,8 +4,8 @@ import {ITeam} from "../../calculation/team/ITeam";
 export class NoDistributedDevelopment extends ProjectDecorator {
     protected override decorateTeam(team: ITeam): ITeam {
         let out = Object.assign(team, {
-            distribution_percentage: {
-                mainLocation: 1,
+            teamDistribution_nr: {
+                mainLocation: team.teamDistribution_nr.mainLocation + team.teamDistribution_nr.remoteLocation,
                 remoteLocation: 0
             }
         });

@@ -28,7 +28,6 @@ export class DevelopmentTeam implements ITeam {
         publicTraffic: 60
     };
 
-
     /**
      * Sources:
      * [1] https://www.bfs.admin.ch/bfs/en/home/statistics/mobility-transport/passenger-transport/commuting.html
@@ -46,18 +45,11 @@ export class DevelopmentTeam implements ITeam {
             publicTraffic: 0.27
         };
 
-
-    distribution_percentage = {mainLocation: 0.5, remoteLocation: 0.5};
-
+    teamDistribution_nr = {mainLocation: 0.5, remoteLocation: 0.5};
 
     duration_years = 1;
 
-
     energyEmission_gC02eqPerKWh = {mainLocation: 1, remoteLocation: 1};
-
-
-    teamSize_nr = 8;
-
 
     workLocation_percentage = {office: 0.5, home: 0.5};
 
@@ -76,4 +68,14 @@ export class DevelopmentTeam implements ITeam {
      * Excludes phone, network, lightning, heating, cooling.
      */
     powerUsageWorkplace_W = 125;
+
+    travelDistributionFrom_percentage = {mainLocation: 0.4, remoteLocation: 0.6};
+
+    /**
+     * ZRH - SOF, Economy
+     * according to myclimate.ch
+     */
+    travelEmission_gC02eqPerOnewayTravel = 210000;
+
+    weeksBetweenTravels_nr = 6;
 }

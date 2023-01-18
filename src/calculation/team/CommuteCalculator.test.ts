@@ -3,7 +3,7 @@ import {CommuteCalculator} from "./CommuteCalculator";
 import {testTeam} from "../../testing/testTeam";
 
 describe("CommuteCalculator", () => {
-    const baseExpectation = testTeam.workingDays_perYear * testTeam.duration_years * testTeam.teamSize_nr * testTeam.workLocation_percentage.office;
+    const baseExpectation = testTeam.workingDays_perYear * testTeam.duration_years * (testTeam.teamDistribution_nr.mainLocation + testTeam.teamDistribution_nr.remoteLocation) * testTeam.workLocation_percentage.office;
 
     test("calculates individual traffic combustion impact", () => {
         const expected = baseExpectation * 42 * 100 * 0.2;

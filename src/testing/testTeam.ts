@@ -1,6 +1,7 @@
 import {ITeam} from "../calculation/team/ITeam";
 
 export const testTeam: ITeam = {
+
     teamName: "test",
     commuteDistance_km: 1,
     commuteEmission_gC02eqPerKm: {
@@ -15,14 +16,14 @@ export const testTeam: ITeam = {
         individualTrafficSlow: 0.03,
         publicTraffic: 0.94
     },
-    distribution_percentage: {mainLocation: 0.5, remoteLocation: 0.5},
+    teamDistribution_nr: {mainLocation: 3, remoteLocation: 2},
     duration_years: 2,
     energyEmission_gC02eqPerKWh: {mainLocation: 3, remoteLocation: 4},
-    teamSize_nr: 5,
     workLocation_percentage: {home: 0.55, office: 0.45},
     workingDays_perYear: 6,
     workingHours_perDay: 7,
     powerUsageWorkplace_W: 8,
     weeksBetweenTravels_nr: 9,
     travelDistributionFrom_percentage: {mainLocation: 0.3, remoteLocation: 0.6},
+    travelEmission_gC02eqPerOnewayTravel: 10,
 };

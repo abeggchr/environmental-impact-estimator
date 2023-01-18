@@ -12,7 +12,7 @@ export class WorkCalculator {
     }
 
     private calculateWork(team: ITeam, location: keyof LocationTypes): [keyof LocationTypes, Impact] {
-        const kWh = totalWorkingDays(team) * team.workingHours_perDay * team.powerUsageWorkplace_W * team.distribution_percentage[location] / 1000;
+        const kWh = totalWorkingDays(team) * team.workingHours_perDay * team.powerUsageWorkplace_W * team.teamDistribution_nr[location] / 1000;
         return [location, new Impact(kWh, kWh * team.energyEmission_gC02eqPerKWh[location])];
     }
 }
