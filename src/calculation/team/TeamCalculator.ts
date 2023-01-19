@@ -6,7 +6,10 @@ import {TravelCalculator} from "./TravelCalculator";
 
 export class TeamCalculator {
 
-    constructor(private commuteCalculator = new CommuteCalculator(), private workCalculator = new WorkCalculator(), private travelCalculator = new TravelCalculator()) {
+    constructor(
+        private commuteCalculator = new CommuteCalculator(),
+        private workCalculator = new WorkCalculator(),
+        private travelCalculator = new TravelCalculator()) {
     }
 
     public calculate(team: ITeam): Impact {
