@@ -1,0 +1,58 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+[Browser] - HTTP
+
+note as BN
+  total 9000 users
+  1h of usage per day
+  used equally distributed between 6h-18h (not used between 18h-6h)
+  except: double usage during peak hours (11h-14h)
+  3 requests per minute and user
+  1 mb traffic per request
+end note
+
+BN .. [Browser]
+
+
+package "Servers" {
+  HTTP - [Web Server]
+  [Job Server]
+}
+
+note as WN
+  9000 usage hours / (12h+3h service hours) = 600 user hours per hour
+  2* 600 * 3 requests per minute / 60 = 60 requests per second at peak time
+  on average 1 mb traffic per request
+  one request takes 0.2s (including I/O and wait for DB)
+end note
+
+WN .. [Web Server]
+
+
+note as JN
+  0.5 jobs per user usage hour -> 300 jobs/hour -> 5 jobs/second (peak)
+  one request takes 1min (including I/O and wait for DB) (peak)
+end note
+
+JN .. [Job Server]
+
+
+note as DN
+  60 requests/second to web server (peak)
+  5 jobs/second in job server (peak)
+  15 read requests to DB per request and job
+  5 write requests to DB per web request and job
+end note
+
+database "Database" {
+   [DB]
+}
+
+DN .. [DB]
+
+[Web Server] --> [DB]
+[Web Server] --> [Job Server]
+[Job Server] --> [DB]
+
+@enduml
