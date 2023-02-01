@@ -10,7 +10,7 @@ describe("WorkEstimator", () => {
         const impact = new WorkEstimator().calculate({
             ...testTeam,
             teamDistribution_nr: {...testTeam.teamDistribution_nr, mainLocation: 0.6},
-            energyEmission_gC02eqPerKWh: {...testTeam.energyEmission_gC02eqPerKWh, mainLocation: 5}
+            emissionFactor_gC02eqPerKWh: {...testTeam.emissionFactor_gC02eqPerKWh, mainLocation: 5}
         });
         const actual = impact.get("mainLocation");
         expect(actual!.kWh).toBe(baseExpectation_kWh * 0.6);
@@ -21,7 +21,7 @@ describe("WorkEstimator", () => {
         const impact = new WorkEstimator().calculate({
             ...testTeam,
             teamDistribution_nr: {...testTeam.teamDistribution_nr, remoteLocation: 0.7},
-            energyEmission_gC02eqPerKWh: {...testTeam.energyEmission_gC02eqPerKWh, remoteLocation: 4}
+            emissionFactor_gC02eqPerKWh: {...testTeam.emissionFactor_gC02eqPerKWh, remoteLocation: 4}
         });
         const actual = impact.get("remoteLocation");
         expect(actual!.kWh).toBe(baseExpectation_kWh * 0.7);

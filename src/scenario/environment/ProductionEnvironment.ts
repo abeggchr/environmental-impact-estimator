@@ -2,10 +2,14 @@ import {Environment} from "./Environment";
 
 /**
  * The production environment consists of 3 servers:
- * - webserver (12 cores)
- * - db server (8 cores)
- * - job server (10 cores)
- * The baseline is a deployment of 3 physical servers
+ * - web server (requires 12 physical cores)
+ * - db server (requires 8 physical cores, memory-intensive, storage)
+ * - job server (requires 10 physical cores, compute-intensive)
+ *
+ * The baseline is a deployment of 3 virtual machines as recommended by the <a href='https://azure.microsoft.com/en-us/pricing/vm-selector'>Microsoft Azure VM selector tool</a>:
+ * - web server: VM "D16 v5" (16 vCPU, 64GB RAM)
+ * - db server: VM "E8as v5" (8 vCPU, 64GB RAM) + Premium SSD P15 (256 GB)
+ * - job server: VM "F16s v2" (16 vCPU, 32GB RAM, 128GB temp storage)
  */
 export class ProductionEnvironment extends Environment {
 

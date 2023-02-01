@@ -32,7 +32,7 @@ export interface ITeam {
 
     teamDistribution_nr: LocationTypes;
 
-    energyEmission_gC02eqPerKWh: LocationTypes;
+    emissionFactor_gC02eqPerKWh: LocationTypes;
 
     powerUsageWorkplace_W: number,
 
