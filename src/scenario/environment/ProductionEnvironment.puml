@@ -4,12 +4,12 @@
 [Browser] - HTTP
 
 note as BN
+  == Load ==
   total 9000 users
   1h of usage per day
   used equally distributed between 6h-18h (not used between 18h-6h)
   except: double usage during peak hours (11h-14h)
   3 requests per minute and user
-  1 mb traffic per request
 end note
 
 BN .. [Browser]
@@ -21,28 +21,41 @@ package "Servers" {
 }
 
 note as WN
-  9000 usage hours / (12h+3h service hours) = 600 user hours per hour
-  2* 600 * 3 requests per minute / 60 = 60 requests per second at peak time
-  on average 1 mb traffic per request
-  one request takes 0.2s (including I/O and wait for DB)
+  == Load ==
+  9000 user usage hours per day / (12h+3h service hours) = 600 user usage hours per hour
+  1200 user usage hours per hour (peak)
+  (1200 * 3 requests per minute) / 60 = **60 requests per second** (peak)
+  response time for one request is 200ms
+  1 mb traffic per request
+  == CPU ==
+  60 request per second * 0.2 seconds per request => 12 CPU
+  assuming CPU load per request is 20% => 4 CPU
+  aiming for a CPU load of 20% => 12 CPU
 end note
 
 WN .. [Web Server]
 
 
 note as JN
-  0.5 jobs per user usage hour -> 300 jobs/hour -> 5 jobs/second (peak)
-  one request takes 1min (including I/O and wait for DB) (peak)
+  == Load ==
+  (0.5 jobs per user usage hour) * (1200 user usage hours per hour) = 600 jobs per hour = **10 jobs per minute** (peak)
+  response time for one job is 1min
+  == CPU ==
+  10 jobs per minute * 1 minute per job => 10 CPU
 end note
 
 JN .. [Job Server]
 
 
 note as DN
-  60 requests/second to web server (peak)
-  5 jobs/second in job server (peak)
-  15 read requests to DB per request and job
-  5 write requests to DB per web request and job
+  == Load ==
+  60 requests/second to web server * 10 db queries per web request = 600 queries per second (web)
+  (10 jobs/minute to job server * 120 queries per job) / 60 = 20 queries per second (job)
+  total: **620 queries per second** / 37200 queries per min
+  == CPU ==
+  8 CPU
+  assuming CPU load per request is 20% and
+  aiming for 20% utilization => 8 CPU
 end note
 
 database "Database" {
@@ -55,4 +68,16 @@ DN .. [DB]
 [Web Server] --> [Job Server]
 [Job Server] --> [DB]
 
+note as D
+  12 CPU physisch
+  service time (20% web, 0.1s db)
+  response time (100%, 0.2s)
+  20% auslastung?
+WEB: 12 CPU, 20% utilization, bei 20% CPU last pro call auf webserver
+DB: 8 CPU, 20% utilization, pro call: 20% CPU (rest: warten auf: cache, disc, locks)
+Redundanz: 2x
+4x ThinkSystem ST650 V2, 1000W
+4kWH
+
+endnote
 @enduml

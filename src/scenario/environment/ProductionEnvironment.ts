@@ -1,5 +1,12 @@
 import {Environment} from "./Environment";
 
+/**
+ * The production environment consists of 3 servers:
+ * - webserver (12 cores)
+ * - db server (8 cores)
+ * - job server (10 cores)
+ * The baseline is a deployment of 3 physical servers
+ */
 export class ProductionEnvironment extends Environment {
 
     environmentName = "production";
