@@ -21,25 +21,6 @@ export abstract class ProductionMachine extends VirtualMachine {
      *
      * In this scenario we assume a European company working at daytime (6am until 6pm) with a 3hr peak over lunchtime (11am until 2pm).
      */
-    getCpuUtilizationAt_percentage = (hour: number) => {
-        const noUsageHours = [0, 1, 2, 3, 4, 5, 18, 19, 20, 21, 22, 23];
-        const averageUsageHours = [6, 7, 8, 9, 10, 14, 15, 16, 17];
-        const peakUsageHours = [11, 12, 13];
-
-        if (noUsageHours.includes(hour)) {
-            return 0;
-        }
-        if (averageUsageHours.includes(hour)) {
-            return 0.1;
-        }
-        if (peakUsageHours.includes(hour)) {
-            return 0.2;
-        }
-
-        throw new Error(`Hour '${hour}' not implemented.`);
-    }
-
-    isRunningAt_boolean = (hour: number) => {
-        return true;
-    }
+    hourlyCpuUtilizationOverAverageDay = [0, 0, 0, 0, 0, 0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1, 0, 0, 0, 0, 0, 0];
+    
 }

@@ -1,12 +1,8 @@
 import {Impact} from "../Impact";
 import {IMachine} from "./IMachine";
-import {
-    CloudConstants,
-    CloudConstantsEmissionsFactors,
-    ComputeEstimator,
-    ComputeUsage
-} from "@cloud-carbon-footprint/core";
-
+import {CloudConstants, CloudConstantsEmissionsFactors, ComputeEstimator} from "@cloud-carbon-footprint/core";
+import _ from "lodash";
+import {ComputeUsage} from "@cloud-carbon-footprint/core/dist";
 
 export class MachineEstimator {
     private readonly DAYS_PER_YEAR = 360;
@@ -26,7 +22,7 @@ export class MachineEstimator {
     private calculateCloudImpact(machine: IMachine) {
 
         const emissionsFactors: CloudConstantsEmissionsFactors = {
-            region: machine.emissionFactor_gC02eq / 1_000_000
+            region: machine.emissionFactor_gC02eqPerkWh
         };
         const constants: CloudConstants = {
             maxWatts: machine.maxWatts_W,
@@ -34,35 +30,34 @@ export class MachineEstimator {
             powerUsageEffectiveness: machine.powerUsageEffectiveness_factor,
             replicationFactor: 1,
         };
-        const computeUsage: ComputeUsage = {
-            cpuUtilizationAverage: this.calculateAverageCpuUtilization(machine),
-            vCpuHours: this.calculateVirtualCpuHours(machine),
-            usesAverageCPUConstant: false, // no impact on estimation, just wired through
-        };
 
-        const computeEstimate = this.computeEstimator.estimate([computeUsage], "region", emissionsFactors, constants);
-        console.log(computeEstimate);
+        const computeUsages = this.getComputeUsage(machine);
+        const computeEstimates = this.computeEstimator.estimate(computeUsages, "region", emissionsFactors, constants);
 
+        let kWh = 0;
+        let gC02eq = 0;
+        for (let computeEstimate of computeEstimates) {
+            kWh += computeEstimate.kilowattHours;
+            gC02eq += computeEstimate.co2e; // is in gC02e because emissionsFactors above is as well
+        }
 
-        return new Impact();
-
+        return new Impact(kWh, gC02eq);
     }
 
-    private calculateAverageCpuUtilization(machine: IMachine) {
-        let dividend = 0;
-        let divisor = 0;
-        for (let i = 0; i < 24; i++) {
-            dividend += machine.getCpuUtilizationAt_percentage(i);
-            divisor += machine.isRunningAt_boolean(i) ? 1 : 0;
+    private getComputeUsage(machine:IMachine) {
+        if (machine.hourlyCpuUtilizationOverAverageDay.length != 24) {
+            throw new Error("expect 24 hours per day, but given argument has "+machine.hourlyCpuUtilizationOverAverageDay.length);
         }
-        return dividend / divisor;
-    }
 
-    private calculateVirtualCpuHours(machine: IMachine) {
-        let hoursPerDay = 0;
-        for (let i = 0; i < 24; i++) {
-            hoursPerDay += machine.isRunningAt_boolean(i) ? 1 : 0;
-        }
-        return hoursPerDay * machine.virtualCPUs_number * this.DAYS_PER_YEAR * machine.duration_years;
+        const usages: ComputeUsage[] = [];
+        _.forOwn(_.groupBy(machine.hourlyCpuUtilizationOverAverageDay), (value: number[]) => {
+            usages.push({
+                cpuUtilizationAverage: value[0],
+                vCpuHours: value.length * machine.virtualCPUs_number * this.DAYS_PER_YEAR * machine.duration_years,
+                usesAverageCPUConstant: false, // no impact on estimation, just wired through
+            });
+        });
+
+        return usages;
     }
 }

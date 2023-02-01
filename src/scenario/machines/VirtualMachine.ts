@@ -3,12 +3,11 @@ import {IMachine} from "../../estimation/machine/IMachine";
 export abstract class VirtualMachine implements IMachine {
     abstract virtualCPUs_number: number;
     abstract duration_years: number;
-    abstract isRunningAt_boolean: (hour: number) => boolean;
     abstract machineName: string;
     abstract embodiedEmissions: number;
     abstract maxWatts_W: number;
     abstract minWatts_W: number;
-
+    abstract hourlyCpuUtilizationOverAverageDay: number[];
 
     isPhysicalMachine = false;
 
@@ -16,7 +15,7 @@ export abstract class VirtualMachine implements IMachine {
      * AZURE_REGIONS.EU_SWITZERLAND: 0.00001152 metric tons per kWH
      * Source: AzureFootprintEstimationConstants from cloud-carbon-footprint tool.
      */
-    emissionFactor_gC02eq = 11.52;
+    emissionFactor_gC02eqPerkWh = 11.52;
 
     /**
      * Quote: "the data shows that about thirty percent of the virtual machines [...] were [...] comatose"
@@ -34,7 +33,7 @@ export abstract class VirtualMachine implements IMachine {
      */
     powerUsageEffectiveness_factor: number = 1.185;
 
-    abstract getCpuUtilizationAt_percentage(hour: number): number;
+
 
 
 }

@@ -10,12 +10,19 @@ export class ProjectEstimator {
 
     public calculate(project: IProject): Impact {
         const impact = new Impact();
+
+        const teamImpact = new Impact();
         for (let team of project.teams) {
-            impact.add(team.teamName, this.teamEstimator.calculate(team));
+            teamImpact.add(team.teamName, this.teamEstimator.calculate(team));
         }
+        impact.add("team", teamImpact);
+
+        const machineImpact = new Impact();
         for (let machine of project.machines) {
-            impact.add(machine.machineName, this.machineEstimator.calculate(machine));
+            machineImpact.add(machine.machineName, this.machineEstimator.calculate(machine));
         }
+        impact.add("machine", machineImpact);
+
         return impact;
     }
 }
