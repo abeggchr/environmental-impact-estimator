@@ -47,7 +47,7 @@ export class DevelopmentTeam implements ITeam {
 
     teamDistribution_nr = {mainLocation: 0.5, remoteLocation: 0.5};
 
-    duration_years = 1;
+    duration_years = 2;
 
     emissionFactor_gC02eqPerKWh = {mainLocation: 1, remoteLocation: 1};
 

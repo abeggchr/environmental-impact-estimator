@@ -1,4 +1,4 @@
-import {Environment} from "./Environment";
+import {VirtualMachine} from "./VirtualMachine";
 
 /**
  * The production environment consists of 3 servers:
@@ -11,9 +11,9 @@ import {Environment} from "./Environment";
  * - db server: VM "E8as v5" (8 vCPU, 64GB RAM) + Premium SSD P15 (256 GB)
  * - job server: VM "F16s v2" (16 vCPU, 32GB RAM, 128GB temp storage)
  */
-export class ProductionEnvironment extends Environment {
+export abstract class ProductionMachine extends VirtualMachine {
 
-    environmentName = "production";
+    duration_years = 8;
 
     /**
      * StackExchange operates its servers on average below 10% CPU usage. Peaks result in up to 20% CPU usage.
@@ -21,7 +21,7 @@ export class ProductionEnvironment extends Environment {
      *
      * In this scenario we assume a European company working at daytime (6am until 6pm) with a 3hr peak over lunchtime (11am until 2pm).
      */
-    utilization_percentage(hour: number): number {
+    getCpuUtilizationAt_percentage = (hour: number) => {
         const noUsageHours = [0, 1, 2, 3, 4, 5, 18, 19, 20, 21, 22, 23];
         const averageUsageHours = [6, 7, 8, 9, 10, 14, 15, 16, 17];
         const peakUsageHours = [11, 12, 13];
@@ -39,5 +39,7 @@ export class ProductionEnvironment extends Environment {
         throw new Error(`Hour '${hour}' not implemented.`);
     }
 
-
+    isRunningAt_boolean = (hour: number) => {
+        return true;
+    }
 }

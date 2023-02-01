@@ -2,21 +2,32 @@ import {describe, expect, test, vi} from "vitest";
 import {ProjectEstimator} from "./ProjectEstimator";
 import {Impact} from "./Impact";
 import {testTeam} from "../testing/testTeam";
+import {testMachine} from "../testing/testMachine";
 
 
-vi.mock('./team/TeamCalculator', () => {
-    const TeamCalculator = vi.fn();
-    TeamCalculator.prototype.calculate = vi.fn(() => {
+vi.mock('./team/TeamEstimator', () => {
+    const TeamEstimator = vi.fn();
+    TeamEstimator.prototype.calculate = vi.fn(() => {
         return new Impact(1, 1);
     })
-    return {TeamCalculator};
+    return {TeamEstimator};
 })
 
-describe("ProjectCalculator", () => {
-    test("calls underlying calculators", () => {
+vi.mock('./machine/MachineEstimator', () => {
+    const MachineEstimator = vi.fn();
+    MachineEstimator.prototype.calculate = vi.fn(() => {
+        return new Impact(1, 1);
+    })
+    return {MachineEstimator};
+})
+
+
+describe("ProjectEstimator", () => {
+    test("calls underlying estimators", () => {
         const sut = new ProjectEstimator();
-        const actual = sut.calculate({teams: [testTeam]});
+        const actual = sut.calculate({teams: [testTeam], machines: [testMachine]});
         expect(actual.get(testTeam.teamName)).not.toBeUndefined();
+        expect(actual.get(testMachine.machineName)).not.toBeUndefined();
     });
 });
 

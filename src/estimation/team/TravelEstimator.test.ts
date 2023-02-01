@@ -4,7 +4,7 @@ import {TravelEstimator} from "./TravelEstimator";
 
 describe("TravelEstimator", () => {
 
-    test("calculates travel emissions", () => {
+    test("estimates travel emissions", () => {
         const impact = new TravelEstimator().calculate({
             ...testTeam,
             duration_years: 1,

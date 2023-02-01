@@ -5,7 +5,7 @@ import {testTeam} from "../../testing/testTeam";
 describe("CommuteEstimator", () => {
     const baseExpectation = testTeam.workingDays_perYear * testTeam.duration_years * (testTeam.teamDistribution_nr.mainLocation + testTeam.teamDistribution_nr.remoteLocation) * testTeam.workLocation_percentage.office;
 
-    test("calculates individual traffic combustion impact", () => {
+    test("estimates individual traffic combustion impact", () => {
         const expected = baseExpectation * 42 * 100 * 0.2;
         const impact = new CommuteEstimator().calculate({
             ...testTeam,
@@ -18,7 +18,7 @@ describe("CommuteEstimator", () => {
         expect(actual!.kWh).toBe(0);
     });
 
-    test("calculates individual traffic slow impact", () => {
+    test("estimates individual traffic slow impact", () => {
         const expected = baseExpectation * 42 * 50 * 0.3;
         const impact = new CommuteEstimator().calculate({
             ...testTeam,
@@ -31,7 +31,7 @@ describe("CommuteEstimator", () => {
         expect(actual!.kWh).toBe(0);
     });
 
-    test("calculates individual traffic electric impact", () => {
+    test("estimates individual traffic electric impact", () => {
         const expected = baseExpectation * 84 * 25 * 0.4;
         const impact = new CommuteEstimator().calculate({
             ...testTeam,
@@ -44,7 +44,7 @@ describe("CommuteEstimator", () => {
         expect(actual!.kWh).toBe(0);
     });
 
-    test("calculates public traffic impact", () => {
+    test("estimates public traffic impact", () => {
         const expected = baseExpectation * 21 * 25 * 0.5;
         const impact = new CommuteEstimator().calculate({
             ...testTeam,

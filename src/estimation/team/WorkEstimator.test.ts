@@ -6,7 +6,7 @@ describe("WorkEstimator", () => {
 
     const baseExpectation_kWh = testTeam.workingDays_perYear * testTeam.duration_years * (testTeam.teamDistribution_nr.mainLocation + testTeam.teamDistribution_nr.remoteLocation) * testTeam.workingHours_perDay * testTeam.powerUsageWorkplace_W / 1000;
 
-    test("calculates main location impact", () => {
+    test("estimates main location impact", () => {
         const impact = new WorkEstimator().calculate({
             ...testTeam,
             teamDistribution_nr: {...testTeam.teamDistribution_nr, mainLocation: 0.6},
@@ -17,7 +17,7 @@ describe("WorkEstimator", () => {
         expect(actual!.gC02eq).toBe(baseExpectation_kWh * 0.6 * 5);
     });
 
-    test("calculates remote location impact", () => {
+    test("estimates remote location impact", () => {
         const impact = new WorkEstimator().calculate({
             ...testTeam,
             teamDistribution_nr: {...testTeam.teamDistribution_nr, remoteLocation: 0.7},
