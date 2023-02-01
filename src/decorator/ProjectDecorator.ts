@@ -1,5 +1,5 @@
-import {IProject} from "../calculation/IProject";
-import {ITeam} from "../calculation/team/ITeam";
+import {IProject} from "../estimation/IProject";
+import {ITeam} from "../estimation/team/ITeam";
 
 export class ProjectDecorator implements IProject {
 

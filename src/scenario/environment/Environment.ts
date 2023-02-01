@@ -1,4 +1,4 @@
-import {IEnvironment} from "../../calculation/environment/IEnvironment";
+import {IEnvironment} from "../../estimation/environment/IEnvironment";
 
 export abstract class Environment implements IEnvironment {
 

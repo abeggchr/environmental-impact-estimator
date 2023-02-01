@@ -1,11 +1,11 @@
 import {describe, expect, test} from "vitest";
 import {testTeam} from "../../testing/testTeam";
-import {TravelCalculator} from "./TravelCalculator";
+import {TravelEstimator} from "./TravelEstimator";
 
-describe("TravelCalculator", () => {
+describe("TravelEstimator", () => {
 
     test("calculates travel emissions", () => {
-        const impact = new TravelCalculator().calculate({
+        const impact = new TravelEstimator().calculate({
             ...testTeam,
             duration_years: 1,
             workingDays_perYear: 200,
@@ -15,7 +15,7 @@ describe("TravelCalculator", () => {
             travelEmission_gC02eqPerOnewayTravel: 100
         });
 
-        const expectedNumberOfTravels = (200 / TravelCalculator.WORKING_DAYS_PER_WEEK) / 6;
+        const expectedNumberOfTravels = (200 / TravelEstimator.WORKING_DAYS_PER_WEEK) / 6;
         const expectedNumberOfGroupTravelsFromMainToRemote = expectedNumberOfTravels * 0.3;
         const expectedNumberOfSingularTravelsFromMainToRemote = expectedNumberOfGroupTravelsFromMainToRemote * 7.5 * 2;
         const expectedNumberOfGroupTravelsFromRemoteToMain = expectedNumberOfTravels * 0.6;
@@ -28,7 +28,7 @@ describe("TravelCalculator", () => {
     });
 
     test("when team is not distributed, returns no emissions", () => {
-        const impact = new TravelCalculator().calculate({
+        const impact = new TravelEstimator().calculate({
             ...testTeam,
             teamDistribution_nr: {remoteLocation: 0, mainLocation: 10}
         });

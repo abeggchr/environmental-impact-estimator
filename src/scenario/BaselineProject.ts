@@ -1,7 +1,7 @@
-import {ITeam} from "../calculation/team/ITeam";
+import {ITeam} from "../estimation/team/ITeam";
 import {DevelopmentTeam} from "./team/DevelopmentTeam";
 import {MaintenanceTeam} from "./team/MaintenanceTeam";
-import {IProject} from "../calculation/IProject";
+import {IProject} from "../estimation/IProject";
 
 export class BaselineProject implements IProject {
 

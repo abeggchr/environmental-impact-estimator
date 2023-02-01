@@ -1,12 +1,12 @@
 import './App.css'
-import {ProjectCalculator} from "./calculation/ProjectCalculator";
+import {ProjectEstimator} from "./estimation/ProjectEstimator";
 import {BaselineProject} from "./scenario/BaselineProject";
 import {NoDistributedDevelopment} from "./decorator/team/NoDistributedDevelopment";
 import useCopyToClipboard from "./util/useCopyToClipboard";
 
 function App() {
-    const baseline = new ProjectCalculator().calculate(new BaselineProject());
-    const decorated = new ProjectCalculator().calculate(new NoDistributedDevelopment(new BaselineProject()));
+    const baseline = new ProjectEstimator().calculate(new BaselineProject());
+    const decorated = new ProjectEstimator().calculate(new NoDistributedDevelopment(new BaselineProject()));
 
     const [value, copy] = useCopyToClipboard();
 

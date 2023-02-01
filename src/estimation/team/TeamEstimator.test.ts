@@ -1,51 +1,51 @@
 import {describe, expect, test, vi} from "vitest";
 import {testTeam} from "../../testing/testTeam";
-import {TeamCalculator} from "./TeamCalculator";
+import {TeamEstimator} from "./TeamEstimator";
 import {Impact} from "../Impact";
 
-vi.mock('./CommuteCalculator', () => {
-    const CommuteCalculator = vi.fn();
-    CommuteCalculator.prototype.calculate = vi.fn(() => {
+vi.mock('./CommuteEstimator', () => {
+    const CommuteEstimator = vi.fn();
+    CommuteEstimator.prototype.calculate = vi.fn(() => {
         return new Impact(1, 1);
     })
-    return {CommuteCalculator};
+    return {CommuteEstimator};
 })
 
-vi.mock('./WorkCalculator', () => {
-    const WorkCalculator = vi.fn();
-    WorkCalculator.prototype.calculate = vi.fn(() => {
+vi.mock('./WorkEstimator', () => {
+    const WorkEstimator = vi.fn();
+    WorkEstimator.prototype.calculate = vi.fn(() => {
         return new Impact(2, 2);
     })
-    return {WorkCalculator};
+    return {WorkEstimator};
 })
 
-vi.mock('./TravelCalculator', () => {
-    const TravelCalculator = vi.fn();
-    TravelCalculator.prototype.calculate = vi.fn(() => {
+vi.mock('./TravelEstimator', () => {
+    const TravelEstimator = vi.fn();
+    TravelEstimator.prototype.calculate = vi.fn(() => {
         return new Impact(3, 3);
     })
-    return {TravelCalculator};
+    return {TravelEstimator};
 })
 
-describe("TeamCalculator", () => {
-    test("calls commute calculators", () => {
-        const sut = new TeamCalculator();
+describe("TeamEstimator", () => {
+    test("calls commute Estimators", () => {
+        const sut = new TeamEstimator();
         const actual = sut.calculate(testTeam);
         expect(actual.get("commute")).not.toBeUndefined();
         expect(actual.get("commute")!.kWh).toBe(1);
         expect(actual.get("commute")!.gC02eq).toBe(1);
     });
 
-    test("calls work calculators", () => {
-        const sut = new TeamCalculator();
+    test("calls work Estimators", () => {
+        const sut = new TeamEstimator();
         const actual = sut.calculate(testTeam);
         expect(actual.get("work")).not.toBeUndefined();
         expect(actual.get("work")!.kWh).toBe(2);
         expect(actual.get("work")!.gC02eq).toBe(2);
     });
 
-    test("calls travel calculators", () => {
-        const sut = new TeamCalculator();
+    test("calls travel Estimators", () => {
+        const sut = new TeamEstimator();
         const actual = sut.calculate(testTeam);
         expect(actual.get("travel")).not.toBeUndefined();
         expect(actual.get("travel")!.kWh).toBe(3);

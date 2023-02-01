@@ -1,5 +1,5 @@
 import {describe, expect, test, vi} from "vitest";
-import {ProjectCalculator} from "./ProjectCalculator";
+import {ProjectEstimator} from "./ProjectEstimator";
 import {Impact} from "./Impact";
 import {testTeam} from "../testing/testTeam";
 
@@ -14,7 +14,7 @@ vi.mock('./team/TeamCalculator', () => {
 
 describe("ProjectCalculator", () => {
     test("calls underlying calculators", () => {
-        const sut = new ProjectCalculator();
+        const sut = new ProjectEstimator();
         const actual = sut.calculate({teams: [testTeam]});
         expect(actual.get(testTeam.teamName)).not.toBeUndefined();
     });

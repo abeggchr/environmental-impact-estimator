@@ -2,7 +2,7 @@ import {ITeam, TrafficTypes} from "./ITeam";
 import {Impact} from "../Impact";
 import {totalWorkingDays} from "./totalWorkingDays";
 
-export class CommuteCalculator {
+export class CommuteEstimator {
 
     public calculate(team: ITeam): Impact {
         const impact = new Impact();

@@ -1,5 +1,5 @@
 import {ProjectDecorator} from "../ProjectDecorator";
-import {ITeam} from "../../calculation/team/ITeam";
+import {ITeam} from "../../estimation/team/ITeam";
 
 export class NoDistributedDevelopment extends ProjectDecorator {
     protected override decorateTeam(team: ITeam): ITeam {

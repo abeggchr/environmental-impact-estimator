@@ -1,4 +1,4 @@
-import {ITeam} from "../calculation/team/ITeam";
+import {ITeam} from "../estimation/team/ITeam";
 
 export const testTeam: ITeam = {
 

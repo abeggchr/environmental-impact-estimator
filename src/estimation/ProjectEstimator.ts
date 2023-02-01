@@ -1,10 +1,10 @@
 import {Impact} from "./Impact";
-import {TeamCalculator} from "./team/TeamCalculator";
+import {TeamEstimator} from "./team/TeamEstimator";
 import {IProject} from "./IProject";
 
-export class ProjectCalculator {
+export class ProjectEstimator {
 
-    constructor(private teamCalculator = new TeamCalculator()) {
+    constructor(private teamCalculator = new TeamEstimator()) {
     }
 
     public calculate(project: IProject): Impact {
