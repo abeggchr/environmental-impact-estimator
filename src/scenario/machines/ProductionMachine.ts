@@ -1,4 +1,4 @@
-import {VirtualMachine} from "./VirtualMachine";
+import {AzureVirtualMachine, InstanceType, Series} from "./AzureVirtualMachine";
 
 /**
  * The production environment consists of 3 servers:
@@ -11,7 +11,11 @@ import {VirtualMachine} from "./VirtualMachine";
  * - db server: VM "E8as v5" (8 vCPU, 64GB RAM) + Premium SSD P15 (256 GB)
  * - job server: VM "F16s v2" (16 vCPU, 32GB RAM, 128GB temp storage)
  */
-export abstract class ProductionMachine extends VirtualMachine {
+export abstract class ProductionMachine extends AzureVirtualMachine {
+
+    protected constructor(series: Series, instanceType: InstanceType) {
+        super(series, instanceType);
+    }
 
     duration_years = 8;
 
