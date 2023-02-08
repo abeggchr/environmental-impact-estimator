@@ -1,4 +1,4 @@
-import {AzureVirtualMachine, InstanceType, Series} from "./AzureVirtualMachine";
+import {AzureVirtualMachine, UsageType, SeriesName} from "./AzureVirtualMachine";
 
 /**
  * The production environment consists of 3 servers:
@@ -13,7 +13,7 @@ import {AzureVirtualMachine, InstanceType, Series} from "./AzureVirtualMachine";
  */
 export abstract class ProductionMachine extends AzureVirtualMachine {
 
-    protected constructor(series: Series, instanceType: InstanceType) {
+    protected constructor(series: SeriesName, instanceType: UsageType) {
         super(series, instanceType);
     }
 
@@ -26,5 +26,9 @@ export abstract class ProductionMachine extends AzureVirtualMachine {
      * In this scenario we assume a European company working at daytime (6am until 6pm) with a 3hr peak over lunchtime (11am until 2pm).
      */
     hourlyCpuUtilizationOverAverageDay = [0, 0, 0, 0, 0, 0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1, 0, 0, 0, 0, 0, 0];
-    
+
+    /**
+     * Assuming a hot standby.
+     */
+    replication_factor = 2;
 }

@@ -6,32 +6,40 @@ import {
     VIRTUAL_MACHINE_TYPE_SERIES_MAPPING
 } from "@cloud-carbon-footprint/azure/src/lib/VirtualMachineTypes";
 
-export type Series = "D2s – D64s v4";
-export type InstanceType = "D16s v4";
+export type SeriesName = "D2s – D64s v4";
+export type UsageType = "D16s v4";
 
 export abstract class AzureVirtualMachine implements IMachine {
 
     private readonly virtualMachine: number[]; // [vcpus, memory, embodied emissions]
     private readonly computeProcessors: string[];
 
-    protected constructor(private series: Series, private instanceType: InstanceType) {
-       this.virtualMachine = VIRTUAL_MACHINE_TYPE_SERIES_MAPPING[series][instanceType];
-       this.computeProcessors = INSTANCE_TYPE_COMPUTE_PROCESSOR_MAPPING[instanceType];
+    protected constructor(private seriesName: SeriesName, private usageType: UsageType) {
+       this.virtualMachine = VIRTUAL_MACHINE_TYPE_SERIES_MAPPING[seriesName][usageType];
+       this.computeProcessors = INSTANCE_TYPE_COMPUTE_PROCESSOR_MAPPING[usageType];
     }
 
     abstract duration_years: number;
     abstract machineName: string;
     abstract hourlyCpuUtilizationOverAverageDay: number[];
+    abstract replication_factor: number;
 
     isPhysicalMachine = false;
 
     get virtualCPUs_number() { return this.virtualMachine[0] }
 
-    get embodiedEmissions() { return this.virtualMachine[2]};
+    get embodiedEmissions_gC02eq() { return this.virtualMachine[2] * 1000 };
 
     get maxWatts_W() { return AZURE_CLOUD_CONSTANTS.getMaxWatts(this.computeProcessors)};
 
     get minWatts_W() { return AZURE_CLOUD_CONSTANTS.getMinWatts(this.computeProcessors)};
+
+    get largestInstanceVirtualCPUs_number() {
+        const seriesInstanceTypes = Object.values(VIRTUAL_MACHINE_TYPE_SERIES_MAPPING[this.seriesName]);
+        let largestInstancevCpu;
+        [largestInstancevCpu] = seriesInstanceTypes[seriesInstanceTypes.length - 1];
+        return largestInstancevCpu;
+    }
 
     /**
      * 0.01152 g per kWh

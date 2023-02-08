@@ -2,7 +2,7 @@ import {IMachine} from "../estimation/machine/IMachine";
 
 export const testMachine: IMachine = {
     duration_years: 1,
-    embodiedEmissions: 2,
+    embodiedEmissions_gC02eq: 2,
     emissionFactor_gC02eqPerkWh: 3,
     hourlyCpuUtilizationOverAverageDay: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
     isPhysicalMachine: false,

@@ -17,5 +17,12 @@ export interface IMachine {
 
     serverExpectedLifespan_years: number;
 
-    embodiedEmissions: number;
+    embodiedEmissions_gC02eq: number;
+
+    replication_factor: number;
+
+    /**
+     * the number of vcpu from the largest instance type in the family of VMs
+     */
+    largestInstanceVirtualCPUs_number: number;
 }
