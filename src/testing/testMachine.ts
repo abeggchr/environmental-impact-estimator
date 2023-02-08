@@ -10,7 +10,9 @@ export const testMachine: IMachine = {
     maxWatts_W: 4,
     minWatts_W: 5,
     powerUsageEffectiveness_factor: 6,
-    serverExpectedLifespan_years: 7,
+    expectedLifespan_years: 7,
     virtualCPUs_number: 8,
-    zombieServers_percentage: 0.1
+    zombieServers_percentage: 0.1,
+    largestInstanceVirtualCPUs_number: 10,
+    replication_factor: 9,
 }

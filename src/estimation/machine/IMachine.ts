@@ -15,7 +15,7 @@ export interface IMachine {
 
     zombieServers_percentage: number;
 
-    serverExpectedLifespan_years: number;
+    expectedLifespan_years: number;
 
     embodiedEmissions_gC02eq: number;
 

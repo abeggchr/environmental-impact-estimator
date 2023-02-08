@@ -55,7 +55,7 @@ export abstract class AzureVirtualMachine implements IMachine {
     /**
      * 4 years
      */
-    serverExpectedLifespan_years = AZURE_CLOUD_CONSTANTS.SERVER_EXPECTED_LIFESPAN! / (365 * 24);
+    expectedLifespan_years = AZURE_CLOUD_CONSTANTS.SERVER_EXPECTED_LIFESPAN! / (365 * 24);
 
     /**
      * 1.185
