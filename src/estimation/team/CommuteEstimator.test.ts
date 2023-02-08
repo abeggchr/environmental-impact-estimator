@@ -7,7 +7,7 @@ describe("CommuteEstimator", () => {
 
     test("estimates individual traffic combustion impact", () => {
         const expected = baseExpectation * 42 * 100 * 0.2;
-        const impact = new CommuteEstimator().calculate({
+        const impact = new CommuteEstimator().estimate({
             ...testTeam,
             commuteDistance_km: 42,
             commuteEmission_gC02eqPerKm: {...testTeam.commuteEmission_gC02eqPerKm, individualTrafficCombustion: 100},
@@ -15,12 +15,11 @@ describe("CommuteEstimator", () => {
         });
         const actual = impact.get("individualTrafficCombustion");
         expect(actual!.gC02eq).toBe(expected);
-        expect(actual!.kWh).toBe(0);
     });
 
     test("estimates individual traffic slow impact", () => {
         const expected = baseExpectation * 42 * 50 * 0.3;
-        const impact = new CommuteEstimator().calculate({
+        const impact = new CommuteEstimator().estimate({
             ...testTeam,
             commuteDistance_km: 42,
             commuteEmission_gC02eqPerKm: {...testTeam.commuteEmission_gC02eqPerKm, individualTrafficSlow: 50},
@@ -28,12 +27,11 @@ describe("CommuteEstimator", () => {
         });
         const actual = impact.get("individualTrafficSlow");
         expect(actual!.gC02eq).toBe(expected);
-        expect(actual!.kWh).toBe(0);
     });
 
     test("estimates individual traffic electric impact", () => {
         const expected = baseExpectation * 84 * 25 * 0.4;
-        const impact = new CommuteEstimator().calculate({
+        const impact = new CommuteEstimator().estimate({
             ...testTeam,
             commuteDistance_km: 84,
             commuteEmission_gC02eqPerKm: {...testTeam.commuteEmission_gC02eqPerKm, individualTrafficElectric: 25},
@@ -41,12 +39,11 @@ describe("CommuteEstimator", () => {
         });
         const actual = impact.get("individualTrafficElectric");
         expect(actual!.gC02eq).toBe(expected);
-        expect(actual!.kWh).toBe(0);
     });
 
     test("estimates public traffic impact", () => {
         const expected = baseExpectation * 21 * 25 * 0.5;
-        const impact = new CommuteEstimator().calculate({
+        const impact = new CommuteEstimator().estimate({
             ...testTeam,
             commuteDistance_km: 21,
             commuteEmission_gC02eqPerKm: {...testTeam.commuteEmission_gC02eqPerKm, publicTraffic: 25},
@@ -54,7 +51,6 @@ describe("CommuteEstimator", () => {
         });
         const actual = impact.get("publicTraffic");
         expect(actual!.gC02eq).toBe(expected);
-        expect(actual!.kWh).toBe(0);
     });
 });
 

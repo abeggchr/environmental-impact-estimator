@@ -1,6 +1,5 @@
 import {Impact} from "../Impact";
 import {IMachine} from "./IMachine";
-import {estimateKwh} from "../estimateKWh";
 
 export class PhysicalMachineEstimator {
 
@@ -15,7 +14,6 @@ export class PhysicalMachineEstimator {
      */
     private estimateEmbodiedEmissions(machine: IMachine) {
         const gCO2 = machine.embodiedEmissions_gC02eq * (machine.duration_years / machine.expectedLifespan_years);
-        const kWh = estimateKwh(gCO2, machine.emissionFactor_gC02eqPerkWh);
-        return new Impact(kWh, gCO2);
+        return new Impact(gCO2);
     }
 }

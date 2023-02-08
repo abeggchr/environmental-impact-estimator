@@ -5,7 +5,7 @@ import {PhysicalMachineEstimator} from "./PhysicalMachineEstimator";
 
 export class MachineEstimator {
 
-    public calculate(machine: IMachine): Impact {
+    public estimate(machine: IMachine): Impact {
         let estimator;
         if (machine.isPhysicalMachine) {
             estimator = new PhysicalMachineEstimator();

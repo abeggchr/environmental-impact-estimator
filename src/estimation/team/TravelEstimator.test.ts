@@ -5,7 +5,7 @@ import {TravelEstimator} from "./TravelEstimator";
 describe("TravelEstimator", () => {
 
     test("estimates travel emissions", () => {
-        const impact = new TravelEstimator().calculate({
+        const impact = new TravelEstimator().estimate({
             ...testTeam,
             duration_years: 1,
             workingDays_perYear: 200,
@@ -24,17 +24,15 @@ describe("TravelEstimator", () => {
         const expected = expectedTotalOnewayTravels * 100;
 
         expect(impact!.gC02eq).toBe(expected);
-        expect(impact!.kWh).toBe(0);
     });
 
     test("when team is not distributed, returns no emissions", () => {
-        const impact = new TravelEstimator().calculate({
+        const impact = new TravelEstimator().estimate({
             ...testTeam,
             teamDistribution_nr: {remoteLocation: 0, mainLocation: 10}
         });
 
         expect(impact!.gC02eq).toBe(0);
-        expect(impact!.kWh).toBe(0);
     });
 });
 

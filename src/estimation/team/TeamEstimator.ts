@@ -12,16 +12,16 @@ export class TeamEstimator {
         private travelEstimator = new TravelEstimator()) {
     }
 
-    public calculate(team: ITeam): Impact {
+    public estimate(team: ITeam): Impact {
 
         // Not included:
         // * videoconference
         // * manufacturing of hardware used
 
         const impact = new Impact();
-        impact.add("commute", this.commuteEstimator.calculate(team));
-        impact.add("work", this.workEstimator.calculate(team));
-        impact.add("travel", this.travelEstimator.calculate(team));
+        impact.add("commute", this.commuteEstimator.estimate(team));
+        impact.add("work", this.workEstimator.estimate(team));
+        impact.add("travel", this.travelEstimator.estimate(team));
         return impact;
     }
 }

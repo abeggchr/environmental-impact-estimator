@@ -5,9 +5,9 @@ export class TravelEstimator {
 
     public static readonly WORKING_DAYS_PER_WEEK = 5;
 
-    public calculate(team: ITeam): Impact {
+    public estimate(team: ITeam): Impact {
         if (team.teamDistribution_nr.remoteLocation == 0 || team.teamDistribution_nr.mainLocation == 0) {
-            return new Impact(0, 0);
+            return new Impact(0);
         }
 
         const numberOfTravels = ((team.duration_years * team.workingDays_perYear) / TravelEstimator.WORKING_DAYS_PER_WEEK) / team.weeksBetweenTravels_nr;
@@ -18,6 +18,6 @@ export class TravelEstimator {
         const totalOnewayTravels = numberOfOnewayTravelsFromMainToRemoteLocation + numberOfOnewayTravelsFromRemoteToMainLocation;
         const emissions = totalOnewayTravels * team.travelEmission_gC02eqPerOnewayTravel;
 
-        return new Impact(0, emissions);
+        return new Impact(emissions);
     }
 }

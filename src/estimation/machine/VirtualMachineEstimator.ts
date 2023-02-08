@@ -52,17 +52,14 @@ export class VirtualMachineEstimator {
     }
 
     private asImpact(estimates: FootprintEstimate[], factor: number) {
-        let kWh = 0;
         let gC02eq = 0;
         for (let estimate of estimates) {
-            kWh += estimate.kilowattHours;
             gC02eq += estimate.co2e; // is in gC02e because emissionsFactors above is as well
         }
 
-        kWh *= factor;
         gC02eq *= factor;
 
-        return new Impact(kWh, gC02eq);
+        return new Impact(gC02eq);
     }
 
     private getComputeUsage(machine: IMachine): ComputeUsage[] {
