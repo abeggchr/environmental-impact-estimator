@@ -26,8 +26,9 @@ describe("ProjectEstimator", () => {
     test("calls underlying estimators", () => {
         const sut = new ProjectEstimator();
         const actual = sut.calculate({teams: [testTeam], machines: [testMachine]});
-        expect(actual.get(testTeam.teamName)).not.toBeUndefined();
-        expect(actual.get(testMachine.machineName)).not.toBeUndefined();
+        console.log(actual.print("key"));
+        expect(actual.get(`team`)?.get(testTeam.teamName)).not.toBeUndefined();
+        expect(actual.get('machine')?.get(testMachine.machineName)).not.toBeUndefined();
     });
 });
 

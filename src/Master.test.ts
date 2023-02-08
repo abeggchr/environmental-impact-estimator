@@ -2,6 +2,7 @@ import { test } from 'vitest'
 import {ProjectEstimator} from "./estimation/ProjectEstimator";
 import {BaselineProject} from "./scenario/BaselineProject";
 import {NoDistributedDevelopment} from "./decorator/team/NoDistributedDevelopment";
+
 test("MasterTest", () => {
     const baseline = new ProjectEstimator().calculate(new BaselineProject());
     const decorated = new ProjectEstimator().calculate(new NoDistributedDevelopment(new BaselineProject()));
