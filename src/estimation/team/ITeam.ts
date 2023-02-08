@@ -34,11 +34,15 @@ export interface ITeam {
 
     emissionFactor_gC02eqPerKWh: LocationTypes;
 
-    powerUsageWorkplace_W: number,
-
     weeksBetweenTravels_nr: number,
 
     travelDistributionFrom_percentage: LocationTypes;
 
-    travelEmission_gC02eqPerOnewayTravel: number
+    travelEmission_gC02eqPerOnewayTravel: number;
+
+    workplaceEmbodiedEmissions_gCO2eq : number;
+
+    workplacePowerUsage_W: number;
+
+    workplaceExpectedLifespan_years: number;
 }

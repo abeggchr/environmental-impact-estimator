@@ -27,6 +27,14 @@ vi.mock('./TravelEstimator', () => {
     return {TravelEstimator};
 })
 
+vi.mock('./EmbodiedEmissionsEstimator', () => {
+    const EmbodiedEmissionsEstimator = vi.fn();
+    EmbodiedEmissionsEstimator.prototype.estimate = vi.fn(() => {
+        return new Impact(4);
+    })
+    return {EmbodiedEmissionsEstimator};
+})
+
 describe("TeamEstimator", () => {
     test("calls commute Estimators", () => {
         const sut = new TeamEstimator();
@@ -47,6 +55,13 @@ describe("TeamEstimator", () => {
         const actual = sut.estimate(testTeam);
         expect(actual.get("travel")).not.toBeUndefined();
         expect(actual.get("travel")!.gC02eq).toBe(3);
+    });
+
+    test("calls EmbodiedEmissionsEstimator", () => {
+        const sut = new TeamEstimator();
+        const actual = sut.estimate(testTeam);
+        expect(actual.get("embodiedEmissions")).not.toBeUndefined();
+        expect(actual.get("embodiedEmissions")!.gC02eq).toBe(4);
     });
 });
 

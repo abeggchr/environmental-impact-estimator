@@ -6,8 +6,8 @@ import {AzureVirtualMachine, UsageType, SeriesName} from "./AzureVirtualMachine"
  * - db server (requires 8 physical cores, memory-intensive, storage)
  * - job server (requires 10 physical cores, compute-intensive)
  *
- * The baseline is a deployment of 3 virtual machines as recommended by the <a href='https://azure.microsoft.com/en-us/pricing/vm-selector'>Microsoft Azure VM selector tool</a>:
- * - web server: VM "D16 v5" (16 vCPU, 64GB RAM)
+ * The baseline is a deployment of 3 virtual machines as recommended by the <a href='https://azure.microsoft.com/en-us/pricing/vm-selector'>Microsoft Azure VM selector tool</a> (and available at
+ * - web server: VM "D16s_v4" (16 vCPU, 64GB RAM)
  * - db server: VM "E8as v5" (8 vCPU, 64GB RAM) + Premium SSD P15 (256 GB)
  * - job server: VM "F16s v2" (16 vCPU, 32GB RAM, 128GB temp storage)
  */

@@ -45,7 +45,6 @@ export class VirtualMachineEstimator {
             usageTimePeriod: machine.duration_years,
             scopeThreeEmissions: machine.embodiedEmissions_gC02eq
         };
-        console.log(usage);
         const estimator = new EmbodiedEmissionsEstimator(machine.expectedLifespan_years);
         const estimates = estimator.estimate([usage], this.REGION, emissionsFactors);
         return this.asImpact(estimates, 1 + machine.zombieServers_percentage);

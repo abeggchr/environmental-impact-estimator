@@ -67,7 +67,7 @@ export class DevelopmentTeam implements ITeam {
      * Includes laptop, monitor.
      * Excludes phone, network, lightning, heating, cooling.
      */
-    powerUsageWorkplace_W = 125;
+    workplacePowerUsage_W = 125;
 
     travelDistributionFrom_percentage = {mainLocation: 0.4, remoteLocation: 0.6};
 
@@ -78,4 +78,17 @@ export class DevelopmentTeam implements ITeam {
     travelEmission_gC02eqPerOnewayTravel = 210000;
 
     weeksBetweenTravels_nr = 6;
+
+    /**
+     * Laptop: 322kg, Dell XPS 15 9500, https://www.delltechnologies.com/asset/en-us/products/laptops-and-2-in-1s/technical-support/xps-15-9500-pcf-datasheet.pdf
+     * Screen: 397 kg, Dell E2720HS, https://www.delltechnologies.com/asset/en-us/products/electronics-and-accessories/technical-support/e2720hs-monitor-pcf-datasheet.pdf
+     * Keyboard: 22kg, Logitech G213, https://www.logitech.com/de-ch/sustainability/carbon-transparency.html#questions
+     * Mouse: 8kg, Logitech G502, https://www.logitech.com/de-ch/sustainability/carbon-transparency.html#questions
+     */
+    workplaceEmbodiedEmissions_gCO2eq = (322 + 397 + 22 + 8) * 1000;
+
+    /**
+     * 4 years for laptop, 6 years for screen, mouse and keyboard -> averages to roughly 5 years.
+     */
+    workplaceExpectedLifespan_years = 5;
 }
