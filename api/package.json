@@ -1,0 +1,30 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.ts",
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cloud-carbon-footprint/azure": "^1.1.0",
+    "@cloud-carbon-footprint/core": "^0.17.0",
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.14.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/lodash": "^4.14.191",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5",
+    "vitest": "^0.29.1"
+  }
+}

@@ -7,7 +7,7 @@ import {
     EmbodiedEmissionsEstimator,
     EmbodiedEmissionsUsage,
     FootprintEstimate
-} from "@cloud-carbon-footprint/core/src";
+} from "@cloud-carbon-footprint/core";
 
 export class VirtualMachineEstimator {
     private readonly DAYS_PER_YEAR = 360;

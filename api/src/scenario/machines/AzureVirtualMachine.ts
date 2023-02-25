@@ -1,10 +1,10 @@
 import {IMachine} from "../../estimation/machine/IMachine";
-import {AZURE_CLOUD_CONSTANTS, AZURE_EMISSIONS_FACTORS_METRIC_TON_PER_KWH} from "@cloud-carbon-footprint/azure/src";
-import {AZURE_REGIONS} from "@cloud-carbon-footprint/azure/src/lib/AzureRegions";
+import {AZURE_CLOUD_CONSTANTS, AZURE_EMISSIONS_FACTORS_METRIC_TON_PER_KWH} from "@cloud-carbon-footprint/azure";
 import {
     INSTANCE_TYPE_COMPUTE_PROCESSOR_MAPPING,
     VIRTUAL_MACHINE_TYPE_SERIES_MAPPING
-} from "@cloud-carbon-footprint/azure/src/lib/VirtualMachineTypes";
+} from "@cloud-carbon-footprint/azure/dist/lib/VirtualMachineTypes";
+import {AZURE_REGIONS} from "@cloud-carbon-footprint/azure/dist/lib/AzureRegions";
 
 export type SeriesName = "D2s – D64s v4";
 export type UsageType = "D16s v4";
