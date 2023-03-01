@@ -1,4 +1,7 @@
 export interface IMachine {
+    ssdCoefficient_whPerTBh: number;
+    hddCoefficient_whPerTBh: number;
+    memoryCoefficient_kWhPerGb: number;
 
     virtualCPUs_number: number;
 
