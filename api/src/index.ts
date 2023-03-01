@@ -1,8 +1,10 @@
 // Import the express in typescript file
-import express, {json} from 'express';
+import express  from 'express';
 import cors from 'cors';
 import {ProjectEstimator} from "./estimation/ProjectEstimator";
 import {BaselineProject} from "./scenario/BaselineProject";
+import {NoDistributedDevelopment} from "./decorator/team/NoDistributedDevelopment";
+import {IProject} from "./estimation/IProject";
 
 // Initialize the express engine
 const app: express.Application = express();
@@ -13,9 +15,18 @@ const port: number = 3000;
 app.use(cors());
 
 // Handling '/' Request
-app.get('/', (_req, _res) => {
+app.get('/baseline', (_req, _res) => {
     const baseline = new ProjectEstimator().estimate(new BaselineProject());
+    console.log(baseline.print("baseline"));
     _res.json(baseline.gC02eq);
+});
+
+app.get('/decorated', (_req, _res) => {
+    let project:IProject = new BaselineProject();
+    project = new NoDistributedDevelopment(project);
+    const decorated = new ProjectEstimator().estimate(project);
+    console.log(decorated.print("decorated"));
+    _res.json(decorated.gC02eq);
 });
 
 // Server setup

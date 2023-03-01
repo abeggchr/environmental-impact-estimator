@@ -12,7 +12,9 @@ export class WorkEstimator {
     }
 
     private estimateWork(team: ITeam, location: keyof LocationTypes): [keyof LocationTypes, Impact] {
-        const kWh = totalWorkingDays(team) * team.workingHours_perDay * team.workplacePowerUsage_W * team.teamDistribution_nr[location] / 1000;
-        return [location, new Impact(kWh * team.emissionFactor_gC02eqPerKWh[location])];
+        const days = totalWorkingDays(team)
+        const gC02eq = ((team.workplacePowerUsage_W * days * team.workingHours_perDay) / 1000) *  team.teamDistribution_nr[location] * team.emissionFactor_gC02eqPerKWh[location] / 1000;
+        const formula = `((${team.workplacePowerUsage_W}W * ${days}d * ${team.workingHours_perDay}h) / 1000 ) * ${team.teamDistribution_nr[location]} [persons] * ${team.emissionFactor_gC02eqPerKWh[location]}gC02eq per kWh`;
+        return [location, new Impact(gC02eq, formula)];
     }
 }

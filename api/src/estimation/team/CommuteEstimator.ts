@@ -14,7 +14,9 @@ export class CommuteEstimator {
     }
 
     private estimateCommute(team: ITeam, modal: keyof TrafficTypes): [keyof TrafficTypes, Impact] {
-        const gC02eq = totalWorkingDays(team) * team.commuteDistance_km * team.workLocation_percentage.office * team.commuteEmission_gC02eqPerKm[modal] * team.commuteModalSplit_percentage[modal];
-        return [modal, new Impact(gC02eq)];
+        const days = totalWorkingDays(team);
+        const gC02eq = days * team.commuteDistance_km * team.workLocation_percentage.office * team.commuteEmission_gC02eqPerKm[modal] * team.commuteModalSplit_percentage[modal];
+        const formula = `${days}d * ${team.commuteDistance_km}km * ${team.workLocation_percentage.office} [percentage office] * ${team.commuteEmission_gC02eqPerKm[modal]}gC02eq [commute emissions per km] * ${team.commuteModalSplit_percentage[modal]} [percentage modal split]`;
+        return [modal, new Impact(gC02eq, formula)];
     }
 }

@@ -45,7 +45,7 @@ export class DevelopmentTeam implements ITeam {
             publicTraffic: 0.27
         };
 
-    teamDistribution_nr = {mainLocation: 0.5, remoteLocation: 0.5};
+    teamDistribution_nr = {mainLocation: 4, remoteLocation: 4};
 
     duration_years = 2;
 

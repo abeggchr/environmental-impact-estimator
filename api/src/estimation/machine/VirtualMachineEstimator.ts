@@ -52,13 +52,16 @@ export class VirtualMachineEstimator {
 
     private asImpact(estimates: FootprintEstimate[], factor: number) {
         let gC02eq = 0;
+        let formula = "(";
         for (let estimate of estimates) {
             gC02eq += estimate.co2e; // is in gC02e because emissionsFactors above is as well
+            formula += `${estimate.co2e}gC02eq + `;
         }
 
         gC02eq *= factor;
+        formula = formula.substring(0, formula.length-3) + `) * ${factor} [factor for zombieServer]`;
 
-        return new Impact(gC02eq);
+        return new Impact(gC02eq, formula);
     }
 
     private getComputeUsage(machine: IMachine): ComputeUsage[] {

@@ -7,7 +7,7 @@ export class TravelEstimator {
 
     public estimate(team: ITeam): Impact {
         if (team.teamDistribution_nr.remoteLocation == 0 || team.teamDistribution_nr.mainLocation == 0) {
-            return new Impact(0);
+            return new Impact(0, "0 - no travel required");
         }
 
         const numberOfTravels = ((team.duration_years * team.workingDays_perYear) / TravelEstimator.WORKING_DAYS_PER_WEEK) / team.weeksBetweenTravels_nr;
@@ -17,7 +17,8 @@ export class TravelEstimator {
         const numberOfOnewayTravelsFromRemoteToMainLocation = numberOfGroupTravelsFromRemoteToMainLocation * team.teamDistribution_nr.remoteLocation * 2;
         const totalOnewayTravels = numberOfOnewayTravelsFromMainToRemoteLocation + numberOfOnewayTravelsFromRemoteToMainLocation;
         const emissions = totalOnewayTravels * team.travelEmission_gC02eqPerOnewayTravel;
+        const formula = `((${numberOfGroupTravelsFromMainToRemoteLocation} [numberOfGroupTravelsFromMainToRemoteLocation] * 2 [oneway] * ${team.teamDistribution_nr.mainLocation} [persons] ) + (${numberOfGroupTravelsFromRemoteToMainLocation} [numberOfGroupTravelsFromMainToRemoteLocation] * 2 * ${team.teamDistribution_nr.remoteLocation} [persons])) * ${team.travelEmission_gC02eqPerOnewayTravel}gCO2eq per way`;
 
-        return new Impact(emissions);
+        return new Impact(emissions, formula);
     }
 }

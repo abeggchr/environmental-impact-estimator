@@ -6,5 +6,6 @@ This tool estimates the energy and carbon footprint of an average enterprise-sof
 
 ## Structure
 
-* `/src` contains the calculation logic along with a React app
+* `/api` contains an Express REST endpoint with the estimation logic
+* `/web` contains a React user interface
 * `/talks` contains preparation files to present the findings
