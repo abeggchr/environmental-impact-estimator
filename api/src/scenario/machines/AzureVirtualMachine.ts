@@ -26,6 +26,7 @@ export abstract class AzureVirtualMachine implements IMachine {
     abstract replication_factor: number;
     abstract ssdStorage_gb: number;
     abstract hddStorage_gb: number;
+    abstract dailyRunning_hours: number;
 
 
     isPhysicalMachine = false;

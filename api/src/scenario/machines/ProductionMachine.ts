@@ -35,4 +35,6 @@ export abstract class ProductionMachine extends AzureVirtualMachine {
      * Assuming a hot standby.
      */
     replication_factor = 2;
+
+    dailyRunning_hours = 24;
 }

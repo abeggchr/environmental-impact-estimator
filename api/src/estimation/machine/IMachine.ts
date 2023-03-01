@@ -1,6 +1,8 @@
 export interface IMachine {
     ssdCoefficient_whPerTBh: number;
+
     hddCoefficient_whPerTBh: number;
+
     memoryCoefficient_kWhPerGb: number;
 
     virtualCPUs_number: number;
@@ -17,9 +19,14 @@ export interface IMachine {
 
     hourlyTrafficOverAverageDay_gb: number[];
 
+    dailyRunning_hours: number;
+
     minWatts_W: number;
+
     maxWatts_W: number;
+
     powerUsageEffectiveness_factor: number;
+
     emissionFactor_gC02eqPerkWh: number;
 
     machineName: string;

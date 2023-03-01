@@ -18,14 +18,8 @@ import {
 
 export class VirtualMachineEstimator {
     private readonly DAYS_PER_YEAR = 360;
-    private readonly HOURS_PER_DAY = 24;
     private readonly REGION = "region";
 
-    /**
-     * Estimates compute, storage, memory
-     *
-     * Networking is not included in the estimate
-     */
     public estimate(machine: IMachine) {
         const emissionsFactors: CloudConstantsEmissionsFactors = {
             [this.REGION]: machine.emissionFactor_gC02eqPerkWh
@@ -56,13 +50,13 @@ export class VirtualMachineEstimator {
     }
 
     private estimateSsdStorage(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
-        const terabyteHours = (machine.ssdStorage_gb / 1000) * machine.duration_years * this.DAYS_PER_YEAR * this.HOURS_PER_DAY;
+        const terabyteHours = (machine.ssdStorage_gb / 1000) * machine.duration_years * this.DAYS_PER_YEAR * machine.dailyRunning_hours;
         const coefficient = machine.ssdCoefficient_whPerTBh;
         return this.estimateStorage(terabyteHours, coefficient!, machine, emissionsFactors, constants);
     }
 
     private estimateHddStorage(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
-        const terabyteHours = (machine.hddStorage_gb / 1000) * machine.duration_years * this.DAYS_PER_YEAR * this.HOURS_PER_DAY;
+        const terabyteHours = (machine.hddStorage_gb / 1000) * machine.duration_years * this.DAYS_PER_YEAR * machine.dailyRunning_hours;
         const coefficient = machine.hddCoefficient_whPerTBh;
         return this.estimateStorage(terabyteHours, coefficient!, machine, emissionsFactors, constants);
     }
@@ -89,7 +83,7 @@ export class VirtualMachineEstimator {
 
     private estimateMemoryEmissions(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
         const usage: MemoryUsage = {
-            gigabyteHours: machine.memory_gb * machine.duration_years * this.DAYS_PER_YEAR * this.HOURS_PER_DAY
+            gigabyteHours: machine.memory_gb * machine.duration_years * this.DAYS_PER_YEAR * machine.dailyRunning_hours
         }
         const coefficient = machine.memoryCoefficient_kWhPerGb; // 0.000392 kWh / Gb
         const estimator = new MemoryEstimator(coefficient!);
