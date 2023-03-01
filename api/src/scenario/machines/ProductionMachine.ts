@@ -19,6 +19,10 @@ export abstract class ProductionMachine extends AzureVirtualMachine {
 
     duration_years = 8;
 
+    ssdStorage_gb = 0;
+
+    hddStorage_gb = 0;
+
     /**
      * StackExchange operates its servers on average below 10% CPU usage. Peaks result in up to 20% CPU usage.
      * Source: https://stackexchange.com/performance

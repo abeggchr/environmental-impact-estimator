@@ -1,5 +1,10 @@
 export interface IMachine {
     virtualCPUs_number: number;
+
+    ssdStorage_gb: number;
+
+    hddStorage_gb: number;
+
     duration_years: number;
 
     hourlyCpuUtilizationOverAverageDay: number[];
