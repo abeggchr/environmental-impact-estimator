@@ -49,10 +49,12 @@ export class DevelopmentTeam implements ITeam {
 
     duration_years = 2;
 
-    emissionFactor_gC02eqPerKWh = {mainLocation: 1, remoteLocation: 1};
+    /**
+     * Source: https://app.electricitymaps.com aggregated for 2022
+     */
+    emissionFactor_gC02eqPerKWh = {mainLocation: 153, remoteLocation: 536};
 
     workLocation_percentage = {office: 0.5, home: 0.5};
-
 
     /**
      * Working days in Zurich in 2023
@@ -73,7 +75,7 @@ export class DevelopmentTeam implements ITeam {
 
     /**
      * ZRH - SOF, Economy
-     * according to myclimate.ch
+     * Source: www.myclimate.ch
      */
     travelEmission_gC02eqPerOnewayTravel = 210000;
 

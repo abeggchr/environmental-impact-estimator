@@ -49,9 +49,9 @@ export abstract class AzureVirtualMachine implements IMachine {
     }
 
     /**
-     * 0.01152 g per kWh
+     * 0.00001152 METRIC_TON_PER_KWH
      */
-    emissionFactor_gC02eqPerkWh = AZURE_EMISSIONS_FACTORS_METRIC_TON_PER_KWH[AZURE_REGIONS.EU_SWITZERLAND.name] * 1000;
+    emissionFactor_gC02eqPerkWh = AZURE_EMISSIONS_FACTORS_METRIC_TON_PER_KWH[AZURE_REGIONS.EU_SWITZERLAND.name] * 1000 * 1000;
 
     /**
      * Quote: "the data shows that about thirty percent of the virtual machines [...] were [...] comatose"
