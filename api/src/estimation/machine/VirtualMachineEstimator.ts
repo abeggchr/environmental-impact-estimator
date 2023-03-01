@@ -8,7 +8,7 @@ import {
     EmbodiedEmissionsUsage,
     FootprintEstimate
 } from "@cloud-carbon-footprint/core";
-import {StorageEstimator, StorageUsage} from "@cloud-carbon-footprint/core/dist";
+import {NetworkingEstimator, NetworkingUsage, StorageEstimator, StorageUsage} from "@cloud-carbon-footprint/core/dist";
 import {AZURE_CLOUD_CONSTANTS} from "@cloud-carbon-footprint/azure";
 
 export class VirtualMachineEstimator {
@@ -16,6 +16,11 @@ export class VirtualMachineEstimator {
     private readonly HOURS_PER_DAY = 24;
     private readonly REGION = "region";
 
+    /**
+     * Estimates compute, storage, memory
+     *
+     * Networking is not included in the estimate
+     */
     public estimate(machine: IMachine) {
         const emissionsFactors: CloudConstantsEmissionsFactors = {
             [this.REGION]: machine.emissionFactor_gC02eqPerkWh
@@ -32,12 +37,13 @@ export class VirtualMachineEstimator {
         impact.add("compute", this.estimateComputeUsage(machine, emissionsFactors, constants));
         impact.add("ssdStorage", this.estimateSsdStorage(machine, emissionsFactors, constants));
         impact.add("hddStorage", this.estimateHddStorage(machine, emissionsFactors, constants));
+        impact.add("network", this.estimateNetworkEmissions(machine, emissionsFactors, constants));
         impact.add("embodiedEmissions", this.estimateEmbodiedEmissions(machine, emissionsFactors));
         return impact;
     }
 
     private estimateComputeUsage(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
-        const usages = this.getComputeUsage(machine);
+        const usages = this.getComputeUsages(machine);
         const estimator = new ComputeEstimator();
         const estimates = estimator.estimate(usages, this.REGION, emissionsFactors, constants);
         return this.asImpact(estimates, 1 + machine.zombieServers_percentage);
@@ -53,6 +59,17 @@ export class VirtualMachineEstimator {
         const terabyteHours = (machine.hddStorage_gb / 1000) * machine.duration_years * this.DAYS_PER_YEAR * this.HOURS_PER_DAY;
         const coefficient = AZURE_CLOUD_CONSTANTS.HDDCOEFFICIENT;
         return this.estimateStorage(terabyteHours, coefficient!, machine, emissionsFactors, constants);
+    }
+
+    /**
+     * Estimates server to client network emissions (as opposed to the cloud carbon footprint tool). Intra-cloud networking is neglected.
+     */
+    private estimateNetworkEmissions(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
+        const coefficient = 0.06; // [kWh per GB] https://www.cloudcarbonfootprint.org/docs/methodology/#appendix-iv-recent-networking-studies
+        const estimator = new NetworkingEstimator(coefficient);
+        const usages = this.getNetworkingUsages(machine);
+        const estimates = estimator.estimate(usages, this.REGION, emissionsFactors, constants);
+        return this.asImpact(estimates, 1 + machine.zombieServers_percentage);
     }
 
     private estimateStorage(terabyteHours: number, coefficient: number , machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
@@ -81,7 +98,7 @@ export class VirtualMachineEstimator {
         let formula = "estimation by cloud carbon footprint tool: (";
         for (let estimate of estimates) {
             gC02eq += estimate.co2e; // is in gC02e because emissionsFactors above is as well
-            formula += `${estimate.co2e}gC02eq + `;
+            formula += `${estimate.co2e.toFixed()} gC02eq + `;
         }
 
         gC02eq *= factor;
@@ -90,17 +107,32 @@ export class VirtualMachineEstimator {
         return new Impact(gC02eq, formula);
     }
 
-    private getComputeUsage(machine: IMachine): ComputeUsage[] {
-        if (machine.hourlyCpuUtilizationOverAverageDay.length != 24) {
-            throw new Error("expect 24 hours per day, but given argument has " + machine.hourlyCpuUtilizationOverAverageDay.length);
+    private getComputeUsages(machine: IMachine): ComputeUsage[] {
+        if (machine.hourlyCpuUtilizationOverAverageDay_percentage.length != 24) {
+            throw new Error("expect 24 hours per day, but given argument has " + machine.hourlyCpuUtilizationOverAverageDay_percentage.length);
         }
 
         const usages: ComputeUsage[] = [];
-        _.forOwn(_.groupBy(machine.hourlyCpuUtilizationOverAverageDay), (value: number[]) => {
+        _.forOwn(_.groupBy(machine.hourlyCpuUtilizationOverAverageDay_percentage), (value: number[]) => {
             usages.push({
                 cpuUtilizationAverage: value[0],
                 vCpuHours: value.length * machine.virtualCPUs_number * this.DAYS_PER_YEAR * machine.duration_years,
                 usesAverageCPUConstant: false, // no impact on estimation, just wired through
+            });
+        });
+
+        return usages;
+    }
+
+    private getNetworkingUsages(machine: IMachine): NetworkingUsage[] {
+        if (machine.hourlyTrafficOverAverageDay_gb.length != 24) {
+            throw new Error("expect 24 hours per day, but given argument has " + machine.hourlyTrafficOverAverageDay_gb.length);
+        }
+
+        const usages: NetworkingUsage[] = [];
+        _.forOwn(_.groupBy(machine.hourlyTrafficOverAverageDay_gb), (value: number[]) => {
+            usages.push({
+                gigabytes: value[0] * value.length * machine.duration_years * this.DAYS_PER_YEAR
             });
         });
 

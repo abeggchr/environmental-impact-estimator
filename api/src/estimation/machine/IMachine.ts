@@ -1,4 +1,5 @@
 export interface IMachine {
+
     virtualCPUs_number: number;
 
     ssdStorage_gb: number;
@@ -7,7 +8,9 @@ export interface IMachine {
 
     duration_years: number;
 
-    hourlyCpuUtilizationOverAverageDay: number[];
+    hourlyCpuUtilizationOverAverageDay_percentage: number[];
+
+    hourlyTrafficOverAverageDay_gb: number[];
 
     minWatts_W: number;
     maxWatts_W: number;

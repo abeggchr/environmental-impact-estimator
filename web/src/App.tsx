@@ -2,14 +2,9 @@ import './App.css'
 import useCopyToClipboard from "./util/useCopyToClipboard";
 import {QueryClient, QueryClientProvider, useQuery} from "react-query";
 import {FunctionComponent} from "react";
-import {Impact} from "./Impact";
 
 function App() {
     const queryClient = new QueryClient();
-
-
-
-
     return (
         <QueryClientProvider client={queryClient}>
             <Baseline />
@@ -22,15 +17,14 @@ const Baseline:FunctionComponent = () => {
 
     const baselineQuery = useQuery('baseline', getBaseline);
 
-    async function getBaseline(): Promise<Impact> {
-        const result = await fetch("http://localhost:3000");
-        return await result.json() as Impact;
+    async function getBaseline(): Promise<string> {
+        const result = await fetch("http://localhost:3000/baseline");
+        return await result.text();
     }
 
     return (
     <div className="App">
-        <h1 onClick={() => copy(baselineQuery.data?.gC02eq.toString() || '')}>Baseline</h1>
-        <p>{baselineQuery.data?.gC02eq}</p>
+        <h1 onClick={() => copy(baselineQuery.data?.toString() || '')}>Baseline</h1>
         <p>{baselineQuery.data?.toString()}</p>
     </div>);
 }
