@@ -6,6 +6,8 @@ export interface IMachine {
 
     hddStorage_gb: number;
 
+    memory_gb: number;
+
     duration_years: number;
 
     hourlyCpuUtilizationOverAverageDay_percentage: number[];

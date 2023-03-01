@@ -27,9 +27,12 @@ export abstract class AzureVirtualMachine implements IMachine {
     abstract ssdStorage_gb: number;
     abstract hddStorage_gb: number;
 
+
     isPhysicalMachine = false;
 
     get virtualCPUs_number() { return this.virtualMachine[0] }
+
+    get memory_gb() { return this.virtualMachine[1]; };
 
     get embodiedEmissions_gC02eq() { return this.virtualMachine[2] * 1000 };
 

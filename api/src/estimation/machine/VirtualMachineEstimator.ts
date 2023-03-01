@@ -8,7 +8,13 @@ import {
     EmbodiedEmissionsUsage,
     FootprintEstimate
 } from "@cloud-carbon-footprint/core";
-import {NetworkingEstimator, NetworkingUsage, StorageEstimator, StorageUsage} from "@cloud-carbon-footprint/core/dist";
+import {
+    MemoryEstimator, MemoryUsage,
+    NetworkingEstimator,
+    NetworkingUsage,
+    StorageEstimator,
+    StorageUsage
+} from "@cloud-carbon-footprint/core/dist";
 import {AZURE_CLOUD_CONSTANTS} from "@cloud-carbon-footprint/azure";
 
 export class VirtualMachineEstimator {
@@ -38,6 +44,7 @@ export class VirtualMachineEstimator {
         impact.add("ssdStorage", this.estimateSsdStorage(machine, emissionsFactors, constants));
         impact.add("hddStorage", this.estimateHddStorage(machine, emissionsFactors, constants));
         impact.add("network", this.estimateNetworkEmissions(machine, emissionsFactors, constants));
+        impact.add("memory", this.estimateMemoryEmissions(machine, emissionsFactors, constants));
         impact.add("embodiedEmissions", this.estimateEmbodiedEmissions(machine, emissionsFactors));
         return impact;
     }
@@ -77,6 +84,16 @@ export class VirtualMachineEstimator {
             terabyteHours: terabyteHours
         };
         const estimator = new StorageEstimator(coefficient);
+        const estimates = estimator.estimate([usage], this.REGION, emissionsFactors, constants);
+        return this.asImpact(estimates, 1 + machine.zombieServers_percentage);
+    }
+
+    private estimateMemoryEmissions(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
+        const usage: MemoryUsage = {
+            gigabyteHours: machine.memory_gb * machine.duration_years * this.DAYS_PER_YEAR * this.HOURS_PER_DAY
+        }
+        const coefficient = AZURE_CLOUD_CONSTANTS.MEMORY_COEFFICIENT; // 0.000392 kWh / Gb
+        const estimator = new MemoryEstimator(coefficient!);
         const estimates = estimator.estimate([usage], this.REGION, emissionsFactors, constants);
         return this.asImpact(estimates, 1 + machine.zombieServers_percentage);
     }
@@ -138,4 +155,5 @@ export class VirtualMachineEstimator {
 
         return usages;
     }
+
 }
