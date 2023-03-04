@@ -62,7 +62,8 @@ export class VirtualMachineEstimator {
     }
 
     /**
-     * Estimates server to client network emissions (as opposed to the cloud carbon footprint tool). Intra-cloud networking is neglected.
+     * Estimates server to client network emissions (as opposed to the cloud carbon footprint tool).
+     * Intra-cloud networking is neglected as it has a lower coefficient and less volume in this scenario.
      */
     private estimateNetworkEmissions(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
         const coefficient = 0.06; // [kWh per GB] https://www.cloudcarbonfootprint.org/docs/methodology/#appendix-iv-recent-networking-studies

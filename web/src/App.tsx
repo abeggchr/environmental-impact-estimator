@@ -25,7 +25,7 @@ const Baseline:FunctionComponent = () => {
     return (
     <div className="App">
         <h1 onClick={() => copy(baselineQuery.data?.toString() || '')}>Baseline</h1>
-        <p>{baselineQuery.data?.toString()}</p>
+        <p>{baselineQuery.data ? parseInt(baselineQuery.data!.toString()).toLocaleString() : ''} gC02eq</p>
     </div>);
 }
 
