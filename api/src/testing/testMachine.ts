@@ -1,7 +1,6 @@
 import {IMachine} from "../estimation/machine/IMachine";
 
 export const testMachine: IMachine = {
-
     duration_years: 1,
     embodiedEmissions_gC02eq: 2,
     emissionFactor_gC02eqPerkWh: 3,
@@ -19,4 +18,9 @@ export const testMachine: IMachine = {
     replication_factor: 9,
     hddStorage_gb: 10,
     ssdStorage_gb: 11,
+    dailyRunning_hours: 12,
+    hddCoefficient_whPerTBh: 13,
+    memoryCoefficient_kWhPerGb: 14,
+    memory_gb: 15,
+    ssdCoefficient_whPerTBh: 16,
 }

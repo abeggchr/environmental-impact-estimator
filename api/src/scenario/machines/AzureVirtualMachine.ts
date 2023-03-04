@@ -5,6 +5,7 @@ import {
     VIRTUAL_MACHINE_TYPE_SERIES_MAPPING
 } from "@cloud-carbon-footprint/azure/dist/lib/VirtualMachineTypes";
 import {AZURE_REGIONS} from "@cloud-carbon-footprint/azure/dist/lib/AzureRegions";
+import {DevelopmentTeam} from "../teams/DevelopmentTeam";
 
 export type SeriesName = "D2s – D64s v4";
 export type UsageType = "D16s v4";
@@ -49,9 +50,10 @@ export abstract class AzureVirtualMachine implements IMachine {
     }
 
     /**
-     * 0.00001152 METRIC_TON_PER_KWH
+     * Baseline is the SWITZERLAND region regular grid emission factor (see DevelopmentTeam
+     * Azures actual emission factor is applied with the "GreenEnergy" decorator for better comparability.
      */
-    emissionFactor_gC02eqPerkWh = AZURE_EMISSIONS_FACTORS_METRIC_TON_PER_KWH[AZURE_REGIONS.EU_SWITZERLAND.name] * 1000 * 1000;
+    emissionFactor_gC02eqPerkWh = DevelopmentTeam.Switzerland_EmissionFactor_gC02eqPerKWh;
 
     /**
      * Quote: "the data shows that about thirty percent of the virtual machines [...] were [...] comatose"

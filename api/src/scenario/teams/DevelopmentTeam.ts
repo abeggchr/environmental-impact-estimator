@@ -50,9 +50,11 @@ export class DevelopmentTeam implements ITeam {
     duration_years = 2;
 
     /**
-     * Source: https://app.electricitymaps.com aggregated for 2022
+     * Source: https://app.electricitymaps.com aggregated for 2022: CH 153, Bulgaria 536
+     * Source: https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2022, UK Electricity for 2022: 193.8 gC02eq
      */
-    emissionFactor_gC02eqPerKWh = {mainLocation: 153, remoteLocation: 536};
+    static Switzerland_EmissionFactor_gC02eqPerKWh = 153;
+    emissionFactor_gC02eqPerKWh = {mainLocation: DevelopmentTeam.Switzerland_EmissionFactor_gC02eqPerKWh, remoteLocation: 536};
 
     workLocation_percentage = {office: 0.5, home: 0.5};
 
