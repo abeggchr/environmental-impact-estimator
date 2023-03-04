@@ -6,7 +6,7 @@ import {Impact} from "../Impact";
 vi.mock('./CommuteEstimator', () => {
     const CommuteEstimator = vi.fn();
     CommuteEstimator.prototype.estimate = vi.fn(() => {
-        return new Impact(1);
+        return new Impact(1, "1");
     })
     return {CommuteEstimator};
 })
@@ -14,7 +14,7 @@ vi.mock('./CommuteEstimator', () => {
 vi.mock('./WorkEstimator', () => {
     const WorkEstimator = vi.fn();
     WorkEstimator.prototype.estimate = vi.fn(() => {
-        return new Impact(2);
+        return new Impact(2, "2");
     })
     return {WorkEstimator};
 })
@@ -22,7 +22,7 @@ vi.mock('./WorkEstimator', () => {
 vi.mock('./TravelEstimator', () => {
     const TravelEstimator = vi.fn();
     TravelEstimator.prototype.estimate = vi.fn(() => {
-        return new Impact(3);
+        return new Impact(3, "3");
     })
     return {TravelEstimator};
 })
@@ -30,7 +30,7 @@ vi.mock('./TravelEstimator', () => {
 vi.mock('./EmbodiedEmissionsEstimator', () => {
     const EmbodiedEmissionsEstimator = vi.fn();
     EmbodiedEmissionsEstimator.prototype.estimate = vi.fn(() => {
-        return new Impact(4);
+        return new Impact(4, "4");
     })
     return {EmbodiedEmissionsEstimator};
 })

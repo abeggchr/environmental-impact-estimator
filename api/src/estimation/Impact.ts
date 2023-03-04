@@ -1,6 +1,6 @@
 export class Impact {
-  private readonly _gC02eq: number | undefined;
-  private readonly _formula: string | undefined;
+  private readonly _gC02eq: number | undefined = undefined;
+  private readonly _formula: string | undefined = undefined;
   private readonly _children: Map<string, Impact>;
 
   constructor(gC02eq?: number, formula?: string ) {

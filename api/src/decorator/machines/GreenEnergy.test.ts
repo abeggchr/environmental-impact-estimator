@@ -9,6 +9,7 @@ describe('GreenEnergy', () => {
             teams: [{...testTeam, emissionFactor_gC02eqPerKWh: { mainLocation: 100, remoteLocation: 100}}],
             machines: [{...testMachine, emissionFactor_gC02eqPerkWh: 100}]
         });
+
         expect(sut.teams[0].emissionFactor_gC02eqPerKWh.mainLocation).toBeLessThan(100);
         expect(sut.teams[0].emissionFactor_gC02eqPerKWh.remoteLocation).toBeLessThan(100);
         expect(sut.machines[0].emissionFactor_gC02eqPerkWh).toBeLessThan(100);

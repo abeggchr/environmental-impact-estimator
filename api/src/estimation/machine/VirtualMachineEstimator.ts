@@ -6,15 +6,14 @@ import {
     ComputeUsage,
     EmbodiedEmissionsEstimator,
     EmbodiedEmissionsUsage,
-    FootprintEstimate
-} from "@cloud-carbon-footprint/core";
-import {
-    MemoryEstimator, MemoryUsage,
+    FootprintEstimate,
+    MemoryEstimator,
+    MemoryUsage,
     NetworkingEstimator,
     NetworkingUsage,
     StorageEstimator,
     StorageUsage
-} from "@cloud-carbon-footprint/core/dist";
+} from "@cloud-carbon-footprint/core";
 
 export class VirtualMachineEstimator {
     private readonly DAYS_PER_YEAR = 360;

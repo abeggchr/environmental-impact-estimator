@@ -8,7 +8,7 @@ import {testMachine} from "../testing/testMachine";
 vi.mock('./team/TeamEstimator', () => {
     const TeamEstimator = vi.fn();
     TeamEstimator.prototype.estimate = vi.fn(() => {
-        return new Impact(1);
+        return new Impact(1, "");
     })
     return {TeamEstimator};
 })
@@ -16,7 +16,7 @@ vi.mock('./team/TeamEstimator', () => {
 vi.mock('./machine/MachineEstimator', () => {
     const MachineEstimator = vi.fn();
     MachineEstimator.prototype.estimate = vi.fn(() => {
-        return new Impact(1);
+        return new Impact(1, "");
     })
     return {MachineEstimator};
 })

@@ -14,6 +14,6 @@ export class PhysicalMachineEstimator {
      */
     private estimateEmbodiedEmissions(machine: IMachine) {
         const gCO2 = machine.embodiedEmissions_gC02eq * (machine.duration_years / machine.expectedLifespan_years);
-        return new Impact(gCO2);
+        return new Impact(gCO2, `${machine.embodiedEmissions_gC02eq} * (${machine.duration_years} / ${machine.expectedLifespan_years})`);
     }
 }
