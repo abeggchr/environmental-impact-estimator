@@ -125,7 +125,7 @@ export class VirtualMachineEstimator {
         const usages: ComputeUsage[] = [];
         _.forOwn(_.groupBy(machine.hourlyCpuUtilizationOverAverageDay_percentage), (value: number[]) => {
             usages.push({
-                cpuUtilizationAverage: value[0],
+                cpuUtilizationAverage: value[0] * 100, // cpuUtilization is a whole number (i.e. 50 and not 0.5)
                 vCpuHours: value.length * machine.virtualCPUs_number * this.DAYS_PER_YEAR * machine.duration_years,
                 usesAverageCPUConstant: false, // no impact on estimation, just wired through
             });
