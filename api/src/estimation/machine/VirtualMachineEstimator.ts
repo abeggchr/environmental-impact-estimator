@@ -17,6 +17,11 @@ import {
 
 export class VirtualMachineEstimator {
     private readonly DAYS_PER_YEAR = 360;
+
+    /**
+     * Source: https://coda.io/@hales/simple-online-calculator-for-dates-and-times/how-many-work-days-in-a-year-8
+     */
+    private readonly BUSINESS_DAYS_PER_YEAR = 249;
     private readonly REGION = "region";
 
     public estimate(machine: IMachine) {
@@ -65,11 +70,13 @@ export class VirtualMachineEstimator {
      * Intra-cloud networking is neglected as it has a lower coefficient and less volume in this scenario.
      */
     private estimateNetworkEmissions(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
+        const usage: NetworkingUsage = {
+            gigabytes: machine.traffic_gbPerBusinessDay * machine.duration_years * this.BUSINESS_DAYS_PER_YEAR
+        };
         const coefficient = 0.06; // [kWh per GB] https://www.cloudcarbonfootprint.org/docs/methodology/#appendix-iv-recent-networking-studies
-        const estimator = new NetworkingEstimator(coefficient);
-        const usages = this.getNetworkingUsages(machine);
-        const estimates = estimator.estimate(usages, this.REGION, emissionsFactors, constants);
-        return this.asImpact(estimates, 1 + machine.zombieServers_percentage);
+        const emissionsFactor = 250; // [g per kWH] https://app.electricitymaps.com/map for 2022, averaged over multiple European countries
+        const gCO2eq = machine.traffic_gbPerBusinessDay * machine.duration_years * this.BUSINESS_DAYS_PER_YEAR * coefficient * emissionsFactors[this.REGION];
+        return new Impact(gCO2eq, `${machine.traffic_gbPerBusinessDay.toFixed(1)} gb/businessDay * ${machine.duration_years * this.BUSINESS_DAYS_PER_YEAR} businessDays * ${coefficient} kWh/gb * ${emissionsFactor} gC02eq/kWh`);
     }
 
     private estimateStorage(terabyteHours: number, coefficient: number , machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
@@ -103,18 +110,18 @@ export class VirtualMachineEstimator {
         return this.asImpact(estimates, 1 + machine.zombieServers_percentage);
     }
 
-    private asImpact(estimates: FootprintEstimate[], factor: number) {
+    private asImpact(estimates: FootprintEstimate[], factor: number, formula:string|undefined = undefined) {
         let gC02eq = 0;
-        let formula = "estimation by cloud carbon footprint tool: (";
+        let defaultFormula = "estimation by cloud carbon footprint tool: (";
         for (let estimate of estimates) {
             gC02eq += estimate.co2e; // is in gC02e because emissionsFactors above is as well
-            formula += `${estimate.co2e.toFixed()} gC02eq + `;
+            defaultFormula += `${estimate.co2e.toFixed()} gC02eq + `;
         }
 
         gC02eq *= factor;
-        formula = formula.substring(0, formula.length-3) + `) * ${factor} [factor for zombieServer]`;
+        defaultFormula = defaultFormula.substring(0, defaultFormula.length-3) + `) * ${factor} [factor for zombieServer]`;
 
-        return new Impact(gC02eq, formula);
+        return new Impact(gC02eq, formula ? formula : defaultFormula);
     }
 
     private getComputeUsages(machine: IMachine): ComputeUsage[] {
@@ -133,20 +140,4 @@ export class VirtualMachineEstimator {
 
         return usages;
     }
-
-    private getNetworkingUsages(machine: IMachine): NetworkingUsage[] {
-        if (machine.hourlyTrafficOverAverageDay_gb.length != 24) {
-            throw new Error("expect 24 hours per day, but given argument has " + machine.hourlyTrafficOverAverageDay_gb.length);
-        }
-
-        const usages: NetworkingUsage[] = [];
-        _.forOwn(_.groupBy(machine.hourlyTrafficOverAverageDay_gb), (value: number[]) => {
-            usages.push({
-                gigabytes: value[0] * value.length * machine.duration_years * this.DAYS_PER_YEAR
-            });
-        });
-
-        return usages;
-    }
-
 }

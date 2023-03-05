@@ -17,7 +17,7 @@ export interface IMachine {
 
     hourlyCpuUtilizationOverAverageDay_percentage: number[];
 
-    hourlyTrafficOverAverageDay_gb: number[];
+    traffic_gbPerBusinessDay: number;
 
     dailyRunning_hours: number;
 

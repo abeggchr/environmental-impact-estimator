@@ -26,7 +26,7 @@ note as WN
   1200 user usage hours per hour (peak)
   (1200 * 3 requests per minute) / 60 = **60 requests per second** (peak)
   response time for one request is 200ms
-  1 mb traffic per request
+  initial request 3.5mb / additional requests 100kb
   == CPU ==
   60 request per second * 0.2 seconds per request => 12 CPU
   assuming CPU load per request is 20% => 4 CPU

@@ -5,7 +5,7 @@ export const testMachine: IMachine = {
     embodiedEmissions_gC02eq: 2,
     emissionFactor_gC02eqPerkWh: 3,
     hourlyCpuUtilizationOverAverageDay_percentage: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    hourlyTrafficOverAverageDay_gb: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    traffic_gbPerBusinessDay: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
     isPhysicalMachine: false,
     machineName: "machineName",
     maxWatts_W: 4,

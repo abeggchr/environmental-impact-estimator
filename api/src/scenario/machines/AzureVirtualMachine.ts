@@ -23,7 +23,7 @@ export abstract class AzureVirtualMachine implements IMachine {
     abstract duration_years: number;
     abstract machineName: string;
     abstract hourlyCpuUtilizationOverAverageDay_percentage: number[];
-    abstract hourlyTrafficOverAverageDay_gb: number[];
+    abstract traffic_gbPerBusinessDay: number;
     abstract replication_factor: number;
     abstract ssdStorage_gb: number;
     abstract hddStorage_gb: number;
