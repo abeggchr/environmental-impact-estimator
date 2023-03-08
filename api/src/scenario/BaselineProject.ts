@@ -6,6 +6,8 @@ import {IMachine} from "../estimation/machine/IMachine";
 import {WebProductionMachine} from "./machine/WebProductionMachine";
 import {BaselineUsage} from "./usage/BaselineUsage";
 import {IUsage} from "../estimation/usage/IUsage";
+import {DbProductionMachine} from "./machine/DbProductionMachine";
+import {JobProductionMachine} from "./machine/JobProductionMachine";
 
 export class BaselineProject implements IProject {
 
@@ -13,6 +15,8 @@ export class BaselineProject implements IProject {
         this._teams.push(new DevelopmentTeam());
         this._teams.push(new MaintenanceTeam());
         this._machines.push(new WebProductionMachine());
+        this._machines.push(new DbProductionMachine());
+        this._machines.push(new JobProductionMachine());
         this._usage = new BaselineUsage();
     }
 
