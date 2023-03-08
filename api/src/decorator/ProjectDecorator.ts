@@ -1,6 +1,7 @@
 import {IProject} from "../estimation/IProject";
 import {ITeam} from "../estimation/team/ITeam";
 import {IMachine} from "../estimation/machine/IMachine";
+import {IUsage} from "../estimation/usage/IUsage";
 
 export class ProjectDecorator implements IProject {
 
@@ -15,11 +16,19 @@ export class ProjectDecorator implements IProject {
         return this.project.machines.map(m => this.decorateMachine(m));
     }
 
+    get usage() {
+        return this.decorateUsage(this.project.usage);
+    }
+
     protected decorateTeam(team: ITeam): ITeam {
         return team;
     }
 
     protected decorateMachine(machine: IMachine): IMachine {
         return machine;
+    }
+
+    protected decorateUsage(usage: IUsage): IUsage {
+        return usage;
     }
 }

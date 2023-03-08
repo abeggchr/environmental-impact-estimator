@@ -14,6 +14,7 @@ import {
     StorageEstimator,
     StorageUsage
 } from "@cloud-carbon-footprint/core";
+import {InternetTrafficEstimator} from "../usage/InternetTrafficEstimator";
 
 export class VirtualMachineEstimator {
     private readonly DAYS_PER_YEAR = 360;
@@ -76,10 +77,9 @@ export class VirtualMachineEstimator {
         const usage: NetworkingUsage = {
             gigabytes: machine.traffic_gbPerBusinessDay * machine.duration_years * this.BUSINESS_DAYS_PER_YEAR
         };
-        const coefficient = 0.06; // [kWh per GB] https://www.cloudcarbonfootprint.org/docs/methodology/#appendix-iv-recent-networking-studies
-        const emissionsFactor = 250; // [g per kWH] https://app.electricitymaps.com/map for 2022, averaged over multiple European countries
-        const gCO2eq = machine.traffic_gbPerBusinessDay * machine.duration_years * this.BUSINESS_DAYS_PER_YEAR * coefficient * emissionsFactors[this.REGION];
-        return new Impact(gCO2eq, `${machine.traffic_gbPerBusinessDay.toFixed(1)} gb/businessDay * ${machine.duration_years * this.BUSINESS_DAYS_PER_YEAR} businessDays * ${coefficient} kWh/gb * ${emissionsFactor} gC02eq/kWh`);
+        const estimator = new NetworkingEstimator(machine.networkingCoefficient_kWhPerGb);
+        const estimates = estimator.estimate([usage], this.REGION, emissionsFactors, constants);
+        return this.asImpact(estimates, 1);
     }
 
     private estimateStorage(terabyteHours: number, coefficient: number , machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {

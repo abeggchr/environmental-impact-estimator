@@ -70,11 +70,9 @@ export abstract class AzureVirtualMachine implements IMachine {
      * 1.185
      */
     powerUsageEffectiveness_factor: number = AZURE_CLOUD_CONSTANTS.PUE_AVG;
-
     ssdCoefficient_whPerTBh: number = AZURE_CLOUD_CONSTANTS.SSDCOEFFICIENT!;
-
     hddCoefficient_whPerTBh: number = AZURE_CLOUD_CONSTANTS.HDDCOEFFICIENT!;
-
     memoryCoefficient_kWhPerGb: number = AZURE_CLOUD_CONSTANTS.MEMORY_COEFFICIENT!;
+    networkingCoefficient_kWhPerGb: number = AZURE_CLOUD_CONSTANTS.NETWORKING_COEFFICIENT!;
 }
 

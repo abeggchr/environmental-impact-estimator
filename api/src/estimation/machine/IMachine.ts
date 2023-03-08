@@ -5,6 +5,8 @@ export interface IMachine {
 
     memoryCoefficient_kWhPerGb: number;
 
+    networkingCoefficient_kWhPerGb: number;
+
     virtualCPUs_number: number;
 
     ssdStorage_gb: number;

@@ -2,10 +2,11 @@ import {Impact} from "./Impact";
 import {TeamEstimator} from "./team/TeamEstimator";
 import {IProject} from "./IProject";
 import {MachineEstimator} from "./machine/MachineEstimator";
+import {UsageEstimator} from "./usage/UsageEstimator";
 
 export class ProjectEstimator {
 
-    constructor(private teamEstimator = new TeamEstimator(), private machineEstimator = new MachineEstimator()) {
+    constructor(private teamEstimator = new TeamEstimator(), private machineEstimator = new MachineEstimator(), private usageEstimator = new UsageEstimator()) {
     }
 
     public estimate(project: IProject): Impact {
@@ -22,6 +23,9 @@ export class ProjectEstimator {
             machineImpact.add(machine.machineName, this.machineEstimator.estimate(machine));
         }
         impact.add("machine", machineImpact);
+
+        const usageImpact = this.usageEstimator.estimate(project.usage);
+        impact.add("usage", usageImpact);
 
         return impact;
     }

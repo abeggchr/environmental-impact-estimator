@@ -27,7 +27,7 @@ vi.mock('./TravelEstimator', () => {
     return {TravelEstimator};
 })
 
-vi.mock('./EmbodiedEmissionsEstimator', () => {
+vi.mock('../common/EmbodiedEmissionsEstimator', () => {
     const EmbodiedEmissionsEstimator = vi.fn();
     EmbodiedEmissionsEstimator.prototype.estimate = vi.fn(() => {
         return new Impact(4, "4");
