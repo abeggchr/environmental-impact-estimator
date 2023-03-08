@@ -1,5 +1,6 @@
 import {ITeam} from "./ITeam";
 import {Impact} from "../Impact";
+import {BUSINESS_DAYS_PER_YEAR} from "../common/Constants";
 
 export class TravelEstimator {
 
@@ -10,7 +11,7 @@ export class TravelEstimator {
             return new Impact(0, "0 - no travel required");
         }
 
-        const numberOfTravels = ((team.duration_years * team.workingDays_perYear) / TravelEstimator.WORKING_DAYS_PER_WEEK) / team.weeksBetweenTravels_nr;
+        const numberOfTravels = ((team.duration_years * BUSINESS_DAYS_PER_YEAR) / TravelEstimator.WORKING_DAYS_PER_WEEK) / team.weeksBetweenTravels_nr;
         const numberOfGroupTravelsFromMainToRemoteLocation = numberOfTravels * team.travelDistributionFrom_percentage.mainLocation;
         const numberOfOnewayTravelsFromMainToRemoteLocation = numberOfGroupTravelsFromMainToRemoteLocation * team.teamDistribution_nr.mainLocation * 2;
         const numberOfGroupTravelsFromRemoteToMainLocation = numberOfTravels * team.travelDistributionFrom_percentage.remoteLocation;

@@ -20,7 +20,6 @@ export const testTeam: ITeam = {
     duration_years: 2,
     emissionFactor_gC02eqPerKWh: {mainLocation: 3, remoteLocation: 4},
     workLocation_percentage: {home: 0.55, office: 0.45},
-    workingDays_perYear: 6,
     workingHours_perDay: 7,
     workplacePowerUsage_W: 8,
     weeksBetweenTravels_nr: 9,

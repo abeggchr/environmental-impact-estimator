@@ -1,9 +1,10 @@
 import {describe, expect, test} from "vitest";
 import {CommuteEstimator} from "./CommuteEstimator";
 import {testTeam} from "../../testing/testTeam";
+import {BUSINESS_DAYS_PER_YEAR} from "../common/Constants";
 
 describe("CommuteEstimator", () => {
-    const baseExpectation = testTeam.workingDays_perYear * testTeam.duration_years * (testTeam.teamDistribution_nr.mainLocation + testTeam.teamDistribution_nr.remoteLocation) * testTeam.workLocation_percentage.office;
+    const baseExpectation = BUSINESS_DAYS_PER_YEAR * testTeam.duration_years * (testTeam.teamDistribution_nr.mainLocation + testTeam.teamDistribution_nr.remoteLocation) * testTeam.workLocation_percentage.office;
 
     test("estimates individual traffic combustion impact", () => {
         const expected = baseExpectation * 42 * 100 * 0.2;

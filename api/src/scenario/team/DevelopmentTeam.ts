@@ -58,10 +58,7 @@ export class DevelopmentTeam implements ITeam {
 
     workLocation_percentage = {office: 0.5, home: 0.5};
 
-    /**
-     * Working days in Zurich in 2023
-     * according to https://www.arbeitstage.ch/
-     */
+
     workingDays_perYear = 251;
 
     workingHours_perDay = 8.4;

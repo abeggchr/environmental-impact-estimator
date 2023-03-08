@@ -1,12 +1,10 @@
 export interface IUsage {
-    workplacePowerUsage_W: number;
 
     users_nr: number;
 
     trafficEmissionFactor_gC02eqPerKWh: number;
 
     trafficCoefficient_kWhPerGb: number;
-
 
     duration_years: number;
 
@@ -17,6 +15,8 @@ export interface IUsage {
     additionalRequest_gb: number;
 
     requestsPerBusinessDayAndUser_nr: number;
+
+    workplacePowerUsage_W: number;
 
     workplaceExpectedLifespan_years: number;
 

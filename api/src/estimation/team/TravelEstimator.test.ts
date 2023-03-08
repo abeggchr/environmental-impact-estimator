@@ -1,6 +1,7 @@
 import {describe, expect, test} from "vitest";
 import {testTeam} from "../../testing/testTeam";
 import {TravelEstimator} from "./TravelEstimator";
+import {BUSINESS_DAYS_PER_YEAR} from "../common/Constants";
 
 describe("TravelEstimator", () => {
 
@@ -8,14 +9,13 @@ describe("TravelEstimator", () => {
         const impact = new TravelEstimator().estimate({
             ...testTeam,
             duration_years: 1,
-            workingDays_perYear: 200,
             weeksBetweenTravels_nr: 6,
             teamDistribution_nr: {remoteLocation: 2.5, mainLocation: 7.5},
             travelDistributionFrom_percentage: {remoteLocation: 0.6, mainLocation: 0.3},
             travelEmission_gC02eqPerOnewayTravel: 100
         });
 
-        const expectedNumberOfTravels = (200 / TravelEstimator.WORKING_DAYS_PER_WEEK) / 6;
+        const expectedNumberOfTravels = (BUSINESS_DAYS_PER_YEAR / TravelEstimator.WORKING_DAYS_PER_WEEK) / 6;
         const expectedNumberOfGroupTravelsFromMainToRemote = expectedNumberOfTravels * 0.3;
         const expectedNumberOfSingularTravelsFromMainToRemote = expectedNumberOfGroupTravelsFromMainToRemote * 7.5 * 2;
         const expectedNumberOfGroupTravelsFromRemoteToMain = expectedNumberOfTravels * 0.6;

@@ -22,7 +22,6 @@ export interface ITeam {
 
     commuteDistance_km: number,
 
-    workingDays_perYear: number;
     workingHours_perDay: number;
 
     workLocation_percentage: {
