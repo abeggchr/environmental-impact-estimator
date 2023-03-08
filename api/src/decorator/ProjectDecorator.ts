@@ -1,7 +1,7 @@
-import {IProject} from "../estimation/IProject";
-import {ITeam} from "../estimation/team/ITeam";
-import {IMachine} from "../estimation/machine/IMachine";
-import {IUsage} from "../estimation/usage/IUsage";
+import {IProject} from "../interfaces/IProject";
+import {ITeam} from "../interfaces/ITeam";
+import {IMachine} from "../interfaces/IMachine";
+import {IUsage} from "../interfaces/IUsage";
 
 export class ProjectDecorator implements IProject {
 

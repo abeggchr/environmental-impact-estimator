@@ -1,5 +1,5 @@
 import {ProjectDecorator} from "./ProjectDecorator";
-import {ITeam} from "../estimation/team/ITeam";
+import {ITeam} from "../interfaces/ITeam";
 
 /**
  * Team members do not travel to other countries.

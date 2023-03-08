@@ -1,8 +1,8 @@
 import {describe, expect, test} from 'vitest'
-import {testTeam} from "../testing/testTeam";
-import {testMachine} from "../testing/testMachine";
+import {testTeam} from "../interfaces/testTeam";
+import {testMachine} from "../interfaces/testMachine";
 import {GreenEnergy} from "./GreenEnergy";
-import {testUsage} from "../testing/testUsage";
+import {testUsage} from "../interfaces/testUsage";
 
 describe('GreenEnergy', () => {
     test('decorates team and machine ', () => {

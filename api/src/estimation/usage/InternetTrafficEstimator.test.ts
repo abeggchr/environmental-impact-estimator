@@ -1,8 +1,8 @@
 import {describe, expect, test} from "vitest";
 import {InternetTrafficEstimator} from "./InternetTrafficEstimator";
-import {testUsage} from "../../testing/testUsage";
+import {testUsage} from "../../interfaces/testUsage";
 import {BUSINESS_DAYS_PER_YEAR} from "../common/Constants";
-import {IUsage} from "./IUsage";
+import {IUsage} from "../../interfaces/IUsage";
 
 describe("InternetTrafficEstimator", () => {
     test("estimates impact", () => {

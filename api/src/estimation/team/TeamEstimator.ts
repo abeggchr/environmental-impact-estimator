@@ -1,5 +1,5 @@
 import {Impact} from "../Impact";
-import {ITeam} from "./ITeam";
+import {ITeam} from "../../interfaces/ITeam";
 import {CommuteEstimator} from "./CommuteEstimator";
 import {WorkEstimator} from "./WorkEstimator";
 import {TravelEstimator} from "./TravelEstimator";

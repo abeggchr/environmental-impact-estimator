@@ -1,4 +1,4 @@
-import {IUsage} from "../../estimation/usage/IUsage";
+import {IUsage} from "../../interfaces/IUsage";
 import {DevelopmentTeam} from "../team/DevelopmentTeam";
 import {MaintenanceTeam} from "../team/MaintenanceTeam";
 

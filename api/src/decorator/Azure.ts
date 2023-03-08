@@ -1,5 +1,5 @@
 import {ProjectDecorator} from "./ProjectDecorator";
-import {IMachine} from "../estimation/machine/IMachine";
+import {IMachine} from "../interfaces/IMachine";
 import {AZURE_CLOUD_CONSTANTS, AZURE_EMISSIONS_FACTORS_METRIC_TON_PER_KWH} from "@cloud-carbon-footprint/azure";
 
 /**

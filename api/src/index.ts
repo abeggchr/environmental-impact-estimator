@@ -4,7 +4,7 @@ import cors from 'cors';
 import {ProjectEstimator} from "./estimation/ProjectEstimator";
 import {BaselineProject} from "./scenario/BaselineProject";
 import {NoDistributedDevelopment} from "./decorator/NoDistributedDevelopment";
-import {IProject} from "./estimation/IProject";
+import {IProject} from "./interfaces/IProject";
 
 // Initialize the express engine
 const app: express.Application = express();

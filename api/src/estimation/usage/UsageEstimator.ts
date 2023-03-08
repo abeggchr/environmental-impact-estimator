@@ -1,6 +1,6 @@
 import {Impact} from "../Impact";
 import {EmbodiedEmissionsEstimator} from "../common/EmbodiedEmissionsEstimator";
-import {IUsage} from "./IUsage";
+import {IUsage} from "../../interfaces/IUsage";
 import {BUSINESS_DAYS_PER_YEAR, HOURS_PER_YEAR} from "../common/Constants";
 import {InternetTrafficEstimator} from "./InternetTrafficEstimator";
 import {WorkEstimator} from "./WorkEstimator";

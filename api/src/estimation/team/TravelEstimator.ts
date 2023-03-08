@@ -1,4 +1,4 @@
-import {ITeam} from "./ITeam";
+import {ITeam} from "../../interfaces/ITeam";
 import {Impact} from "../Impact";
 import {BUSINESS_DAYS_PER_YEAR} from "../common/Constants";
 

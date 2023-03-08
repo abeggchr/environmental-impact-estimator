@@ -1,4 +1,4 @@
-import {ITeam} from "../../estimation/team/ITeam";
+import {ITeam} from "../../interfaces/ITeam";
 
 export class DevelopmentTeam implements ITeam {
 

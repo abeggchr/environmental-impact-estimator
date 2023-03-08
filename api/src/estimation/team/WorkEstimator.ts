@@ -1,4 +1,4 @@
-import {ITeam, LocationTypes} from "./ITeam";
+import {ITeam, LocationTypes} from "../../interfaces/ITeam";
 import {Impact} from "../Impact";
 import {totalWorkingDays} from "./totalWorkingDays";
 import {BUSINESS_DAYS_PER_YEAR} from "../common/Constants";

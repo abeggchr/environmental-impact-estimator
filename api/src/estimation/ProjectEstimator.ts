@@ -1,6 +1,6 @@
 import {Impact} from "./Impact";
 import {TeamEstimator} from "./team/TeamEstimator";
-import {IProject} from "./IProject";
+import {IProject} from "../interfaces/IProject";
 import {MachineEstimator} from "./machine/MachineEstimator";
 import {UsageEstimator} from "./usage/UsageEstimator";
 

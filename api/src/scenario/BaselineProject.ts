@@ -1,11 +1,11 @@
-import {ITeam} from "../estimation/team/ITeam";
+import {ITeam} from "../interfaces/ITeam";
 import {DevelopmentTeam} from "./team/DevelopmentTeam";
 import {MaintenanceTeam} from "./team/MaintenanceTeam";
-import {IProject} from "../estimation/IProject";
-import {IMachine} from "../estimation/machine/IMachine";
+import {IProject} from "../interfaces/IProject";
+import {IMachine} from "../interfaces/IMachine";
 import {WebProductionMachine} from "./machine/WebProductionMachine";
 import {BaselineUsage} from "./usage/BaselineUsage";
-import {IUsage} from "../estimation/usage/IUsage";
+import {IUsage} from "../interfaces/IUsage";
 import {DbProductionMachine} from "./machine/DbProductionMachine";
 import {JobProductionMachine} from "./machine/JobProductionMachine";
 

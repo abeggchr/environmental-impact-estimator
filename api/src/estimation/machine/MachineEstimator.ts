@@ -1,5 +1,5 @@
 import {Impact} from "../Impact";
-import {IMachine} from "./IMachine";
+import {IMachine} from "../../interfaces/IMachine";
 import {
     CloudConstants,
     CloudConstantsEmissionsFactors,

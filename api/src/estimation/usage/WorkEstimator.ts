@@ -1,6 +1,6 @@
 import {Impact} from "../Impact";
 import {BUSINESS_DAYS_PER_YEAR} from "../common/Constants";
-import {IUsage} from "./IUsage";
+import {IUsage} from "../../interfaces/IUsage";
 
 export class WorkEstimator {
 

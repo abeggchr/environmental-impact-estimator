@@ -1,4 +1,4 @@
-import {IMachine} from "../estimation/machine/IMachine";
+import {IMachine} from "./IMachine";
 
 export const testMachine: IMachine = {
     cpuUtilizationOnNonBusinessDay_percentage: 17,

@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package interfaces {
+    interface IMachine
+    interface ITeam
+    interface IUsage
+    interface IProject {
+            machines
+            teams
+            usage
+    }
+
+    IProject *-- IMachine
+    IProject *-- ITeam
+    IProject *-- IUsage
+}
+
+package estimation {
+    class MachineEstimator
+    class TeamEstimator
+    class UsageEstimator
+    class ProjectEstimator
+
+    ProjectEstimator *-- MachineEstimator
+    ProjectEstimator *-- TeamEstimator
+    ProjectEstimator *-- UsageEstimator
+
+    ProjectEstimator --> interfaces.IProject
+
+}
+
+package decorator {
+    abstract class ProjectEstimator implements interfaces.IProject {
+        decorateMachines()
+        decorateTeams()
+        decorateUsage()
+    }
+}
+
+package scenario {
+    class BaselineProject implements interfaces.IProject {
+
+    }
+}
+
+@enduml

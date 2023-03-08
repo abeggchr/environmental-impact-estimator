@@ -1,4 +1,4 @@
-import {IUsage} from "../estimation/usage/IUsage";
+import {IUsage} from "./IUsage";
 
 export const testUsage: IUsage = {
     workplacePowerUsage_W: 11,
