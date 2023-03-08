@@ -1,8 +1,8 @@
 import { test } from 'vitest'
 import {ProjectEstimator} from "./estimation/ProjectEstimator";
 import {BaselineProject} from "./scenario/BaselineProject";
-import {NoDistributedDevelopment} from "./decorator/team/NoDistributedDevelopment";
-import {GreenEnergy} from "./decorator/machine/GreenEnergy";
+import {NoDistributedDevelopment} from "./decorator/NoDistributedDevelopment";
+import {GreenEnergy} from "./decorator/GreenEnergy";
 import {Azure} from "./decorator/Azure";
 
 test("MasterTest", () => {

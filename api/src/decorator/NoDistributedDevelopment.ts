@@ -1,6 +1,9 @@
-import {ProjectDecorator} from "../ProjectDecorator";
-import {ITeam} from "../../estimation/team/ITeam";
+import {ProjectDecorator} from "./ProjectDecorator";
+import {ITeam} from "../estimation/team/ITeam";
 
+/**
+ * Team members do not travel to other countries.
+ */
 export class NoDistributedDevelopment extends ProjectDecorator {
     protected override decorateTeam(team: ITeam): ITeam {
         const decorated = Object.assign(team, {

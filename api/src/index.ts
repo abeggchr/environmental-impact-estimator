@@ -3,7 +3,7 @@ import express  from 'express';
 import cors from 'cors';
 import {ProjectEstimator} from "./estimation/ProjectEstimator";
 import {BaselineProject} from "./scenario/BaselineProject";
-import {NoDistributedDevelopment} from "./decorator/team/NoDistributedDevelopment";
+import {NoDistributedDevelopment} from "./decorator/NoDistributedDevelopment";
 import {IProject} from "./estimation/IProject";
 
 // Initialize the express engine

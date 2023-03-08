@@ -1,9 +1,12 @@
-import {ProjectDecorator} from "../ProjectDecorator";
-import {ITeam} from "../../estimation/team/ITeam";
+import {ProjectDecorator} from "./ProjectDecorator";
+import {ITeam} from "../estimation/team/ITeam";
 import {AZURE_EMISSIONS_FACTORS_METRIC_TON_PER_KWH} from "@cloud-carbon-footprint/azure";
-import {IMachine} from "../../estimation/machine/IMachine";
-import {IUsage} from "../../estimation/usage/IUsage";
+import {IMachine} from "../estimation/machine/IMachine";
+import {IUsage} from "../estimation/usage/IUsage";
 
+/**
+ * Use "green energy" in workplaces and in data centre.
+ */
 export class GreenEnergy extends ProjectDecorator {
 
     private static EMISSIONS_FACTOR = AZURE_EMISSIONS_FACTORS_METRIC_TON_PER_KWH['switzerland'] * 1000 * 1000;
