@@ -23,21 +23,21 @@ describe("Impact", () => {
       });
 
       test("prints path, value, formula and percentage", () => {
-        expect(sut.print("root")).toBe(`root,10,1.00,
-root > a,4,0.40,F4
-root > b,6,0.60,F6`);
+        expect(sut.print("root")).toBe(`root,10,100%,
+root > a,4,40%,F4
+root > b,6,60%,F6`);
       });
     });
 
 
     describe("when adding impacts in two levels", () => {
       beforeEach(() => {
-        const a = new Impact(0, "F0");
+        const a = new Impact();
         a.add("aa", new Impact(4, "F4"));
         a.add("ab", new Impact(5, "F5"));
         sut.add("a", a);
 
-        const b = new Impact(0, "F0");
+        const b = new Impact();
         b.add("ba", new Impact(6, "F6"));
         b.add("bb", new Impact(7, "F7"));
         sut.add("b", b);
@@ -64,7 +64,7 @@ root > b,6,0.60,F6`);
     });
 
     test("prints path, values and formula", () => {
-      expect(sut.print("root")).toBe("root,2,1.00,F2");
+      expect(sut.print("root")).toBe("root,2,100%,F2");
     });
   });
 });
