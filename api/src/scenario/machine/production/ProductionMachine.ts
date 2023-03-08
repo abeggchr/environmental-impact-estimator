@@ -1,4 +1,4 @@
-import {Machine, UsageType, SeriesName} from "./Machine";
+import {Machine, UsageType, SeriesName} from "../Machine";
 
 /**
  * The production environment consists of 3 servers:

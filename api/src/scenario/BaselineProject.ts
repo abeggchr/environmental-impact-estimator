@@ -3,11 +3,11 @@ import {DevelopmentTeam} from "./team/DevelopmentTeam";
 import {MaintenanceTeam} from "./team/MaintenanceTeam";
 import {IProject} from "../interfaces/IProject";
 import {IMachine} from "../interfaces/IMachine";
-import {WebProductionMachine} from "./machine/WebProductionMachine";
+import {WebProductionMachine} from "./machine/production/WebProductionMachine";
 import {BaselineUsage} from "./usage/BaselineUsage";
 import {IUsage} from "../interfaces/IUsage";
-import {DbProductionMachine} from "./machine/DbProductionMachine";
-import {JobProductionMachine} from "./machine/JobProductionMachine";
+import {DbProductionMachine} from "./machine/production/DbProductionMachine";
+import {JobProductionMachine} from "./machine/production/JobProductionMachine";
 
 export class BaselineProject implements IProject {
 
