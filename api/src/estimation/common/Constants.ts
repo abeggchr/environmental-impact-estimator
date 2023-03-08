@@ -5,4 +5,7 @@ export const DAYS_PER_YEAR = 360;
  */
 export const  BUSINESS_DAYS_PER_YEAR = 249;
 
-export const HOURS_PER_YEAR = DAYS_PER_YEAR * 24;
+export const HOURS_PER_DAY = 24;
+
+export const HOURS_PER_YEAR = DAYS_PER_YEAR * HOURS_PER_DAY;
+

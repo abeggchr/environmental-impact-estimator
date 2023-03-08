@@ -1,11 +1,13 @@
 import {IMachine} from "../estimation/machine/IMachine";
 
 export const testMachine: IMachine = {
+    cpuUtilizationOnNonBusinessDay_percentage: 17,
+    networkingCoefficient_kWhPerGb: 18,
     duration_years: 1,
     embodiedEmissions_gC02eq: 2,
     emissionFactor_gC02eqPerkWh: 3,
-    hourlyCpuUtilizationOverAverageDay_percentage: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-    traffic_gbPerBusinessDay: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    hourlyCpuUtilizationOverBusinessDay_percentage: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    traffic_gbPerBusinessDay: 1,
     isPhysicalMachine: false,
     machineName: "machineName",
     maxWatts_W: 4,
@@ -22,5 +24,5 @@ export const testMachine: IMachine = {
     hddCoefficient_whPerTBh: 13,
     memoryCoefficient_kWhPerGb: 14,
     memory_gb: 15,
-    ssdCoefficient_whPerTBh: 16,
+    ssdCoefficient_whPerTBh: 16
 }
