@@ -122,7 +122,7 @@ export class VirtualMachineEstimator {
         }
 
         gC02eq *= factor;
-        defaultFormula = defaultFormula.substring(0, defaultFormula.length-3) + `) * ${factor} [factor for zombieServer]`;
+        defaultFormula = defaultFormula.substring(0, defaultFormula.length-3) + `) * ${factor} [zombieFactor]`;
 
         return new Impact(gC02eq, formula ? formula : defaultFormula);
     }

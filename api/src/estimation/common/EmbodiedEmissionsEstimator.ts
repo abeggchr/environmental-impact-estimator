@@ -6,7 +6,7 @@ export class EmbodiedEmissionsEstimator {
      */
     public estimate(replicationFactor_nr: number, embodiedEmissions_cCO2eq: number, duration_years: number, expectedLifespan_years: number) {
         const gCO2 = (replicationFactor_nr) * embodiedEmissions_cCO2eq * (duration_years / expectedLifespan_years);
-        const formula = `${replicationFactor_nr} [replication] * ${embodiedEmissions_cCO2eq}gC02eq * (${duration_years}years [duration] / ${expectedLifespan_years}years [lifespan])`;
+        const formula = `${embodiedEmissions_cCO2eq}gC02eq * (${duration_years}years [duration] / ${expectedLifespan_years}years [lifespan]) * ${replicationFactor_nr} [users]`;
         return new Impact(gCO2, formula);
     }
 }
