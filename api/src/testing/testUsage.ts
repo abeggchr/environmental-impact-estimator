@@ -1,6 +1,7 @@
 import {IUsage} from "../estimation/usage/IUsage";
 
 export const testUsage: IUsage = {
+    workplacePowerUsage_W: 11,
     additionalRequest_gb: 0,
     duration_years: 1,
     workplaceEmbodiedEmissions_gC02eq: 2,
@@ -11,5 +12,5 @@ export const testUsage: IUsage = {
     usagePerUserAndBusinessDay_h: 7,
     users_nr: 8,
     workplaceEmissionFactor_gC02eqPerKWh: 9,
-    trafficCoefficient_kWhPerGb: 10,
+    trafficCoefficient_kWhPerGb: 10
 }

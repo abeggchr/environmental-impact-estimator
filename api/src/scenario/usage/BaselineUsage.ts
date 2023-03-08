@@ -18,4 +18,5 @@ export class BaselineUsage implements IUsage {
     requestsPerBusinessDayAndUser_nr = 3 * 60 * 1; // 3 request per minute and user during 1h of usage
     users_nr = 9000;
     workplaceEmissionFactor_gC02eqPerKWh = this.trafficEmissionFactor_gC02eqPerKWh;
+    workplacePowerUsage_W = this.developmentTeam.workplacePowerUsage_W;
 }

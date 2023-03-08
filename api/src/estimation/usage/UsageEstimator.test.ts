@@ -12,6 +12,14 @@ vi.mock('../common/EmbodiedEmissionsEstimator', () => {
     return {EmbodiedEmissionsEstimator};
 })
 
+vi.mock('./WorkEstimator', () => {
+    const WorkEstimator = vi.fn();
+    WorkEstimator.prototype.estimate = vi.fn(() => {
+        return new Impact(2, "2");
+    })
+    return {WorkEstimator};
+})
+
 describe("UsageEstimator", () => {
 
     test("calls EmbodiedEmissionsEstimator", () => {
@@ -19,6 +27,8 @@ describe("UsageEstimator", () => {
         const actual = sut.estimate(testUsage);
         expect(actual.get("embodiedEmissions")).not.toBeUndefined();
         expect(actual.get("embodiedEmissions")!.gC02eq).toBe(4);
+        expect(actual.get("work")).not.toBeUndefined();
+        expect(actual.get("work")!.gC02eq).toBe(2);
     });
 });
 

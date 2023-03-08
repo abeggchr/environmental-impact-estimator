@@ -1,4 +1,5 @@
 export interface IUsage {
+    workplacePowerUsage_W: number;
 
     users_nr: number;
 
@@ -22,6 +23,4 @@ export interface IUsage {
     workplaceEmbodiedEmissions_gC02eq: number;
 
     workplaceEmissionFactor_gC02eqPerKWh: number;
-
-
 }
