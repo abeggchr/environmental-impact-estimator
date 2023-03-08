@@ -12,9 +12,9 @@ export type SeriesName = "D2s – D64s v4";
 export type UsageType = "D16s v4";
 
 /**
- * An on-premise virtual machine based on a virtual machine available on Azure.
+ * An on-premise virtual machine based on a virtual machine available in Azure.
  */
-export abstract class VirtualMachine implements IMachine {
+export abstract class Machine implements IMachine {
 
     private readonly virtualMachine: number[]; // [vcpus, memory, embodied emissions]
     private readonly computeProcessors: string[];

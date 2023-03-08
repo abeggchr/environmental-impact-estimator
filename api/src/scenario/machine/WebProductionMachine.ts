@@ -12,9 +12,7 @@ export class WebProductionMachine extends ProductionMachine {
     machineName = "web-production";
 
     /**
-     * initial request 3.5mb (one for every user) / additional requests during usage 100kb
-     * 9000 users, 1h usage per day, 3 requests per minute and user
-     * = 193.5 gb / day
+     * 9000 users, 1h usage per day, 3 requests per minute and user, 50kb internal traffic to db server per request
      */
-    traffic_gbPerBusinessDay = 9000 * (0.0035 + 3 * 60 * 0.0001);
+    traffic_gbPerBusinessDay = 9000 * 3 * 60 * 0.00005;
 }

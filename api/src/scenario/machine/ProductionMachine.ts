@@ -1,4 +1,4 @@
-import {VirtualMachine, UsageType, SeriesName} from "./VirtualMachine";
+import {Machine, UsageType, SeriesName} from "./Machine";
 
 /**
  * The production environment consists of 3 servers:
@@ -11,7 +11,7 @@ import {VirtualMachine, UsageType, SeriesName} from "./VirtualMachine";
  * - db server: VM "E8as v5" (8 vCPU, 64GB RAM) + Premium SSD P15 (256 GB)
  * - job server: VM "F16s v2" (16 vCPU, 32GB RAM, 128GB temp storage)
  */
-export abstract class ProductionMachine extends VirtualMachine {
+export abstract class ProductionMachine extends Machine {
 
     protected constructor(series: SeriesName, instanceType: UsageType) {
         super(series, instanceType);
