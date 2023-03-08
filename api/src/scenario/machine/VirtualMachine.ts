@@ -6,11 +6,15 @@ import {
 } from "@cloud-carbon-footprint/azure/dist/lib/VirtualMachineTypes";
 import {AZURE_REGIONS} from "@cloud-carbon-footprint/azure/dist/lib/AzureRegions";
 import {DevelopmentTeam} from "../team/DevelopmentTeam";
+import {DAYS_PER_YEAR, HOURS_PER_DAY} from "../../estimation/common/Constants";
 
 export type SeriesName = "D2s – D64s v4";
 export type UsageType = "D16s v4";
 
-export abstract class AzureVirtualMachine implements IMachine {
+/**
+ * An on-premise virtual machine based on a virtual machine available on Azure.
+ */
+export abstract class VirtualMachine implements IMachine {
 
     private readonly virtualMachine: number[]; // [vcpus, memory, embodied emissions]
     private readonly computeProcessors: string[];
@@ -51,7 +55,7 @@ export abstract class AzureVirtualMachine implements IMachine {
     }
 
     /**
-     * Baseline is the SWITZERLAND region regular grid emission factor (see DevelopmentTeam
+     * Baseline is the SWITZERLAND region regular grid emission factor (see DevelopmentTeam)
      * Azures actual emission factor is applied with the "GreenEnergy" decorator for better comparability.
      */
     emissionFactor_gC02eqPerkWh = DevelopmentTeam.Switzerland_EmissionFactor_gC02eqPerKWh;
@@ -65,12 +69,13 @@ export abstract class AzureVirtualMachine implements IMachine {
     /**
      * 4 years
      */
-    expectedLifespan_years = AZURE_CLOUD_CONSTANTS.SERVER_EXPECTED_LIFESPAN! / (365 * 24);
+    expectedLifespan_years = AZURE_CLOUD_CONSTANTS.SERVER_EXPECTED_LIFESPAN! / (DAYS_PER_YEAR * HOURS_PER_DAY);
 
     /**
-     * 1.185
+     * "In a survey we carried out for the report noted above, European enterprises cited on average a PUE of 2.1"
+     * Source: https://www.spglobal.com/marketintelligence/en/news-insights/research/improving-datacenter-efficiency-in-europe-the-role-of-pue
      */
-    powerUsageEffectiveness_factor: number = AZURE_CLOUD_CONSTANTS.PUE_AVG;
+    powerUsageEffectiveness_factor: number = 2.1;
     ssdCoefficient_whPerTBh: number = AZURE_CLOUD_CONSTANTS.SSDCOEFFICIENT!;
     hddCoefficient_whPerTBh: number = AZURE_CLOUD_CONSTANTS.HDDCOEFFICIENT!;
     memoryCoefficient_kWhPerGb: number = AZURE_CLOUD_CONSTANTS.MEMORY_COEFFICIENT!;
