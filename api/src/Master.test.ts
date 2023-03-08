@@ -2,7 +2,7 @@ import { test } from 'vitest'
 import {ProjectEstimator} from "./estimation/ProjectEstimator";
 import {BaselineProject} from "./scenario/BaselineProject";
 import {NoDistributedDevelopment} from "./decorator/team/NoDistributedDevelopment";
-import {GreenEnergy} from "./decorator/machines/GreenEnergy";
+import {GreenEnergy} from "./decorator/machine/GreenEnergy";
 
 test("MasterTest", () => {
     const baseline = new ProjectEstimator().estimate(new BaselineProject());

@@ -1,9 +1,9 @@
 import {ITeam} from "../estimation/team/ITeam";
-import {DevelopmentTeam} from "./teams/DevelopmentTeam";
-import {MaintenanceTeam} from "./teams/MaintenanceTeam";
+import {DevelopmentTeam} from "./team/DevelopmentTeam";
+import {MaintenanceTeam} from "./team/MaintenanceTeam";
 import {IProject} from "../estimation/IProject";
 import {IMachine} from "../estimation/machine/IMachine";
-import {WebProductionMachine} from "./machines/WebProductionMachine";
+import {WebProductionMachine} from "./machine/WebProductionMachine";
 
 export class BaselineProject implements IProject {
 

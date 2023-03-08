@@ -5,7 +5,7 @@ import {
     VIRTUAL_MACHINE_TYPE_SERIES_MAPPING
 } from "@cloud-carbon-footprint/azure/dist/lib/VirtualMachineTypes";
 import {AZURE_REGIONS} from "@cloud-carbon-footprint/azure/dist/lib/AzureRegions";
-import {DevelopmentTeam} from "../teams/DevelopmentTeam";
+import {DevelopmentTeam} from "../team/DevelopmentTeam";
 
 export type SeriesName = "D2s – D64s v4";
 export type UsageType = "D16s v4";
