@@ -7,7 +7,7 @@ import {Azure} from "./decorator/Azure";
 
 test("MasterTest", () => {
     const baseline = new ProjectEstimator().estimate(new BaselineProject());
-    const decorated = new ProjectEstimator().estimate(new GreenEnergy(new NoDistributedDevelopment(new Azure((new BaselineProject())))));
+    const decorated = new ProjectEstimator().estimate((new NoDistributedDevelopment((new BaselineProject()))));
 
     function percentageDecrease(oldValue: number, newValue: number) {
         return ((newValue - oldValue) / oldValue) * 100;
