@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This tool estimates the carbon footprint for an average enterprise-software project.
+This tool estimates the carbon footprint for an average enterprise software project.
 A set of decorates allows to play around to see the impact of different optimization measures.
 
 ## Getting started
@@ -28,7 +28,24 @@ There's a frontend, but not much visible there. Lot's of ideas though!
 7. `npm run dev`
 8. Open given URL in browser. You will not yet see much though.
 
-## Structure
+## Scenario
+
+The emissions are estimated for an "average enterprise software project". Here's a description of the project at hand:
+
+The software is developed by 8 developers during 2 years. The developers work in a near-shoring setup and the whole teams comes together every 6 weeks.
+
+After the software is developed it is maintained by 2 developers until the end of life of the software which is after 8 years.
+The maintenance team does not use near-shoring.
+
+The software is used by 9000 users distributed across Europe.
+Each user uses the software during 1h per business day during 8 years.
+
+The usage is equally distributed over the day - except for the time between 11 and 14 o'clock where the load is doubled.
+
+The application is a single page application served by a web-server which gets the data from a database-server.
+A job-server takes care of long-running jobs.
+
+## Repository Structure
 
 * `/api` contains an Express REST endpoint with the estimation logic
 * `/web` contains a React user interface
