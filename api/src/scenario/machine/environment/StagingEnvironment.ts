@@ -20,5 +20,5 @@ export class StagingEnvironment extends Environment {
      */
     hourlyCpuUtilizationOverBusinessDay_percentage = [1, 0.05, 0.05, 0.05, 0.05, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-    duration_years = 8;
+    duration_years = 10;
 }

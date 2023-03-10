@@ -17,7 +17,7 @@ export class TestEnvironment extends Environment {
      */
     hourlyCpuUtilizationOverBusinessDay_percentage = [0.4, 0.4, 0.4, 0.4,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-    duration_years = 8;
+    duration_years = 10;
 
 }
 
@@ -29,11 +29,11 @@ class TestMachine extends Machine {
 
     cpuUtilizationOnNonBusinessDay_percentage = 0;
     dailyRunning_hours = 24;
-    duration_years = 8;
+    duration_years = 10;
     hddStorage_gb = 0;
     ssdStorage_gb = 32;
     traffic_gbPerBusinessDay = 1;
     hourlyCpuUtilizationOverBusinessDay_percentage = []; // ignored in environment
-    machineName = ''; // ignored in environment
-    replication_factor = 0; // ignored in environment
+    machineName = ''; // overwritten in environment
+    replication_factor = 0; // overwritten in environment
 }

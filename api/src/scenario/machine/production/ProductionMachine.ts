@@ -17,7 +17,7 @@ export abstract class ProductionMachine extends Machine {
         super(series, instanceType);
     }
 
-    duration_years = 8;
+    duration_years = 10;
 
     ssdStorage_gb = 0;
 
