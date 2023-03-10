@@ -17,6 +17,8 @@ The easiest way to start is to run and adopt `MasterTest` in the `api` project.
 
 ### Starting the web frontend
 
+There's a frontend, but not much visible there. Lot's of ideas though!
+
 1. Clone repo
 2. `cd api`
 3. `npm i`
