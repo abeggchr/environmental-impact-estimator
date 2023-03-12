@@ -52,7 +52,7 @@ export class MachineEstimator {
         if (machine.hourlyCpuUtilizationOverBusinessDay_percentage.length != 24) {
             throw new Error("expect 24 hours per day, but given argument has " + machine.hourlyCpuUtilizationOverBusinessDay_percentage.length);
         }
-        const daysPerYear = DAYS_PER_YEAR - BUSINESS_DAYS_PER_YEAR;
+
         const usages: ComputeUsage[] = [];
         _.forOwn(_.groupBy(machine.hourlyCpuUtilizationOverBusinessDay_percentage), (value: number[]) => {
             usages.push({
@@ -116,9 +116,9 @@ export class MachineEstimator {
 
     private estimateMemoryEmissions(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
         const usage: MemoryUsage = {
-            gigabyteHours: machine.memory_gb * machine.duration_years * DAYS_PER_YEAR * machine.dailyRunning_hours
+            gigabyteHours: machine.memory_gb * machine.dailyRunning_hours * DAYS_PER_YEAR * machine.duration_years
         }
-        const coefficient = machine.memoryCoefficient_kWhPerGb; // 0.000392 kWh / Gb
+        const coefficient = machine.memoryCoefficient_kWhPerGb; // for Azure: 0.000392 kWh / Gb, see AZURE_CLOUD_CONSTANTS.MEMORY_COEFFICIENT
         const estimator = new MemoryEstimator(coefficient!);
         const estimates = estimator.estimate([usage], this.REGION, emissionsFactors, constants);
         return this.asImpact(estimates, 1 + machine.zombieServers_percentage);
@@ -128,15 +128,15 @@ export class MachineEstimator {
         const usage: EmbodiedEmissionsUsage = {
             instancevCpu: machine.virtualCPUs_number,
             largestInstancevCpu: machine.largestInstanceVirtualCPUs_number,
-            usageTimePeriod: machine.duration_years,
-            scopeThreeEmissions: machine.embodiedEmissions_gC02eq * machine.replication_factor
+            usageTimePeriod: machine.duration_years, // y
+            scopeThreeEmissions: machine.embodiedEmissions_gC02eq * machine.replication_factor // g
         };
-        const estimator = new EmbodiedEmissionsEstimator(machine.expectedLifespan_years);
-        const estimates = estimator.estimate([usage], this.REGION, emissionsFactors);
+        const estimator = new EmbodiedEmissionsEstimator(machine.expectedLifespan_years); // y
+        const estimates = estimator.estimate([usage], this.REGION, emissionsFactors); // emission factor: gC02eqPerkWh
         return this.asImpact(estimates, 1 + machine.zombieServers_percentage);
     }
 
-    private asImpact(estimates: FootprintEstimate[], factor: number, formula: string | undefined = undefined) {
+    private asImpact(estimates: FootprintEstimate[], zombieFactor: number, formula: string | undefined = undefined) {
         let gC02eq = 0;
         let defaultFormula = "estimation by cloud carbon footprint tool: (";
         for (let estimate of estimates) {
@@ -144,8 +144,8 @@ export class MachineEstimator {
             defaultFormula += `${estimate.co2e.toFixed()} gC02eq + `;
         }
 
-        gC02eq *= factor;
-        defaultFormula = defaultFormula.substring(0, defaultFormula.length - 3) + `) * ${factor} [zombieFactor]`;
+        gC02eq *= zombieFactor;
+        defaultFormula = defaultFormula.substring(0, defaultFormula.length - 3) + `) * ${zombieFactor} [zombieFactor]`;
 
         return new Impact(gC02eq, formula ? formula : defaultFormula);
     }

@@ -2,38 +2,24 @@ import {Environment} from "./Environment";
 import {Machine} from "../Machine";
 
 /**
- * A smaller dimensioned environment for developer tests.
+ * Test environment consists of 3 test machines.
  */
-export class TestEnvironment extends Environment {
-
-    public constructor() {
-        super([new TestMachine(), new TestMachine(), new TestMachine()]);
-    }
-
-    machineName = 'test-environment';
-
-    /**
-     * 4h of testing per business day.
-     */
-    hourlyCpuUtilizationOverBusinessDay_percentage = [0.4, 0.4, 0.4, 0.4,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
-    duration_years = 10;
-
-}
-
-class TestMachine extends Machine {
+export class TestEnvironment extends Machine {
 
     constructor() {
         super('Av2 Standard', 'A4 v2');
     }
 
+    /**
+     * 4h of testing per business day.
+     */
+    hourlyCpuUtilizationOverBusinessDay_percentage = [0.4, 0.4, 0.4, 0.4,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    machineName = 'test-environment';
+    duration_years = 10;
     cpuUtilizationOnNonBusinessDay_percentage = 0;
     dailyRunning_hours = 24;
-    duration_years = 10;
     hddStorage_gb = 0;
     ssdStorage_gb = 32;
     traffic_gbPerBusinessDay = 1;
-    hourlyCpuUtilizationOverBusinessDay_percentage = []; // ignored in environment
-    machineName = ''; // overwritten in environment
-    replication_factor = 0; // overwritten in environment
+    replication_factor = 3; // overwritten in environment
 }

@@ -18,6 +18,11 @@ export abstract class Machine implements IMachine {
 
     private readonly virtualMachine: number[]; // [vcpus, memory, embodied emissions]
     private readonly computeProcessors: string[];
+    private VIRTUAL_MACHINE_INDEX = {
+        VCPU: 0,
+        MEMORY: 1,
+        EMBODIED_EMISSIONS: 2,
+    };
 
     protected constructor(private seriesName: SeriesName, private usageType: UsageType) {
        this.virtualMachine = VIRTUAL_MACHINE_TYPE_SERIES_MAPPING[seriesName][usageType];
@@ -37,11 +42,11 @@ export abstract class Machine implements IMachine {
 
     isPhysicalMachine = false;
 
-    get virtualCPUs_number() { return this.virtualMachine[0] }
+    get virtualCPUs_number() { return this.virtualMachine[this.VIRTUAL_MACHINE_INDEX.VCPU] }
 
-    get memory_gb() { return this.virtualMachine[1]; };
+    get memory_gb() { return this.virtualMachine[this.VIRTUAL_MACHINE_INDEX.MEMORY]; };
 
-    get embodiedEmissions_gC02eq() { return this.virtualMachine[2] * 1000 };
+    get embodiedEmissions_gC02eq() { return this.virtualMachine[this.VIRTUAL_MACHINE_INDEX.EMBODIED_EMISSIONS] * 1_000_000 };
 
     get maxWatts_W() { return AZURE_CLOUD_CONSTANTS.getMaxWatts(this.computeProcessors)};
 

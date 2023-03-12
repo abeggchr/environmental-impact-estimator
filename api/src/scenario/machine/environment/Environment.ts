@@ -2,11 +2,13 @@ import {IMachine} from "../../../interfaces/IMachine";
 
 /**
  * An environment consists of multiple machines.
+ *
+ * If two machines with a replication factor of 2 are passed in, the replication-factor of 1 for the environment means, that there are 4 vms running.
  */
 export abstract class Environment implements IMachine {
 
 
-    protected constructor(private machines: IMachine[]) {
+    protected constructor(private machines: IMachine[], private adjustReplicationFactor: (machine:IMachine) => number) {
     }
 
     abstract machineName: string;
@@ -29,7 +31,7 @@ export abstract class Environment implements IMachine {
     minWatts_W = this.avg('minWatts_W');
     networkingCoefficient_kWhPerGb = this.avg('networkingCoefficient_kWhPerGb');
     powerUsageEffectiveness_factor= this.avg('powerUsageEffectiveness_factor');
-    replication_factor = this.machines.length;
+    replication_factor = 1;
     ssdCoefficient_whPerTBh = this.avg('ssdCoefficient_whPerTBh');
     ssdStorage_gb = this.sum("ssdStorage_gb");
     traffic_gbPerBusinessDay = this.sum('traffic_gbPerBusinessDay');
@@ -37,7 +39,7 @@ export abstract class Environment implements IMachine {
     zombieServers_percentage = this.avg('zombieServers_percentage');
 
     private sum(key: keyof IMachine) {
-        return this.machines.reduce((accumulator, machine) => {return accumulator + (machine[key] as number)}, 0);
+        return this.machines.reduce((accumulator, machine) => {return accumulator + (this.adjustReplicationFactor(machine) * (machine[key] as number))}, 0);
     }
 
     private avg(key: keyof IMachine) {
