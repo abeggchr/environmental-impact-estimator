@@ -1,6 +1,5 @@
 import {ProjectDecorator} from "./ProjectDecorator";
 import {ITeam} from "../interfaces/ITeam";
-import {AZURE_EMISSIONS_FACTORS_METRIC_TON_PER_KWH} from "@cloud-carbon-footprint/azure";
 import {IMachine} from "../interfaces/IMachine";
 import {IUsage} from "../interfaces/IUsage";
 
@@ -9,7 +8,8 @@ import {IUsage} from "../interfaces/IUsage";
  */
 export class GreenEnergy extends ProjectDecorator {
 
-    private static EMISSIONS_FACTOR = AZURE_EMISSIONS_FACTORS_METRIC_TON_PER_KWH['switzerland'] * 1000 * 1000;
+    // ewz.pronatur 20221 emission factor 19 gCO2eq/kWh
+    private static EMISSIONS_FACTOR = 19;
 
     protected override decorateTeam(team: ITeam): ITeam {
         return Object.assign(team, {

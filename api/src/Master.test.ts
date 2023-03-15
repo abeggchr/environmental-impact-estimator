@@ -3,11 +3,10 @@ import {ProjectEstimator} from "./estimation/ProjectEstimator";
 import {BaselineProject} from "./scenario/BaselineProject";
 import {NoDistributedDevelopment} from "./decorator/NoDistributedDevelopment";
 import {GreenEnergy} from "./decorator/GreenEnergy";
-import {Azure} from "./decorator/Azure";
 
 test("MasterTest", () => {
     const baseline = new ProjectEstimator().estimate(new BaselineProject());
-    const decorated = new ProjectEstimator().estimate((new NoDistributedDevelopment((new BaselineProject()))));
+    const decorated = new ProjectEstimator().estimate((new NoDistributedDevelopment(new GreenEnergy((new BaselineProject())))));
 
     function percentageDecrease(oldValue: number, newValue: number) {
         return ((newValue - oldValue) / oldValue) * 100;
