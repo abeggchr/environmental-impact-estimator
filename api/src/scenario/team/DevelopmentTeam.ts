@@ -13,20 +13,29 @@ export class DevelopmentTeam implements ITeam {
      * Sources:
      * [1] https://ourworldindata.org/travel-carbon-footprint
      * [2] https://modmo.io/blogs/news/what-is-the-carbon-footprint-of-an-ebike
+     * [3] https://www.mobitool.ch/de/tools/mobitool-faktoren-v2-1-25.html?tag=3
      *
      * The source [1] is unclear whether embodied emissions are included.
      * For slow traffic, embodied emissions are included as well as the food required to cycle/walk. Based on [2]
      */
     commuteEmission_gC02eqPerKm = {
-        // 43g-283g for cars (52%), 84-135g for motorcycle (12%)
-        individualTrafficCombustion: 135,
-        // 46g-77g including hybrid with UK electricity
-        individualTrafficElectric: 53,
-        // e-bike 2%, bicycle 7%, foot 10%
-        individualTrafficSlow: 35,
-        // rail 15% 41g, road 12% 105g (bus) 35g (tram)
-        publicTraffic: 60
+        // [3] Personenwagen > Durchschnitt
+        individualTrafficCombustion: 210,
+
+        // [3] Personenwagen > Elektrizität > Verbrauchermix CH
+        // [2] 46g-77g including hybrid with UK electricity
+        individualTrafficElectric: 89,
+
+        // modal split: e-bike 2%, bicycle 7%, foot 10%
+        // [3] Walking 0, Bicycle 8, E-Bike 13
+        // [2] Walking 56, Bicycle 21, E-Bike 6
+        individualTrafficSlow: 10,
+
+        // [3] Durchschnitt öV
+        publicTraffic: 25
     };
+
+    // Statista Link: https://www.statista.com/statistics/449481/switzerland-modal-split-of-passenger-transport-on-land/
 
     /**
      * Sources:
