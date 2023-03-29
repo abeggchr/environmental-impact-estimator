@@ -37,8 +37,7 @@ export abstract class Machine implements IMachine {
     abstract replication_factor: number;
     abstract ssdStorage_gb: number;
     abstract hddStorage_gb: number;
-    abstract cpuUtilizationOnNonBusinessDay_percentage: number;
-    
+
     isPhysicalMachine = false;
 
     get virtualCPUs_number() { return this.virtualMachine[this.VIRTUAL_MACHINE_INDEX.VCPU] }

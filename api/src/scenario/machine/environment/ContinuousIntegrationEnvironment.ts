@@ -21,8 +21,6 @@ export class ContinuousIntegrationEnvironment extends Machine {
     hourlyCpuUtilizationOverNonBusinessDay_percentage = Array(24).fill(0);
     machineName = 'ci-environment';
     duration_years = 10;
-    cpuUtilizationOnNonBusinessDay_percentage = 0;
-    dailyRunning_hours = 24;
     hddStorage_gb = 0;
     ssdStorage_gb = 256;
     traffic_gbPerBusinessDay = 1;

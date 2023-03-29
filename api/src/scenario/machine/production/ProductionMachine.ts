@@ -33,12 +33,8 @@ export abstract class ProductionMachine extends Machine {
 
     hourlyCpuUtilizationOverNonBusinessDay_percentage = Array(24).fill(0);
 
-    cpuUtilizationOnNonBusinessDay_percentage = 0;
-
     /**
      * Assuming a hot standby.
      */
     replication_factor = 2;
-
-    dailyRunning_hours = 24;
 }

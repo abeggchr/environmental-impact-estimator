@@ -16,8 +16,6 @@ export abstract class Environment implements IMachine {
     abstract hourlyCpuUtilizationOverBusinessDay_percentage: number[];
     abstract hourlyCpuUtilizationOverNonBusinessDay_percentage: number[];
 
-
-    cpuUtilizationOnNonBusinessDay_percentage = 0;
     embodiedEmissions_gC02eq = this.sum("embodiedEmissions_gC02eq");
     emissionFactor_gC02eqPerkWh = this.avg('emissionFactor_gC02eqPerkWh');
     expectedLifespan_years= this.avg('expectedLifespan_years');

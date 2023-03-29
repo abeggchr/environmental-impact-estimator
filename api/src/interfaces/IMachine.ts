@@ -21,8 +21,6 @@ export interface IMachine {
 
     hourlyCpuUtilizationOverNonBusinessDay_percentage: number[];
 
-    cpuUtilizationOnNonBusinessDay_percentage: number;
-
     traffic_gbPerBusinessDay: number;
 
     minWatts_W: number;

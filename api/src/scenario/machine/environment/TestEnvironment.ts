@@ -17,7 +17,6 @@ export class TestEnvironment extends Machine {
     hourlyCpuUtilizationOverNonBusinessDay_percentage = Array(24).fill(0);
     machineName = 'test-environment';
     duration_years = 10;
-    cpuUtilizationOnNonBusinessDay_percentage = 0;
     hddStorage_gb = 0;
     ssdStorage_gb = 32;
     traffic_gbPerBusinessDay = 1;

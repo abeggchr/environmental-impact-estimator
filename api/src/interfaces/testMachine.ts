@@ -1,7 +1,6 @@
 import {IMachine} from "./IMachine";
 
 export const testMachine: IMachine = {
-    cpuUtilizationOnNonBusinessDay_percentage: 17,
     networkingCoefficient_kWhPerGb: 18,
     duration_years: 1,
     embodiedEmissions_gC02eq: 2,

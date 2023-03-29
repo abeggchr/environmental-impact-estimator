@@ -42,8 +42,8 @@ export class MachineEstimator {
         const uptime_avgHoursPerDay = (5* uptime_hoursPerBusinessDay + 2*uptime_hoursPerNonBusinessDay)/7;
 
         const impact = new Impact();
-        impact.add("computeOnBusinessDays", this.estimateBusinessDayComputeUsage(machine, emissionsFactors, constants));
-        impact.add("computeOnNonBusinessDays", this.estimateNonBusinessDayComputeUsage(machine, emissionsFactors, constants, uptime_hoursPerNonBusinessDay));
+        impact.add("computeOnBusinessDays", this.estimateComputeUsage(machine.hourlyCpuUtilizationOverBusinessDay_percentage, BUSINESS_DAYS_PER_YEAR, machine, emissionsFactors, constants));
+        impact.add("computeOnNonBusinessDays", this.estimateComputeUsage(machine.hourlyCpuUtilizationOverNonBusinessDay_percentage, DAYS_PER_YEAR - BUSINESS_DAYS_PER_YEAR, machine, emissionsFactors, constants));
         impact.add("ssdStorage", this.estimateSsdStorage(machine, emissionsFactors, constants, uptime_avgHoursPerDay));
         impact.add("hddStorage", this.estimateHddStorage(machine, emissionsFactors, constants, uptime_avgHoursPerDay));
         impact.add("network", this.estimateNetworkEmissions(machine, emissionsFactors, constants));
@@ -52,30 +52,16 @@ export class MachineEstimator {
         return impact;
     }
 
-    private estimateBusinessDayComputeUsage(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
-        const usages: ComputeUsage[] = [];
-        _.forOwn(_.groupBy(machine.hourlyCpuUtilizationOverBusinessDay_percentage), (value: number[]) => {
-            usages.push({
+    private estimateComputeUsage(hourlyCpuUtilizationOverDay_percentage: number[], daysPerYear: number, machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
+        const usagesPerDay: ComputeUsage[] = [];
+        _.forOwn(_.groupBy(hourlyCpuUtilizationOverDay_percentage), (value: number[]) => {
+            usagesPerDay.push({
                 cpuUtilizationAverage: value[0] * 100, // cpuUtilization is a whole number (i.e. 50 and not 0.5)
                 vCpuHours: machine.virtualCPUs_number * value.length,
                 usesAverageCPUConstant: false, // no impact on estimation, just wired through
             });
         });
 
-        return this.estimateComputeUsage(usages, BUSINESS_DAYS_PER_YEAR, machine, emissionsFactors, constants);
-     }
-
-    private estimateNonBusinessDayComputeUsage(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants, uptime_hoursPerNonBusinessDay: number) {
-        const daysPerYear = DAYS_PER_YEAR - BUSINESS_DAYS_PER_YEAR;
-        const usages = [{
-            cpuUtilizationAverage: machine.cpuUtilizationOnNonBusinessDay_percentage * 100, // cpuUtilization is a whole number (i.e. 50 and not 0.5)
-            vCpuHours: machine.virtualCPUs_number * uptime_hoursPerNonBusinessDay ,
-            usesAverageCPUConstant: false, // no impact on estimation, just wired through
-        }];
-        return this.estimateComputeUsage(usages, daysPerYear, machine, emissionsFactors, constants);
-    }
-
-    private estimateComputeUsage(usagesPerDay: ComputeUsage[], daysPerYear: number, machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
         const estimator = new ComputeEstimator();
         const estimates = estimator.estimate(usagesPerDay, this.REGION, emissionsFactors, constants);
         const zombieFactor = 1 + machine.zombieServers_percentage;
