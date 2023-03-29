@@ -9,7 +9,7 @@ import {DevelopmentTeam} from "../team/DevelopmentTeam";
 import {DAYS_PER_YEAR, HOURS_PER_DAY} from "../../estimation/common/Constants";
 
 export type SeriesName = "D2s – D64s v4" | "E2as – E96as v5" | "Fsv2-series" | "Av2 Standard";
-export type UsageType = "D16s v4" | "E8as v5"|"F16s v2" | "A4 v2";
+export type UsageType = "D16s v4" | "E8as v5"|"F16s v2" | "A4 v2" | "A2m v2";
 
 /**
  * An on-premise virtual machine based on a virtual machine available in Azure.

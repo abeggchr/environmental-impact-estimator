@@ -4,7 +4,7 @@ import {WebProductionMachine} from "../production/WebProductionMachine";
 import {Environment} from "./Environment";
 
 /**
- * Staging environment is dimensioned like the production environment.Differences are:
+ * Staging environment is dimensioned like the production environment. Differences are:
  * - there is not hot-standby
  * - it has another usage pattern
  * - it is used during development and usage phase
@@ -12,7 +12,7 @@ import {Environment} from "./Environment";
 export class StagingEnvironment extends Environment {
 
     public constructor() {
-        super([new WebProductionMachine(), new DbProductionMachine(), new JobProductionMachine()], m => 1);
+        super([new WebProductionMachine(), new DbProductionMachine(), new JobProductionMachine()], _ => 1);
     }
 
 

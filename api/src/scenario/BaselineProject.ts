@@ -10,6 +10,7 @@ import {DbProductionMachine} from "./machine/production/DbProductionMachine";
 import {JobProductionMachine} from "./machine/production/JobProductionMachine";
 import {StagingEnvironment} from "./machine/environment/StagingEnvironment";
 import {TestEnvironment} from "./machine/environment/TestEnvironment";
+import {ContinuousIntegrationEnvironment} from "./machine/environment/ContinuousIntegrationEnvironment";
 
 export class BaselineProject implements IProject {
 
@@ -21,6 +22,7 @@ export class BaselineProject implements IProject {
         this._machines.push(new JobProductionMachine());
         this._machines.push(new StagingEnvironment());
         this._machines.push(new TestEnvironment());
+        this._machines.push(new ContinuousIntegrationEnvironment());
         this._usage = new BaselineUsage();
     }
 

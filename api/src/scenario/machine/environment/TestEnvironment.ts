@@ -21,5 +21,5 @@ export class TestEnvironment extends Machine {
     hddStorage_gb = 0;
     ssdStorage_gb = 32;
     traffic_gbPerBusinessDay = 1;
-    replication_factor = 3; // overwritten in environment
+    replication_factor = 3;
 }
