@@ -37,22 +37,22 @@ export class MachineEstimator {
             replicationFactor: machine.replication_factor,
         };
 
+        const uptime_hoursPerBusinessDay = machine.hourlyCpuUtilizationOverBusinessDay_percentage.length;
+        const uptime_hoursPerNonBusinessDay = machine.hourlyCpuUtilizationOverNonBusinessDay_percentage.length;
+        const uptime_avgHoursPerDay = (5* uptime_hoursPerBusinessDay + 2*uptime_hoursPerNonBusinessDay)/7;
+
         const impact = new Impact();
         impact.add("computeOnBusinessDays", this.estimateBusinessDayComputeUsage(machine, emissionsFactors, constants));
-        impact.add("computeOnNonBusinessDays", this.estimateNonBusinessDayComputeUsage(machine, emissionsFactors, constants));
-        impact.add("ssdStorage", this.estimateSsdStorage(machine, emissionsFactors, constants));
-        impact.add("hddStorage", this.estimateHddStorage(machine, emissionsFactors, constants));
+        impact.add("computeOnNonBusinessDays", this.estimateNonBusinessDayComputeUsage(machine, emissionsFactors, constants, uptime_hoursPerNonBusinessDay));
+        impact.add("ssdStorage", this.estimateSsdStorage(machine, emissionsFactors, constants, uptime_avgHoursPerDay));
+        impact.add("hddStorage", this.estimateHddStorage(machine, emissionsFactors, constants, uptime_avgHoursPerDay));
         impact.add("network", this.estimateNetworkEmissions(machine, emissionsFactors, constants));
-        impact.add("memory", this.estimateMemoryEmissions(machine, emissionsFactors, constants));
+        impact.add("memory", this.estimateMemoryEmissions(machine, emissionsFactors, constants, uptime_avgHoursPerDay));
         impact.add("embodiedEmissions", this.estimateEmbodiedEmissions(machine, emissionsFactors));
         return impact;
     }
 
     private estimateBusinessDayComputeUsage(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
-        if (machine.hourlyCpuUtilizationOverBusinessDay_percentage.length != 24) {
-            throw new Error("expect 24 hours per day, but given argument has " + machine.hourlyCpuUtilizationOverBusinessDay_percentage.length);
-        }
-
         const usages: ComputeUsage[] = [];
         _.forOwn(_.groupBy(machine.hourlyCpuUtilizationOverBusinessDay_percentage), (value: number[]) => {
             usages.push({
@@ -65,11 +65,11 @@ export class MachineEstimator {
         return this.estimateComputeUsage(usages, BUSINESS_DAYS_PER_YEAR, machine, emissionsFactors, constants);
      }
 
-    private estimateNonBusinessDayComputeUsage(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
+    private estimateNonBusinessDayComputeUsage(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants, uptime_hoursPerNonBusinessDay: number) {
         const daysPerYear = DAYS_PER_YEAR - BUSINESS_DAYS_PER_YEAR;
         const usages = [{
             cpuUtilizationAverage: machine.cpuUtilizationOnNonBusinessDay_percentage * 100, // cpuUtilization is a whole number (i.e. 50 and not 0.5)
-            vCpuHours: machine.virtualCPUs_number * HOURS_PER_DAY ,
+            vCpuHours: machine.virtualCPUs_number * uptime_hoursPerNonBusinessDay ,
             usesAverageCPUConstant: false, // no impact on estimation, just wired through
         }];
         return this.estimateComputeUsage(usages, daysPerYear, machine, emissionsFactors, constants);
@@ -84,14 +84,14 @@ export class MachineEstimator {
         return this.asImpact(estimates, zombieFactor * daysPerYear * machine.duration_years, formula);
     }
 
-    private estimateSsdStorage(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
-        const terabyteHours = (machine.ssdStorage_gb / 1000) * machine.duration_years * DAYS_PER_YEAR * machine.dailyRunning_hours;
+    private estimateSsdStorage(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants, uptime_avgHoursPerDay: number) {
+        const terabyteHours = (machine.ssdStorage_gb / 1000) * machine.duration_years * DAYS_PER_YEAR * uptime_avgHoursPerDay;
         const coefficient = machine.ssdCoefficient_whPerTBh;
         return this.estimateStorage(terabyteHours, coefficient!, machine, emissionsFactors, constants);
     }
 
-    private estimateHddStorage(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
-        const terabyteHours = (machine.hddStorage_gb / 1000) * machine.duration_years * DAYS_PER_YEAR * machine.dailyRunning_hours;
+    private estimateHddStorage(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants, uptime_avgHoursPerDay:number) {
+        const terabyteHours = (machine.hddStorage_gb / 1000) * machine.duration_years * DAYS_PER_YEAR * uptime_avgHoursPerDay;
         const coefficient = machine.hddCoefficient_whPerTBh;
         return this.estimateStorage(terabyteHours, coefficient!, machine, emissionsFactors, constants);
     }
@@ -114,9 +114,9 @@ export class MachineEstimator {
         return this.asImpact(estimates, 1 + machine.zombieServers_percentage);
     }
 
-    private estimateMemoryEmissions(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
+    private estimateMemoryEmissions(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants, uptime_avgHoursPerDay: number) {
         const usage: MemoryUsage = {
-            gigabyteHours: machine.memory_gb * machine.dailyRunning_hours * DAYS_PER_YEAR * machine.duration_years
+            gigabyteHours: machine.memory_gb * uptime_avgHoursPerDay * DAYS_PER_YEAR * machine.duration_years
         }
         const coefficient = machine.memoryCoefficient_kWhPerGb; // for Azure: 0.000392 kWh / Gb, see AZURE_CLOUD_CONSTANTS.MEMORY_COEFFICIENT
         const estimator = new MemoryEstimator(coefficient!);

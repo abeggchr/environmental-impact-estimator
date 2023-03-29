@@ -32,14 +32,13 @@ export abstract class Machine implements IMachine {
     abstract duration_years: number;
     abstract machineName: string;
     abstract hourlyCpuUtilizationOverBusinessDay_percentage: number[];
+    abstract hourlyCpuUtilizationOverNonBusinessDay_percentage: number[];
     abstract traffic_gbPerBusinessDay: number;
     abstract replication_factor: number;
     abstract ssdStorage_gb: number;
     abstract hddStorage_gb: number;
-    abstract dailyRunning_hours: number;
     abstract cpuUtilizationOnNonBusinessDay_percentage: number;
-
-
+    
     isPhysicalMachine = false;
 
     get virtualCPUs_number() { return this.virtualMachine[this.VIRTUAL_MACHINE_INDEX.VCPU] }

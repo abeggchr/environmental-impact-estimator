@@ -17,7 +17,8 @@ export class ContinuousIntegrationEnvironment extends Machine {
     /**
      * 40% load during office hours plus integration test (12h)
      */
-    hourlyCpuUtilizationOverBusinessDay_percentage = [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    hourlyCpuUtilizationOverBusinessDay_percentage = [...Array(12).fill(0.4), ...Array(12).fill(0)];
+    hourlyCpuUtilizationOverNonBusinessDay_percentage = Array(24).fill(0);
     machineName = 'ci-environment';
     duration_years = 10;
     cpuUtilizationOnNonBusinessDay_percentage = 0;

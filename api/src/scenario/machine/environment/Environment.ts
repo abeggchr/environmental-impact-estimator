@@ -14,10 +14,10 @@ export abstract class Environment implements IMachine {
     abstract machineName: string;
     abstract duration_years: number;
     abstract hourlyCpuUtilizationOverBusinessDay_percentage: number[];
+    abstract hourlyCpuUtilizationOverNonBusinessDay_percentage: number[];
 
 
     cpuUtilizationOnNonBusinessDay_percentage = 0;
-    dailyRunning_hours = 24;
     embodiedEmissions_gC02eq = this.sum("embodiedEmissions_gC02eq");
     emissionFactor_gC02eqPerkWh = this.avg('emissionFactor_gC02eqPerkWh');
     expectedLifespan_years= this.avg('expectedLifespan_years');
@@ -45,6 +45,8 @@ export abstract class Environment implements IMachine {
     private avg(key: keyof IMachine) {
         return this.sum(key) / this.machines.length;
     }
+
+
 
 
 }

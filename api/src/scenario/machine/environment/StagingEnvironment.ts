@@ -22,7 +22,8 @@ export class StagingEnvironment extends Environment {
      * 1h performance test per day (full utilization).
      * 4h of users testing per day (a bit more than no utilization).
      */
-    hourlyCpuUtilizationOverBusinessDay_percentage = [1, 0.05, 0.05, 0.05, 0.05, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    hourlyCpuUtilizationOverBusinessDay_percentage = [1, ...Array(4).fill(0.05), ...Array(19).fill(0)];
+    hourlyCpuUtilizationOverNonBusinessDay_percentage = Array(24).fill(0);
 
     duration_years = 10;
 }

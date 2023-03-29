@@ -13,11 +13,11 @@ export class TestEnvironment extends Machine {
     /**
      * 4h of testing per business day.
      */
-    hourlyCpuUtilizationOverBusinessDay_percentage = [0.4, 0.4, 0.4, 0.4,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    hourlyCpuUtilizationOverBusinessDay_percentage = [...Array(4).fill(0.4), ...Array(20).fill(0)];
+    hourlyCpuUtilizationOverNonBusinessDay_percentage = Array(24).fill(0);
     machineName = 'test-environment';
     duration_years = 10;
     cpuUtilizationOnNonBusinessDay_percentage = 0;
-    dailyRunning_hours = 24;
     hddStorage_gb = 0;
     ssdStorage_gb = 32;
     traffic_gbPerBusinessDay = 1;
