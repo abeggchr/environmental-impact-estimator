@@ -2,7 +2,6 @@ import {describe, expect, test, vi} from "vitest";
 import {testTeam} from "../../interfaces/testTeam";
 import {TeamEstimator} from "./TeamEstimator";
 import {Impact} from "../Impact";
-import {VideoconferenceEstimator} from "./VideoconferenceEstimator";
 
 vi.mock('./CommuteEstimator', () => {
     const CommuteEstimator = vi.fn();

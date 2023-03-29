@@ -1,10 +1,9 @@
 import {IMachine} from "../../interfaces/IMachine";
-import {AZURE_CLOUD_CONSTANTS, AZURE_EMISSIONS_FACTORS_METRIC_TON_PER_KWH} from "@cloud-carbon-footprint/azure";
+import {AZURE_CLOUD_CONSTANTS} from "@cloud-carbon-footprint/azure";
 import {
     INSTANCE_TYPE_COMPUTE_PROCESSOR_MAPPING,
     VIRTUAL_MACHINE_TYPE_SERIES_MAPPING
 } from "@cloud-carbon-footprint/azure/dist/lib/VirtualMachineTypes";
-import {AZURE_REGIONS} from "@cloud-carbon-footprint/azure/dist/lib/AzureRegions";
 import {DevelopmentTeam} from "../team/DevelopmentTeam";
 import {DAYS_PER_YEAR, HOURS_PER_DAY} from "../../estimation/common/Constants";
 

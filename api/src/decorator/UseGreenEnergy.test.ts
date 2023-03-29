@@ -1,12 +1,12 @@
 import {describe, expect, test} from 'vitest'
 import {testTeam} from "../interfaces/testTeam";
 import {testMachine} from "../interfaces/testMachine";
-import {GreenEnergy} from "./GreenEnergy";
+import {UseGreenEnergy} from "./UseGreenEnergy";
 import {testUsage} from "../interfaces/testUsage";
 
-describe('GreenEnergy', () => {
+describe('UseGreenEnergy', () => {
     test('decorates team and machine ', () => {
-        const sut = new GreenEnergy({
+        const sut = new UseGreenEnergy({
             teams: [{...testTeam, emissionFactor_gC02eqPerKWh: { mainLocation: 100, remoteLocation: 100}}],
             machines: [{...testMachine, emissionFactor_gC02eqPerkWh: 100}],
             usage: {...testUsage, workplaceEmbodiedEmissions_gC02eq: 100}
@@ -19,7 +19,7 @@ describe('GreenEnergy', () => {
     });
 
     test('does not decorate traffic emission factor', () => {
-        const sut = new GreenEnergy({
+        const sut = new UseGreenEnergy({
             teams: [testTeam],
             machines: [testMachine],
             usage: {...testUsage, trafficEmissionFactor_gC02eqPerKWh: 100}
@@ -29,7 +29,7 @@ describe('GreenEnergy', () => {
     })
 
     test('does not decorate team and machine if emissionsFactor would increase', () => {
-        const sut = new GreenEnergy({
+        const sut = new UseGreenEnergy({
             teams: [{...testTeam, emissionFactor_gC02eqPerKWh: { mainLocation: 0.1, remoteLocation: 0.1}}],
             machines: [{...testMachine, emissionFactor_gC02eqPerkWh: 0.1}],
             usage: {...testUsage, workplaceEmbodiedEmissions_gC02eq: 0.1}

@@ -16,7 +16,7 @@ import {
     StorageUsage
 } from "@cloud-carbon-footprint/core";
 import _ from "lodash";
-import {BUSINESS_DAYS_PER_YEAR, DAYS_PER_YEAR, HOURS_PER_DAY} from "../common/Constants";
+import {BUSINESS_DAYS_PER_YEAR, DAYS_PER_YEAR} from "../common/Constants";
 
 /**
  * Estimates a virtual machine using the cloud carbon footprint tool.

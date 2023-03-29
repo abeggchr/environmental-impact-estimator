@@ -3,8 +3,8 @@ import {testTeam} from "../interfaces/testTeam";
 import {testMachine} from "../interfaces/testMachine";
 import {testUsage} from "../interfaces/testUsage";
 import {Cloud} from "./Cloud";
-import {AZURE_CLOUD_CONSTANTS, AZURE_EMISSIONS_FACTORS_METRIC_TON_PER_KWH} from "@cloud-carbon-footprint/azure";
-import {CLOUD_EMISSION_FACTOR} from "./GreenEnergy";
+import {AZURE_CLOUD_CONSTANTS} from "@cloud-carbon-footprint/azure";
+import {CLOUD_EMISSION_FACTOR} from "./UseGreenEnergy";
 
 describe('Cloud', () => {
     test('decorates machine pue', () => {

@@ -1,4 +1,3 @@
-import {Environment} from "./Environment";
 import {Machine} from "../Machine";
 
 /**

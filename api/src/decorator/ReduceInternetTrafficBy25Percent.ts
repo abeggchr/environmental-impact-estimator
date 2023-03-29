@@ -1,7 +1,4 @@
 import {ProjectDecorator} from "./ProjectDecorator";
-import {ITeam} from "../interfaces/ITeam";
-import {IMachine} from "../interfaces/IMachine";
-import {CLOUD_EMISSION_FACTOR} from "./GreenEnergy";
 import {IUsage} from "../interfaces/IUsage";
 
 export class ReduceInternetTrafficBy25Percent extends ProjectDecorator {

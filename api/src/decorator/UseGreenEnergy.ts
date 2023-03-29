@@ -22,7 +22,7 @@ const GREEN_VIDEOCONFERENCE_EMISSION_FACTOR = 40;
 /**
  * Use "green energy" in workplaces, for video conference and in data centre.
  */
-export class GreenEnergy extends ProjectDecorator {
+export class UseGreenEnergy extends ProjectDecorator {
 
     protected override decorateTeam(team: ITeam): ITeam {
         return Object.assign(team, {

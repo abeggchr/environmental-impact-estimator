@@ -1,5 +1,4 @@
 import {describe, expect, test} from "vitest";
-import {testTeam} from "../../interfaces/testTeam";
 import {WorkEstimator} from "./WorkEstimator";
 import {BUSINESS_DAYS_PER_YEAR} from "../common/Constants";
 import {testUsage} from "../../interfaces/testUsage";

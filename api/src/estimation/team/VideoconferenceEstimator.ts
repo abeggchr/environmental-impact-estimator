@@ -1,4 +1,4 @@
-import {ITeam, TrafficTypes} from "../../interfaces/ITeam";
+import {ITeam} from "../../interfaces/ITeam";
 import {Impact} from "../Impact";
 import {totalWorkingDays} from "./totalWorkingDays";
 
