@@ -5,10 +5,11 @@ import {NoDistributedDevelopment} from "./decorator/NoDistributedDevelopment";
 import {UseGreenEnergy} from "./decorator/UseGreenEnergy";
 import {Cloud} from "./decorator/Cloud";
 import {ReduceIndividualTrafficBy25Percent} from "./decorator/ReduceIndividualTrafficBy25Percent";
+import {DoubleUtilization} from "./decorator/DoubleUtilization";
 
 test("MasterTest", () => {
     const baseline = new ProjectEstimator().estimate(new BaselineProject());
-    const decorated = new ProjectEstimator().estimate(new ReduceIndividualTrafficBy25Percent(new Cloud((new NoDistributedDevelopment(new UseGreenEnergy((new BaselineProject())))))));
+    const decorated = new ProjectEstimator().estimate(new DoubleUtilization(new Cloud((new NoDistributedDevelopment(new UseGreenEnergy((new BaselineProject())))))));
 
     function percentageDecrease(oldValue: number, newValue: number) {
         return ((newValue - oldValue) / oldValue) * 100;
