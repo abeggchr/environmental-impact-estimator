@@ -4,7 +4,6 @@ import {BaselineProject} from "./scenario/BaselineProject";
 import {NoDistributedDevelopment} from "./decorator/NoDistributedDevelopment";
 import {UseGreenEnergy} from "./decorator/UseGreenEnergy";
 import {Cloud} from "./decorator/Cloud";
-import {ReduceIndividualTrafficBy25Percent} from "./decorator/ReduceIndividualTrafficBy25Percent";
 import {DoubleUtilization} from "./decorator/DoubleUtilization";
 
 test("MasterTest", () => {
