@@ -2,6 +2,7 @@ import {describe, expect, test, vi} from "vitest";
 import {testTeam} from "../../interfaces/testTeam";
 import {TeamEstimator} from "./TeamEstimator";
 import {Impact} from "../Impact";
+import {VideoconferenceEstimator} from "./VideoconferenceEstimator";
 
 vi.mock('./CommuteEstimator', () => {
     const CommuteEstimator = vi.fn();
@@ -35,6 +36,14 @@ vi.mock('../common/EmbodiedEmissionsEstimator', () => {
     return {EmbodiedEmissionsEstimator};
 })
 
+vi.mock('./VideoconferenceEstimator', () => {
+    const VideoconferenceEstimator = vi.fn();
+    VideoconferenceEstimator.prototype.estimate = vi.fn(() => {
+        return new Impact(5, "5");
+    })
+    return {VideoconferenceEstimator};
+})
+
 describe("TeamEstimator", () => {
     test("calls commute Estimators", () => {
         const sut = new TeamEstimator();
@@ -62,6 +71,13 @@ describe("TeamEstimator", () => {
         const actual = sut.estimate(testTeam);
         expect(actual.get("embodiedEmissions")).not.toBeUndefined();
         expect(actual.get("embodiedEmissions")!.gC02eq).toBe(4);
+    });
+
+    test("calls VideoconferenceEstimator", () => {
+        const sut = new TeamEstimator();
+        const actual = sut.estimate(testTeam);
+        expect(actual.get("videoconference")).not.toBeUndefined();
+        expect(actual.get("videoconference")!.gC02eq).toBe(5);
     });
 });
 

@@ -44,4 +44,12 @@ export interface ITeam {
     workplacePowerUsage_W: number;
 
     workplaceExpectedLifespan_years: number;
+
+    /**
+     * a "videoconference day" is a day when either the team works distributed
+     * or the team works in home office
+     */
+    videoconference_hoursPerVideoconferenceDayAndTeamMember: number;
+
+    videoconference_gC02eqPerHour: number;
 }

@@ -98,4 +98,11 @@ export class DevelopmentTeam implements ITeam {
      * 4 years for laptop, 6 years for screen, mouse and keyboard -> averages to roughly 5 years.
      */
     workplaceExpectedLifespan_years = 5;
+
+    /***
+     * Source: https://www.mobitool.ch/de/tools/mobitool-faktoren-v2-1-25.html?tag=3
+     */
+    videoconference_gC02eqPerHour = 45;
+
+    videoconference_hoursPerVideoconferenceDayAndTeamMember = 1;
 }

@@ -1,7 +1,8 @@
 import {ITeam} from "./ITeam";
 
 export const testTeam: ITeam = {
-
+    videoconference_gC02eqPerHour: 14,
+    videoconference_hoursPerVideoconferenceDayAndTeamMember: 13,
     teamName: "test",
     commuteDistance_km: 1,
     commuteEmission_gC02eqPerKm: {
@@ -26,5 +27,5 @@ export const testTeam: ITeam = {
     travelDistributionFrom_percentage: {mainLocation: 0.3, remoteLocation: 0.6},
     travelEmission_gC02eqPerOnewayTravel: 10,
     workplaceEmbodiedEmissions_gCO2eq: 11,
-    workplaceExpectedLifespan_years: 12,
+    workplaceExpectedLifespan_years: 12
 };
