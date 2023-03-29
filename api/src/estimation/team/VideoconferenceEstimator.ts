@@ -12,7 +12,6 @@ export class VideoconferenceEstimator {
         const teamMembers = team.teamDistribution_nr.remoteLocation + team.teamDistribution_nr.mainLocation;
         const videoconferenceHours = workingDays * videoconferencePercentage * team.videoconference_hoursPerVideoconferenceDayAndTeamMember * teamMembers;
         const gCO2eq = videoconferenceHours * team.videoconference_gC02eqPerHour;
-        console.log(gCO2eq);
         return new Impact(gCO2eq, `${workingDays}d * ${videoconferencePercentage} [percentage of days with video conf] * ${teamMembers} [team members] * ${team.videoconference_hoursPerVideoconferenceDayAndTeamMember}h * ${team.videoconference_gC02eqPerHour}gCO2eq/h`);
     }
 }
