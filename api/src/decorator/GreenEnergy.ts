@@ -4,7 +4,7 @@ import {IMachine} from "../interfaces/IMachine";
 import {IUsage} from "../interfaces/IUsage";
 
 /**
- * Use "green energy" in workplaces and in data centre.
+ * Use "green energy" in workplaces, for video conference and in data centre.
  */
 export class GreenEnergy extends ProjectDecorator {
 
@@ -16,7 +16,9 @@ export class GreenEnergy extends ProjectDecorator {
             emissionFactor_gC02eqPerKWh: {
                 mainLocation:   Math.min(GreenEnergy.EMISSIONS_FACTOR, team.emissionFactor_gC02eqPerKWh.mainLocation),
                 remoteLocation: Math.min(GreenEnergy.EMISSIONS_FACTOR, team.emissionFactor_gC02eqPerKWh.remoteLocation),
-            }
+            },
+            // Source: https://www.mobitool.ch/de/tools/mobitool-faktoren-v2-1-25.html?tag=3
+            videoconference_gC02eqPerHour: 40
         });
     }
 
