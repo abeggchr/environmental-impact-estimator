@@ -30,7 +30,6 @@ describe("VideoconferenceEstimator", () => {
             videoconference_gC02eqPerHour: 5,
         });
         const expected = workingDays  * 0.5 * 3 * 4 * 5;
-        console.log(actual.formula);
         expect(actual.gC02eq).toBe(expected);
     });
 
