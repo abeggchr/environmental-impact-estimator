@@ -1,9 +1,6 @@
 import {describe, expect, test} from 'vitest'
 import {testTeam} from "../interfaces/testTeam";
-import {testMachine} from "../interfaces/testMachine";
 import {testUsage} from "../interfaces/testUsage";
-import {ScaleToZero} from "./ScaleToZero";
-import {ProductionMachine} from "../scenario/machine/production/ProductionMachine";
 import {Machine, SeriesName, UsageType} from "../scenario/machine/Machine";
 import {DoubleUtilization} from "./DoubleUtilization";
 

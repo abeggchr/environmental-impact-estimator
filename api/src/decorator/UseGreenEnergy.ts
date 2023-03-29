@@ -32,7 +32,7 @@ export class UseGreenEnergy extends ProjectDecorator {
                 remoteLocation: Math.min(GREEN_GRID_EMISSION_FACTOR, team.emissionFactor_gC02eqPerKWh.remoteLocation),
             },
 
-            videoconference_gC02eqPerHour: 40
+            videoconference_gC02eqPerHour: GREEN_VIDEOCONFERENCE_EMISSION_FACTOR
         });
     }
 
@@ -44,7 +44,7 @@ export class UseGreenEnergy extends ProjectDecorator {
 
     protected override decorateUsage(usage: IUsage): IUsage {
         return Object.assign(usage, {
-            workplaceEmissionFactor_gC02eqPerKWh: Math.min(GREEN_VIDEOCONFERENCE_EMISSION_FACTOR, usage.workplaceEmissionFactor_gC02eqPerKWh)
+            workplaceEmissionFactor_gC02eqPerKWh: Math.min(GREEN_GRID_EMISSION_FACTOR, usage.workplaceEmissionFactor_gC02eqPerKWh),
         });
     }
 }

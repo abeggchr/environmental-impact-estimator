@@ -1,16 +1,7 @@
 import {test} from 'vitest'
 import {ProjectEstimator} from "./estimation/ProjectEstimator";
 import {BaselineProject} from "./scenario/BaselineProject";
-import {NoDistributedDevelopment} from "./decorator/NoDistributedDevelopment";
-import {UseGreenEnergy} from "./decorator/UseGreenEnergy";
-import {Cloud} from "./decorator/Cloud";
-import {ReduceIndividualTrafficBy25Percent} from "./decorator/ReduceIndividualTrafficBy25Percent";
-import {DoubleUtilization} from "./decorator/DoubleUtilization";
-import {ExtendHardwareLifespanBy1Year} from "./decorator/ExtendHardwareLifespanBy1Year";
-import {NoZombieServers} from "./decorator/NoZombieServers";
-import {ReduceInternetTrafficBy25Percent} from "./decorator/ReduceInternetTrafficBy25Percent";
-import {ScaleToZero} from "./decorator/ScaleToZero";
-import {OnlyHomeOffice} from "./decorator/OnlyHomeOffice";
+import {allDecorators} from "./decorator/allDecorators";
 
 test("Ordering", () => {
     function percentageDecrease(oldValue: number, newValue: number) {
@@ -19,12 +10,10 @@ test("Ordering", () => {
 
     const baseline = new ProjectEstimator().estimate(new BaselineProject());
 
-    const decorators = [Cloud, DoubleUtilization, ExtendHardwareLifespanBy1Year, NoDistributedDevelopment, NoZombieServers, OnlyHomeOffice, ReduceIndividualTrafficBy25Percent, ReduceInternetTrafficBy25Percent, ScaleToZero, UseGreenEnergy];
-
-    const estimations = decorators
+    const estimations = allDecorators
         .map(c => {
             return {
-                name: c.name,
+                name: c.name.replace("_",""),
                 gCO2eq: new ProjectEstimator().estimate(new c(new BaselineProject())).gC02eq
             }
         })

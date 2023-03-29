@@ -2,7 +2,6 @@ import {describe, expect, test} from 'vitest'
 import {testTeam} from "../interfaces/testTeam";
 import {testMachine} from "../interfaces/testMachine";
 import {testUsage} from "../interfaces/testUsage";
-import {ReduceIndividualTrafficBy25Percent} from "./ReduceIndividualTrafficBy25Percent";
 import {OnlyHomeOffice} from "./OnlyHomeOffice";
 
 describe('OnlyHomeOffice', () => {

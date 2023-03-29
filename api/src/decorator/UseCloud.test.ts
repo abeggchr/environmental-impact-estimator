@@ -2,13 +2,13 @@ import {describe, expect, test} from 'vitest'
 import {testTeam} from "../interfaces/testTeam";
 import {testMachine} from "../interfaces/testMachine";
 import {testUsage} from "../interfaces/testUsage";
-import {Cloud} from "./Cloud";
+import {UseCloud} from "./UseCloud";
 import {AZURE_CLOUD_CONSTANTS} from "@cloud-carbon-footprint/azure";
 import {CLOUD_EMISSION_FACTOR} from "./UseGreenEnergy";
 
-describe('Cloud', () => {
+describe('UseCloud', () => {
     test('decorates machine pue', () => {
-        const sut = new Cloud({
+        const sut = new UseCloud({
             teams: [testTeam],
             machines: [{...testMachine, powerUsageEffectiveness_factor: 2}],
             usage: testUsage
@@ -17,7 +17,7 @@ describe('Cloud', () => {
     });
 
     test('does not decorate machine pue if value would increase', () => {
-        const sut = new Cloud({
+        const sut = new UseCloud({
             teams: [testTeam],
             machines: [{...testMachine, powerUsageEffectiveness_factor: 0.5}],
             usage: testUsage
@@ -26,7 +26,7 @@ describe('Cloud', () => {
     });
 
     test('decorates machine emission factor', () => {
-        const sut = new Cloud({
+        const sut = new UseCloud({
             teams: [testTeam],
             machines: [{...testMachine, emissionFactor_gC02eqPerkWh: 100}],
             usage: testUsage
@@ -35,7 +35,7 @@ describe('Cloud', () => {
     });
 
     test('does not decorates machine emission factor if value would increase', () => {
-        const sut = new Cloud({
+        const sut = new UseCloud({
             teams: [testTeam],
             machines: [{...testMachine, emissionFactor_gC02eqPerkWh: 0.1}],
             usage: testUsage

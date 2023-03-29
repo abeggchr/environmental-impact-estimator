@@ -1,14 +1,15 @@
 import { test } from 'vitest'
 import {ProjectEstimator} from "./estimation/ProjectEstimator";
 import {BaselineProject} from "./scenario/BaselineProject";
-import {NoDistributedDevelopment} from "./decorator/NoDistributedDevelopment";
-import {UseGreenEnergy} from "./decorator/UseGreenEnergy";
-import {Cloud} from "./decorator/Cloud";
-import {DoubleUtilization} from "./decorator/DoubleUtilization";
+import {allDecorators} from "./decorator/allDecorators";
+import {IProject} from "./interfaces/IProject";
 
 test("MasterTest", () => {
     const baseline = new ProjectEstimator().estimate(new BaselineProject());
-    const decorated = new ProjectEstimator().estimate(new DoubleUtilization(new Cloud((new NoDistributedDevelopment(new UseGreenEnergy((new BaselineProject())))))));
+
+    let decoratedProject: IProject= new BaselineProject();
+    allDecorators.forEach(d => decoratedProject = new d(decoratedProject));
+    const decorated = new ProjectEstimator().estimate(decoratedProject);
 
     function percentageDecrease(oldValue: number, newValue: number) {
         return ((newValue - oldValue) / oldValue) * 100;
