@@ -38,8 +38,6 @@ export abstract class Machine implements IMachine {
     abstract ssdStorage_gb: number;
     abstract hddStorage_gb: number;
 
-    isPhysicalMachine = false;
-
     get virtualCPUs_number() { return this.virtualMachine[this.VIRTUAL_MACHINE_INDEX.VCPU] }
 
     get memory_gb() { return this.virtualMachine[this.VIRTUAL_MACHINE_INDEX.MEMORY]; };

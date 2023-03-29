@@ -33,8 +33,6 @@ export interface IMachine {
 
     machineName: string;
 
-    isPhysicalMachine: boolean;
-
     zombieServers_percentage: number;
 
     expectedLifespan_years: number;

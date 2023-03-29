@@ -8,7 +8,6 @@ export const testMachine: IMachine = {
     hourlyCpuUtilizationOverBusinessDay_percentage: Array(24).fill(1),
     hourlyCpuUtilizationOverNonBusinessDay_percentage: Array(24).fill(0),
     traffic_gbPerBusinessDay: 1,
-    isPhysicalMachine: false,
     machineName: "machineName",
     maxWatts_W: 4,
     minWatts_W: 5,

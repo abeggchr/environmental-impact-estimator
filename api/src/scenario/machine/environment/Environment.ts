@@ -21,7 +21,6 @@ export abstract class Environment implements IMachine {
     expectedLifespan_years= this.avg('expectedLifespan_years');
     hddCoefficient_whPerTBh= this.avg('expectedLifespan_years');
     hddStorage_gb = this.sum("hddStorage_gb");
-    isPhysicalMachine = false;
     largestInstanceVirtualCPUs_number = this.avg('largestInstanceVirtualCPUs_number');
     maxWatts_W = this.avg('maxWatts_W');
     memoryCoefficient_kWhPerGb = this.avg('memoryCoefficient_kWhPerGb');
