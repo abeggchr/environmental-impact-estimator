@@ -1,4 +1,4 @@
-import { test } from 'vitest'
+import {test} from 'vitest'
 import {ProjectEstimator} from "./estimation/ProjectEstimator";
 import {BaselineProject} from "./scenario/BaselineProject";
 import {allDecorators} from "./decorator/allDecorators";
@@ -7,10 +7,7 @@ import {percentageDecrease} from "./testing/percentageDecrease";
 
 test("MasterTest", () => {
     const baseline = new ProjectEstimator().estimate(new BaselineProject());
-
-    let decoratedProject: IProject= new BaselineProject();
-    allDecorators.forEach(d => decoratedProject = new d(decoratedProject));
-    const decorated = new ProjectEstimator().estimate(decoratedProject);
+    const decorated = new ProjectEstimator().estimate(allDecorators.reduce((accumulator: IProject, decorator) => new decorator(accumulator), new BaselineProject()));
 
     console.log("====");
     console.log(baseline.print("baseline"));
