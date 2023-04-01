@@ -52,4 +52,6 @@ export interface ITeam {
     videoconference_hoursPerVideoconferenceDayAndTeamMember: number;
 
     videoconference_gC02eqPerHour: number;
+
+    food_gCO2PerLunch: number;
 }

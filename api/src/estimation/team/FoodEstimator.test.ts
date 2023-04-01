@@ -1,20 +1,16 @@
 import {describe, expect, test} from "vitest";
 import {testTeam} from "../../common/testing/testTeam";
-import {BUSINESS_DAYS_PER_YEAR} from "../common/Constants";
 import {FoodEstimator} from "./FoodEstimator";
+import {totalWorkingDays} from "./totalWorkingDays";
 
 describe("FoodEstimator", () => {
-    test("estimates emissions per number of working days", () => {
-
+    test("estimates food emissions", () => {
         const impact = new FoodEstimator().estimate({
             ...testTeam,
-            commuteDistance_km: 42,
-            commuteEmission_gC02eqPerKm: {...testTeam.commuteEmission_gC02eqPerKm, individualTrafficCombustion: 100},
-            commuteModalSplit_percentage: {...testTeam.commuteModalSplit_percentage, individualTrafficCombustion: 0.2}
+            food_gCO2PerLunch: 42,
         });
 
-        const days = BUSINESS_DAYS_PER_YEAR * testTeam.duration_years * (testTeam.teamDistribution_nr.mainLocation + testTeam.teamDistribution_nr.remoteLocation);
-        expect(impact.gC02eq).toBe(days * FoodEstimator.EMISSIONS_PER_LUNCH_GCO2);
+        expect(impact.gC02eq).toBe(totalWorkingDays(testTeam) * 42);
     });
 });
 
