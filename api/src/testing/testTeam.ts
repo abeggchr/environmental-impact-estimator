@@ -1,4 +1,4 @@
-import {ITeam} from "./ITeam";
+import {ITeam} from "../interfaces/ITeam";
 
 export const testTeam: ITeam = {
     videoconference_gC02eqPerHour: 14,

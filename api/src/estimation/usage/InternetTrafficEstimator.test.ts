@@ -1,6 +1,6 @@
 import {describe, expect, test} from "vitest";
 import {InternetTrafficEstimator} from "./InternetTrafficEstimator";
-import {testUsage} from "../../interfaces/testUsage";
+import {testUsage} from "../../testing/testUsage";
 import {BUSINESS_DAYS_PER_YEAR} from "../common/Constants";
 import {IUsage} from "../../interfaces/IUsage";
 

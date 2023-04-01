@@ -1,6 +1,6 @@
 import {describe, expect, test} from 'vitest'
-import {testTeam} from "../interfaces/testTeam";
-import {testUsage} from "../interfaces/testUsage";
+import {testTeam} from "../testing/testTeam";
+import {testUsage} from "../testing/testUsage";
 import {Machine, SeriesName, UsageType} from "../scenario/machine/Machine";
 import {DoubleUtilization} from "./DoubleUtilization";
 

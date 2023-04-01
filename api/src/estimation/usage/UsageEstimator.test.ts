@@ -1,7 +1,7 @@
 import {describe, expect, test, vi} from "vitest";
 import {Impact} from "../Impact";
 import {UsageEstimator} from "./UsageEstimator";
-import {testUsage} from "../../interfaces/testUsage";
+import {testUsage} from "../../testing/testUsage";
 
 
 vi.mock('../common/EmbodiedEmissionsEstimator', () => {

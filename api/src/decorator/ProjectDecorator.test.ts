@@ -1,7 +1,7 @@
 import {describe, expect, test} from 'vitest'
-import {testTeam} from "../interfaces/testTeam";
+import {testTeam} from "../testing/testTeam";
 import {ProjectDecorator} from "./ProjectDecorator";
-import {testMachine} from "../interfaces/testMachine";
+import {testMachine} from "../testing/testMachine";
 
 describe('ProjectDecorator', () => {
     test('returns teams undecorated', () => {

@@ -1,7 +1,7 @@
 import {describe, expect, test} from "vitest";
 import {WorkEstimator} from "./WorkEstimator";
 import {BUSINESS_DAYS_PER_YEAR} from "../common/Constants";
-import {testUsage} from "../../interfaces/testUsage";
+import {testUsage} from "../../testing/testUsage";
 
 describe("WorkEstimator", () => {
     

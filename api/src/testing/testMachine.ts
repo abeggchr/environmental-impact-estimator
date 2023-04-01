@@ -1,4 +1,4 @@
-import {IMachine} from "./IMachine";
+import {IMachine} from "../interfaces/IMachine";
 
 export const testMachine: IMachine = {
     networkingCoefficient_kWhPerGb: 18,
