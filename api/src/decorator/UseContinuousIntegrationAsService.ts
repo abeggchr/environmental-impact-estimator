@@ -3,6 +3,7 @@ import {IMachine} from "../interfaces/IMachine";
 import {AZURE_CLOUD_CONSTANTS} from "@cloud-carbon-footprint/azure";
 import {CLOUD_EMISSION_FACTOR} from "./UseGreenEnergy";
 import {HOURS_PER_YEAR, MONTHS_PER_YEAR} from "../estimation/common/Constants";
+import {ContinuousIntegrationEnvironment} from "../scenario/machine/environment/ContinuousIntegrationEnvironment";
 
 /**
  * Use a SaaS solution for continous integration.
@@ -14,22 +15,20 @@ import {HOURS_PER_YEAR, MONTHS_PER_YEAR} from "../estimation/common/Constants";
  *
  * This decorator decorates:
  * - only machines with the name "ci-environment"
- * - uses 100% utilization during business days
- * - scales to 0 during non business days
- * - adjusts the duration according to actual usage
- * - uses non business days as well (simplifies calculation)
+ * - uses 100% utilization during all days
+ * - adjusts the duration according to actual usage (duration = usage for all members)
  */
-export class UseContinousIntegrationAsService extends ProjectDecorator {
+export class UseContinuousIntegrationAsService extends ProjectDecorator {
 
     public static HOURS_PER_TEAMMEMBER_AND_MONTH = 16;
 
     protected override decorateMachine(machine: IMachine): IMachine {
-        if (machine.machineName !== 'ci-environment') {
+        if (machine.machineName !== ContinuousIntegrationEnvironment.MACHINE_NAME) {
             return machine;
         }
 
         const manYears = this.project.teams.reduce((accumulator, project) => accumulator += (project.teamDistribution_nr.remoteLocation + project.teamDistribution_nr.mainLocation) * project.duration_years, 0);
-        const duration = ((manYears * MONTHS_PER_YEAR * UseContinousIntegrationAsService.HOURS_PER_TEAMMEMBER_AND_MONTH)) / HOURS_PER_YEAR;
+        const duration = ((manYears * MONTHS_PER_YEAR * UseContinuousIntegrationAsService.HOURS_PER_TEAMMEMBER_AND_MONTH)) / HOURS_PER_YEAR;
 
         return Object.assign(machine, {
             hourlyCpuUtilizationOverBusinessDay_percentage: Array(24).fill(1),

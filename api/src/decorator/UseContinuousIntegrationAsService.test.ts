@@ -5,14 +5,14 @@ import {testUsage} from "../testing/testUsage";
 import {UseCloud} from "./UseCloud";
 import {AZURE_CLOUD_CONSTANTS} from "@cloud-carbon-footprint/azure";
 import {CLOUD_EMISSION_FACTOR} from "./UseGreenEnergy";
-import {UseContinousIntegrationAsService} from "./UseContinousIntegrationAsService";
+import {UseContinuousIntegrationAsService} from "./UseContinuousIntegrationAsService";
 import {ContinuousIntegrationEnvironment} from "../scenario/machine/environment/ContinuousIntegrationEnvironment";
 import {HOURS_PER_YEAR, MONTHS_PER_YEAR} from "../estimation/common/Constants";
 
-describe('UseContinousIntegrationAsService', () => {
+describe('UseContinuousIntegrationAsService', () => {
 
     test('decorates hourly utilization on business days', () => {
-        const sut = new UseContinousIntegrationAsService({
+        const sut = new UseContinuousIntegrationAsService({
             teams: [testTeam],
             machines: [{
                 ...testMachine,
@@ -25,7 +25,7 @@ describe('UseContinousIntegrationAsService', () => {
     });
 
     test('decorates hourly utilization on non business days', () => {
-        const sut = new UseContinousIntegrationAsService({
+        const sut = new UseContinuousIntegrationAsService({
             teams: [testTeam],
             machines: [{
                 ...testMachine,
@@ -38,7 +38,7 @@ describe('UseContinousIntegrationAsService', () => {
     });
 
     test('decorates replication factor', () => {
-        const sut = new UseContinousIntegrationAsService({
+        const sut = new UseContinuousIntegrationAsService({
             teams: [{
                 ...testTeam,
                 teamDistribution_nr: { mainLocation: 2, remoteLocation: 3},
@@ -50,7 +50,7 @@ describe('UseContinousIntegrationAsService', () => {
             usage: testUsage
         });
 
-        var expected = ((((2+3) * 4 * MONTHS_PER_YEAR * UseContinousIntegrationAsService.HOURS_PER_TEAMMEMBER_AND_MONTH) / HOURS_PER_YEAR));
+        const expected = ((((2+3) * 4 * MONTHS_PER_YEAR * UseContinuousIntegrationAsService.HOURS_PER_TEAMMEMBER_AND_MONTH) / HOURS_PER_YEAR));
 
         expect(sut.machines[0].duration_years).toBe(expected);
     })
