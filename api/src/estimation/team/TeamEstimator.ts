@@ -5,6 +5,7 @@ import {WorkEstimator} from "./WorkEstimator";
 import {TravelEstimator} from "./TravelEstimator";
 import {EmbodiedEmissionsEstimator} from "../common/EmbodiedEmissionsEstimator";
 import {VideoconferenceEstimator} from "./VideoconferenceEstimator";
+import {FoodEstimator} from "./FoodEstimator";
 
 export class TeamEstimator {
 
@@ -13,7 +14,8 @@ export class TeamEstimator {
         private workEstimator = new WorkEstimator(),
         private travelEstimator = new TravelEstimator(),
         private embodiedEmissionsEstimator = new EmbodiedEmissionsEstimator(),
-        private videoconferenceEstimator = new VideoconferenceEstimator()) {
+        private videoconferenceEstimator = new VideoconferenceEstimator(),
+        private foodEstimator = new FoodEstimator()) {
     }
 
     public estimate(team: ITeam): Impact {
@@ -23,6 +25,7 @@ export class TeamEstimator {
         impact.add("travel", this.travelEstimator.estimate(team));
         impact.add("embodiedEmissions", this.embodiedEmissionsEstimator.estimate(team.teamDistribution_nr.mainLocation + team.teamDistribution_nr.remoteLocation, team.workplaceEmbodiedEmissions_gCO2eq, team.duration_years, team.workplaceExpectedLifespan_years));
         impact.add("videoconference", this.videoconferenceEstimator.estimate(team));
+        impact.add("food", this.foodEstimator.estimate(team));
         return impact;
     }
 }

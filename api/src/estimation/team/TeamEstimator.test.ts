@@ -43,6 +43,14 @@ vi.mock('./VideoconferenceEstimator', () => {
     return {VideoconferenceEstimator};
 })
 
+vi.mock('./FoodEstimator', () => {
+    const FoodEstimator = vi.fn();
+    FoodEstimator.prototype.estimate = vi.fn(() => {
+        return new Impact(6, "6");
+    })
+    return {FoodEstimator};
+})
+
 describe("TeamEstimator", () => {
     test("calls commute Estimators", () => {
         const sut = new TeamEstimator();
@@ -77,6 +85,13 @@ describe("TeamEstimator", () => {
         const actual = sut.estimate(testTeam);
         expect(actual.get("videoconference")).not.toBeUndefined();
         expect(actual.get("videoconference")!.gC02eq).toBe(5);
+    });
+
+    test("calls FoodEstimator", () => {
+        const sut = new TeamEstimator();
+        const actual = sut.estimate(testTeam);
+        expect(actual.get("food")).not.toBeUndefined();
+        expect(actual.get("food")!.gC02eq).toBe(6);
     });
 });
 
