@@ -12,7 +12,7 @@ import {HOURS_PER_YEAR, MONTHS_PER_YEAR} from "../estimation/common/Constants";
  * - each developer requires 8h of 100% utilization per month for working per month with the UI: ticketing, boards, artifacts, pull requests...
  * - the same VMs are used in the SaaS solution
  *
- * This decorater decorates:
+ * This decorator decorates:
  * - only machines with the name "ci-environment"
  * - uses 100% utilization during business days
  * - scales to 0 during non business days
