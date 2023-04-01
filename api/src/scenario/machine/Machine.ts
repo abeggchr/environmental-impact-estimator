@@ -6,6 +6,7 @@ import {
 } from "@cloud-carbon-footprint/azure/dist/lib/VirtualMachineTypes";
 import {DevelopmentTeam} from "../team/DevelopmentTeam";
 import {DAYS_PER_YEAR, HOURS_PER_DAY} from "../../estimation/common/Constants";
+import {EmissionFactor} from "../../common/testing/EmissionFactor";
 
 export type SeriesName = "D2s – D64s v4" | "E2as – E96as v5" | "Fsv2-series" | "Av2 Standard";
 export type UsageType = "D16s v4" | "E8as v5"|"F16s v2" | "A4 v2" | "A2m v2" | "A4m v2";
@@ -20,7 +21,7 @@ export abstract class Machine implements IMachine {
     public static VIRTUAL_MACHINE_INDEX = {
         VCPU: 0,
         MEMORY: 1,
-        EMBODIED_EMISSIONS: 2,
+        SCOPE_THREE_EMISSIONS: 2,
     };
 
     protected constructor(public seriesName: SeriesName, public usageType: UsageType) {
@@ -41,7 +42,7 @@ export abstract class Machine implements IMachine {
 
     get memory_gb() { return this.virtualMachine[Machine.VIRTUAL_MACHINE_INDEX.MEMORY]; };
 
-    get embodiedEmissions_gC02eq() { return this.virtualMachine[Machine.VIRTUAL_MACHINE_INDEX.EMBODIED_EMISSIONS] * 1_000_000 };
+    get scopeThreeEmissions_gC02eq() { return this.virtualMachine[Machine.VIRTUAL_MACHINE_INDEX.SCOPE_THREE_EMISSIONS] * 1_000_000 };
 
     get maxWatts_W() { return AZURE_CLOUD_CONSTANTS.getMaxWatts(this.computeProcessors)};
 
@@ -55,10 +56,10 @@ export abstract class Machine implements IMachine {
     }
 
     /**
-     * Baseline is the SWITZERLAND region regular grid emission factor (see DevelopmentTeam)
+     * Baseline is the SWITZERLAND region regular grid emission factor.
      * Azures actual emission factor is applied with the "GreenEnergy" decorator for better comparability.
      */
-    emissionFactor_gC02eqPerkWh = DevelopmentTeam.Switzerland_EmissionFactor_gC02eqPerKWh;
+    emissionFactor_gC02eqPerkWh = EmissionFactor.SWITZERLAND_CONSUMPTION;
 
     /**
      * Quote: "the data shows that about thirty percent of the virtual machines [...] were [...] comatose"

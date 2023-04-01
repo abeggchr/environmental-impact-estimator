@@ -15,7 +15,7 @@ import {
     StorageEstimator,
     StorageUsage
 } from "@cloud-carbon-footprint/core";
-import { convertGigaBytesToTerabyteHours } from "@cloud-carbon-footprint/common";
+import {convertGigaBytesToTerabyteHours} from "@cloud-carbon-footprint/common";
 import _ from "lodash";
 import {BUSINESS_DAYS_PER_YEAR, DAYS_PER_YEAR, HOURS_PER_DAY, HOURS_PER_YEAR} from "../common/Constants";
 
@@ -40,7 +40,7 @@ export class MachineEstimator {
 
         const uptime_hoursPerBusinessDay = machine.hourlyCpuUtilizationOverBusinessDay_percentage.length;
         const uptime_hoursPerNonBusinessDay = machine.hourlyCpuUtilizationOverNonBusinessDay_percentage.length;
-        const uptime_avgHoursPerDay = (5* uptime_hoursPerBusinessDay + 2*uptime_hoursPerNonBusinessDay)/7;
+        const uptime_avgHoursPerDay = (5 * uptime_hoursPerBusinessDay + 2 * uptime_hoursPerNonBusinessDay) / 7;
 
         const impact = new Impact();
         impact.add("computeOnBusinessDays", this.estimateComputeUsage(machine.hourlyCpuUtilizationOverBusinessDay_percentage, BUSINESS_DAYS_PER_YEAR, machine, emissionsFactors, constants));
@@ -77,7 +77,7 @@ export class MachineEstimator {
         return this.estimateStorage(terabyteHours, coefficient!, machine, emissionsFactors, constants);
     }
 
-    private estimateHddStorage(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants, uptime_avgHoursPerDay:number) {
+    private estimateHddStorage(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants, uptime_avgHoursPerDay: number) {
         const terabyteHours = convertGigaBytesToTerabyteHours(machine.hddStorage_gb) * machine.duration_years * DAYS_PER_YEAR * (uptime_avgHoursPerDay / HOURS_PER_DAY);
         const coefficient = machine.hddCoefficient_whPerTBh;
         return this.estimateStorage(terabyteHours, coefficient!, machine, emissionsFactors, constants);
@@ -116,7 +116,7 @@ export class MachineEstimator {
             instancevCpu: machine.virtualCPUs_number,
             largestInstancevCpu: machine.largestInstanceVirtualCPUs_number,
             usageTimePeriod: machine.duration_years, // y
-            scopeThreeEmissions: machine.embodiedEmissions_gC02eq * machine.replication_factor // g
+            scopeThreeEmissions: machine.scopeThreeEmissions_gC02eq * machine.replication_factor // g
         };
         const estimator = new EmbodiedEmissionsEstimator(machine.expectedLifespan_years); // y
         const estimates = estimator.estimate([usage], this.REGION, emissionsFactors); // emission factor: gC02eqPerkWh

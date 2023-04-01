@@ -1,4 +1,5 @@
 import {ITeam} from "../../interfaces/ITeam";
+import {EmissionFactor} from "../../common/testing/EmissionFactor";
 
 export class DevelopmentTeam implements ITeam {
 
@@ -58,12 +59,7 @@ export class DevelopmentTeam implements ITeam {
 
     duration_years = 2;
 
-    /**
-     * Source: https://app.electricitymaps.com aggregated for 2022: CH 153, Bulgaria 536
-     * Source: https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2022, UK Electricity for 2022: 193.8 gC02eq
-     */
-    static Switzerland_EmissionFactor_gC02eqPerKWh = 153;
-    emissionFactor_gC02eqPerKWh = {mainLocation: DevelopmentTeam.Switzerland_EmissionFactor_gC02eqPerKWh, remoteLocation: 536};
+    emissionFactor_gC02eqPerKWh = {mainLocation: EmissionFactor.SWITZERLAND_CONSUMPTION, remoteLocation: EmissionFactor.BULGARIA};
 
     workLocation_percentage = {office: 0.5, home: 0.5};
 
@@ -99,10 +95,7 @@ export class DevelopmentTeam implements ITeam {
      */
     workplaceExpectedLifespan_years = 5;
 
-    /***
-     * Source: https://www.mobitool.ch/de/tools/mobitool-faktoren-v2-1-25.html?tag=3
-     */
-    videoconference_gC02eqPerHour = 45;
+    videoconference_gC02eqPerHour = EmissionFactor.VIDEOCONFERENCE_EMISSION_FACTOR;
 
     videoconference_hoursPerVideoconferenceDayAndTeamMember = 1;
 }

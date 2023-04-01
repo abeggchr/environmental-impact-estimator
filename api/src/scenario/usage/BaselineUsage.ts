@@ -1,6 +1,7 @@
 import {IUsage} from "../../interfaces/IUsage";
 import {DevelopmentTeam} from "../team/DevelopmentTeam";
 import {MaintenanceTeam} from "../team/MaintenanceTeam";
+import {EmissionFactor} from "../../common/testing/EmissionFactor";
 
 export class BaselineUsage implements IUsage {
 
@@ -13,7 +14,7 @@ export class BaselineUsage implements IUsage {
     workplaceExpectedLifespan_years = this.developmentTeam.workplaceExpectedLifespan_years;
     initialRequest_gb = 0.0035; // 3.5mb
     trafficCoefficient_kWhPerGb = 0.06;  // Source: https://www.cloudcarbonfootprint.org/docs/methodology/#appendix-iv-recent-networking-studies
-    trafficEmissionFactor_gC02eqPerKWh = 250; // Source: https://app.electricitymaps.com/map for 2022, averaged over multiple European countries
+    trafficEmissionFactor_gC02eqPerKWh = EmissionFactor.EUROPE;
     usagePerUserAndBusinessDay_h = 1; // application is used 1 hour
     requestsPerBusinessDayAndUser_nr = 3 * 60 * 1; // 3 request per minute and user during 1h of usage
     users_nr = 9000;

@@ -37,7 +37,7 @@ export interface IMachine {
 
     expectedLifespan_years: number;
 
-    embodiedEmissions_gC02eq: number;
+    scopeThreeEmissions_gC02eq: number;
 
     replication_factor: number;
 
