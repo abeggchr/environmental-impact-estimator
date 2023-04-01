@@ -10,6 +10,8 @@ import {Machine} from "../Machine";
  */
 export class ContinuousIntegrationEnvironment extends Machine {
 
+    public static MACHINE_NAME = 'ci-environment';
+
     constructor() {
         super('Av2 Standard', 'A2m v2');
     }
@@ -19,7 +21,7 @@ export class ContinuousIntegrationEnvironment extends Machine {
      */
     hourlyCpuUtilizationOverBusinessDay_percentage = [...Array(12).fill(0.4), ...Array(12).fill(0)];
     hourlyCpuUtilizationOverNonBusinessDay_percentage = Array(24).fill(0);
-    machineName = 'ci-environment';
+    machineName = ContinuousIntegrationEnvironment.MACHINE_NAME;
     duration_years = 10;
     hddStorage_gb = 0;
     ssdStorage_gb = 256;

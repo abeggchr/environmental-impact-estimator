@@ -5,7 +5,7 @@ import {IUsage} from "../interfaces/IUsage";
 
 export class ProjectDecorator implements IProject {
 
-    constructor(private project: IProject) {
+    constructor(protected project: IProject) {
     }
 
     get teams() {

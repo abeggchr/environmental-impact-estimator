@@ -10,3 +10,5 @@ export const HOURS_PER_DAY = 24;
 
 export const HOURS_PER_YEAR = DAYS_PER_YEAR * HOURS_PER_DAY;
 
+export const MONTHS_PER_YEAR = 12;
+

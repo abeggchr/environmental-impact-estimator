@@ -8,5 +8,6 @@ import {ReduceIndividualTrafficBy25Percent} from "./ReduceIndividualTrafficBy25P
 import {ReduceInternetTrafficBy25Percent} from "./ReduceInternetTrafficBy25Percent";
 import {ScaleToZero} from "./ScaleToZero";
 import {UseGreenEnergy} from "./UseGreenEnergy";
+import {UseContinousIntegrationAsService} from "./UseContinousIntegrationAsService";
 
-export const allDecorators = [UseCloud, DoubleUtilization, ExtendHardwareLifespanBy1Year, NoDistributedDevelopment, NoZombieServers, OnlyHomeOffice, ReduceIndividualTrafficBy25Percent, ReduceInternetTrafficBy25Percent, ScaleToZero, UseGreenEnergy];
+export const allDecorators = [UseContinousIntegrationAsService, UseCloud, DoubleUtilization, ExtendHardwareLifespanBy1Year, NoDistributedDevelopment, NoZombieServers, OnlyHomeOffice, ReduceIndividualTrafficBy25Percent, ReduceInternetTrafficBy25Percent, ScaleToZero, UseGreenEnergy];
