@@ -2,10 +2,11 @@ import {describe, expect, test} from "vitest";
 import {testTeam} from "../../common/testing/testTeam";
 import {WorkEstimator} from "./WorkEstimator";
 import {BUSINESS_DAYS_PER_YEAR} from "../common/Constants";
+import {wattHoursToKiloWattHours} from "../../common/testing/unitConversion";
 
 describe("WorkEstimator", () => {
 
-    const baseExpectation_kWh = ((testTeam.workplacePowerUsage_W * BUSINESS_DAYS_PER_YEAR * testTeam.duration_years * testTeam.workingHours_perDay) / 1000);
+    const baseExpectation_kWh = wattHoursToKiloWattHours((testTeam.workplacePowerUsage_W * BUSINESS_DAYS_PER_YEAR * testTeam.duration_years * testTeam.workingHours_perDay));
 
     test("estimates main location impact", () => {
         const impact = new WorkEstimator().estimate({
