@@ -3,6 +3,7 @@ import {ProjectEstimator} from "./estimation/ProjectEstimator";
 import {BaselineProject} from "./scenario/BaselineProject";
 import {allDecorators} from "./decorator/allDecorators";
 import {IProject} from "./interfaces/IProject";
+import {percentageDecrease} from "./testing/percentageDecrease";
 
 test("MasterTest", () => {
     const baseline = new ProjectEstimator().estimate(new BaselineProject());
@@ -10,10 +11,6 @@ test("MasterTest", () => {
     let decoratedProject: IProject= new BaselineProject();
     allDecorators.forEach(d => decoratedProject = new d(decoratedProject));
     const decorated = new ProjectEstimator().estimate(decoratedProject);
-
-    function percentageDecrease(oldValue: number, newValue: number) {
-        return ((newValue - oldValue) / oldValue) * 100;
-    }
 
     console.log("====");
     console.log(baseline.print("baseline"));

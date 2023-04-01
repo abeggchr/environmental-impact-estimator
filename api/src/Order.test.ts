@@ -2,11 +2,9 @@ import {test} from 'vitest'
 import {ProjectEstimator} from "./estimation/ProjectEstimator";
 import {BaselineProject} from "./scenario/BaselineProject";
 import {allDecorators} from "./decorator/allDecorators";
+import {percentageDecrease} from "./testing/percentageDecrease";
 
 test("Ordering", () => {
-    function percentageDecrease(oldValue: number, newValue: number) {
-        return ((newValue - oldValue) / oldValue) * 100;
-    }
 
     const baseline = new ProjectEstimator().estimate(new BaselineProject());
 
