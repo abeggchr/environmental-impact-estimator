@@ -43,7 +43,7 @@ export class Impact {
   print(key: string, parentGC02eq: number = 0): string {
     let lines:string[] = [];
     let childPercentage = parentGC02eq === 0 ? 1 : this.gC02eq / parentGC02eq;
-    lines.push(`${key},${this.gC02eq.toFixed()},${(childPercentage * 100).toFixed()}%,${this.formula}`);
+    lines.push(`${key};${this.gC02eq.toFixed()};${(childPercentage * 100).toFixed()}%;${this.formula}`);
     for (let [childKey, value] of this._children) {
       if (value) {
         lines.push(value.print(`${key} > ${childKey}`, this.gC02eq));
