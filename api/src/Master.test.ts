@@ -3,7 +3,7 @@ import {ProjectEstimator} from "./estimation/ProjectEstimator";
 import {BaselineProject} from "./scenario/BaselineProject";
 import {allDecorators} from "./decorator/allDecorators";
 import {IProject} from "./interfaces/IProject";
-import {percentageDecrease} from "./testing/percentageDecrease";
+import {percentageDecrease} from "./common/testing/percentageDecrease";
 
 test("MasterTest", () => {
     const baseline = new ProjectEstimator().estimate(new BaselineProject());

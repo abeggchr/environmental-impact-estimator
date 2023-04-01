@@ -2,7 +2,7 @@ import {test} from 'vitest'
 import {ProjectEstimator} from "./estimation/ProjectEstimator";
 import {BaselineProject} from "./scenario/BaselineProject";
 import {allDecorators} from "./decorator/allDecorators";
-import {percentageDecrease} from "./testing/percentageDecrease";
+import {percentageDecrease} from "./common/testing/percentageDecrease";
 
 test("Ordering", () => {
 

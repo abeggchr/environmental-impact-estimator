@@ -15,8 +15,9 @@ import {
     StorageEstimator,
     StorageUsage
 } from "@cloud-carbon-footprint/core";
+import { convertGigaBytesToTerabyteHours } from "@cloud-carbon-footprint/common";
 import _ from "lodash";
-import {BUSINESS_DAYS_PER_YEAR, DAYS_PER_YEAR} from "../common/Constants";
+import {BUSINESS_DAYS_PER_YEAR, DAYS_PER_YEAR, HOURS_PER_DAY, HOURS_PER_YEAR} from "../common/Constants";
 
 /**
  * Estimates a virtual machine using the cloud carbon footprint tool.
@@ -71,13 +72,13 @@ export class MachineEstimator {
     }
 
     private estimateSsdStorage(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants, uptime_avgHoursPerDay: number) {
-        const terabyteHours = (machine.ssdStorage_gb / 1000) * machine.duration_years * DAYS_PER_YEAR * uptime_avgHoursPerDay;
+        const terabyteHours = convertGigaBytesToTerabyteHours(machine.ssdStorage_gb) * machine.duration_years * DAYS_PER_YEAR * (uptime_avgHoursPerDay / HOURS_PER_DAY);
         const coefficient = machine.ssdCoefficient_whPerTBh;
         return this.estimateStorage(terabyteHours, coefficient!, machine, emissionsFactors, constants);
     }
 
     private estimateHddStorage(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants, uptime_avgHoursPerDay:number) {
-        const terabyteHours = (machine.hddStorage_gb / 1000) * machine.duration_years * DAYS_PER_YEAR * uptime_avgHoursPerDay;
+        const terabyteHours = convertGigaBytesToTerabyteHours(machine.hddStorage_gb) * machine.duration_years * DAYS_PER_YEAR * (uptime_avgHoursPerDay / HOURS_PER_DAY);
         const coefficient = machine.hddCoefficient_whPerTBh;
         return this.estimateStorage(terabyteHours, coefficient!, machine, emissionsFactors, constants);
     }

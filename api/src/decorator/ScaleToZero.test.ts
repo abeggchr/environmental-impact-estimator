@@ -1,7 +1,7 @@
 import {describe, expect, test} from 'vitest'
-import {testTeam} from "../testing/testTeam";
-import {testMachine} from "../testing/testMachine";
-import {testUsage} from "../testing/testUsage";
+import {testTeam} from "../common/testing/testTeam";
+import {testMachine} from "../common/testing/testMachine";
+import {testUsage} from "../common/testing/testUsage";
 import {ScaleToZero} from "./ScaleToZero";
 
 describe('ScaleToZero', () => {

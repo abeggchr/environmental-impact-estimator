@@ -1,5 +1,5 @@
 import {ITeam} from "../../interfaces/ITeam";
-import {testTeam} from "../../testing/testTeam";
+import {testTeam} from "../../common/testing/testTeam";
 import {BUSINESS_DAYS_PER_YEAR} from "../common/Constants";
 
 export function totalWorkingDays(team: ITeam) {

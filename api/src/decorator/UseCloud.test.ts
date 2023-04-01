@@ -1,7 +1,7 @@
 import {describe, expect, test} from 'vitest'
-import {testTeam} from "../testing/testTeam";
-import {testMachine} from "../testing/testMachine";
-import {testUsage} from "../testing/testUsage";
+import {testTeam} from "../common/testing/testTeam";
+import {testMachine} from "../common/testing/testMachine";
+import {testUsage} from "../common/testing/testUsage";
 import {UseCloud} from "./UseCloud";
 import {AZURE_CLOUD_CONSTANTS} from "@cloud-carbon-footprint/azure";
 import {CLOUD_EMISSION_FACTOR} from "./UseGreenEnergy";

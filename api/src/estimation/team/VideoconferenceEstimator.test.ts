@@ -1,5 +1,5 @@
 import {describe, expect, test} from "vitest";
-import {testTeam} from "../../testing/testTeam";
+import {testTeam} from "../../common/testing/testTeam";
 import {VideoconferenceEstimator} from "./VideoconferenceEstimator";
 import {totalWorkingDays} from "./totalWorkingDays";
 

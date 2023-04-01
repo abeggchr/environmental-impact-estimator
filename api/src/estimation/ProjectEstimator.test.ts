@@ -1,9 +1,9 @@
 import {describe, expect, test, vi} from "vitest";
 import {ProjectEstimator} from "./ProjectEstimator";
 import {Impact} from "./Impact";
-import {testTeam} from "../testing/testTeam";
-import {testMachine} from "../testing/testMachine";
-import {testUsage} from "../testing/testUsage";
+import {testTeam} from "../common/testing/testTeam";
+import {testMachine} from "../common/testing/testMachine";
+import {testUsage} from "../common/testing/testUsage";
 
 
 vi.mock('./team/TeamEstimator', () => {

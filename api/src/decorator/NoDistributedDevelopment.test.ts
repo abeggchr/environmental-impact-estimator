@@ -1,7 +1,7 @@
 import {describe, expect, test} from 'vitest'
-import {testTeam} from "../testing/testTeam";
+import {testTeam} from "../common/testing/testTeam";
 import {NoDistributedDevelopment} from "./NoDistributedDevelopment";
-import {testMachine} from "../testing/testMachine";
+import {testMachine} from "../common/testing/testMachine";
 
 describe('NoDistributedDevelopment', () => {
     test('decorates distribution', () => {
