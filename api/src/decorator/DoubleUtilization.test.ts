@@ -66,5 +66,5 @@ class UnitTestMachine extends Machine {
     replication_factor = 3;
     ssdStorage_gb = 2;
     traffic_gbPerBusinessDay = 1;
-
+    instances_number = 4;
 }

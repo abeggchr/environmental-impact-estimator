@@ -4,7 +4,7 @@ import {testMachine} from "../common/testing/testMachine";
 import {testUsage} from "../common/testing/testUsage";
 import {UseCloud} from "./UseCloud";
 import {AZURE_CLOUD_CONSTANTS} from "@cloud-carbon-footprint/azure";
-import {CLOUD_EMISSION_FACTOR} from "./UseGreenEnergy";
+import {EmissionFactor} from "../common/testing/EmissionFactor";
 
 describe('UseCloud', () => {
     test('decorates machine pue', () => {
@@ -31,7 +31,7 @@ describe('UseCloud', () => {
             machines: [{...testMachine, emissionFactor_gC02eqPerkWh: 100}],
             usage: testUsage
         });
-        expect(sut.machines[0].emissionFactor_gC02eqPerkWh).toBe(CLOUD_EMISSION_FACTOR);
+        expect(sut.machines[0].emissionFactor_gC02eqPerkWh).toBe(EmissionFactor.CLOUD_EMISSION_FACTOR);
     });
 
     test('does not decorates machine emission factor if value would increase', () => {

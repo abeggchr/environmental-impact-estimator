@@ -5,6 +5,8 @@ import {Machine, UsageType, SeriesName} from "../Machine";
  * - web server (requires 12 physical cores)
  * - db server (requires 8 physical cores, memory-intensive, storage)
  * - job server (requires 10 physical cores, compute-intensive)
+ * - it is replicated twice
+ * - there's a hot standby
  *
  * The baseline is a deployment of 3 virtual machines as recommended by the <a href='https://azure.microsoft.com/en-us/pricing/vm-selector'>Microsoft Azure VM selector tool</a> (and available at CCF):
  * - web server: VM "D16s_v4" (16 vCPU, 64GB RAM)
@@ -34,7 +36,12 @@ export abstract class ProductionMachine extends Machine {
     hourlyCpuUtilizationOverNonBusinessDay_percentage = Array(24).fill(0);
 
     /**
-     * Assuming a hot standby.
+     * replicated twice
      */
     replication_factor = 2;
+
+    /**
+     * hot standby
+     */
+    instances_number = 2;
 }

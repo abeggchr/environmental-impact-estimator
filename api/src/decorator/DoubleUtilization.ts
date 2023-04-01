@@ -57,5 +57,6 @@ class HalfPowerfulMachine extends Machine {
     hourlyCpuUtilizationOverNonBusinessDay_percentage = this.original.hourlyCpuUtilizationOverNonBusinessDay_percentage;
     machineName = this.original.machineName;
     replication_factor = this.original.replication_factor;
+    instances_number = this.original.instances_number;
     traffic_gbPerBusinessDay = this.original.traffic_gbPerBusinessDay;
 }

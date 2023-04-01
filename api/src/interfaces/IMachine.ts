@@ -39,7 +39,15 @@ export interface IMachine {
 
     scopeThreeEmissions_gC02eq: number;
 
+    /**
+     * How often is memory, storage etc. replicated?
+     */
     replication_factor: number;
+
+    /**
+     * How many instances of this VM are comissioned?
+     */
+    instances_number: number;
 
     /**
      * the number of vcpu from the largest instance type in the family of VMs

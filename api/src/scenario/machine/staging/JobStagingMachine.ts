@@ -6,4 +6,6 @@ export class JobStagingMachine extends JobProductionMachine {
     hourlyCpuUtilizationOverBusinessDay_percentage = [1, ...Array(4).fill(0.05), ...Array(19).fill(0)];
     hourlyCpuUtilizationOverNonBusinessDay_percentage = Array(24).fill(0);
     duration_years = 10;
+    replication_factor = 1;
+    instances_number = 1;
 }

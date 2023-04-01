@@ -35,6 +35,7 @@ export abstract class Machine implements IMachine {
     abstract hourlyCpuUtilizationOverNonBusinessDay_percentage: number[];
     abstract traffic_gbPerBusinessDay: number;
     abstract replication_factor: number;
+    abstract instances_number: number;
     abstract ssdStorage_gb: number;
     abstract hddStorage_gb: number;
 
