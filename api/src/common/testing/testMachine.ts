@@ -16,7 +16,6 @@ export const testMachine: IMachine = {
     virtualCPUs_number: 8,
     zombieServers_percentage: 0.1,
     largestInstanceVirtualCPUs_number: 10,
-    replication_factor: 9,
     hddStorage_gb: 10,
     ssdStorage_gb: 11,
     hddCoefficient_whPerTBh: 13,

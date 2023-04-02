@@ -46,7 +46,6 @@ describe('DoubleUtilization', () => {
         const actual = sut.machines[0];
         expect(actual.duration_years).toBe(machine.duration_years);
         expect(actual.hddStorage_gb).toBe(machine.hddStorage_gb);
-        expect(actual.replication_factor).toBe(machine.replication_factor);
         expect(actual.ssdStorage_gb).toBe(machine.ssdStorage_gb);
         expect(actual.traffic_gbPerBusinessDay).toBe(machine.traffic_gbPerBusinessDay);
     });
@@ -63,7 +62,6 @@ class UnitTestMachine extends Machine {
     hourlyCpuUtilizationOverBusinessDay_percentage = Array(2).fill(2);
     hourlyCpuUtilizationOverNonBusinessDay_percentage = Array(1).fill(1);
     machineName = "unit-test-machine";
-    replication_factor = 3;
     ssdStorage_gb = 2;
     traffic_gbPerBusinessDay = 1;
     instances_number = 4;

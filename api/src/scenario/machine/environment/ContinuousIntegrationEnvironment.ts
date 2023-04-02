@@ -26,6 +26,5 @@ export class ContinuousIntegrationEnvironment extends Machine {
     hddStorage_gb = 0;
     ssdStorage_gb = 256;
     traffic_gbPerBusinessDay = 1;
-    replication_factor = 1;
     instances_number = 2;
 }

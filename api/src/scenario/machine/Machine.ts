@@ -4,7 +4,6 @@ import {
     INSTANCE_TYPE_COMPUTE_PROCESSOR_MAPPING,
     VIRTUAL_MACHINE_TYPE_SERIES_MAPPING
 } from "@cloud-carbon-footprint/azure/dist/lib/VirtualMachineTypes";
-import {DevelopmentTeam} from "../team/DevelopmentTeam";
 import {DAYS_PER_YEAR, HOURS_PER_DAY} from "../../estimation/common/Constants";
 import {EmissionFactor} from "../../common/testing/EmissionFactor";
 
@@ -34,7 +33,6 @@ export abstract class Machine implements IMachine {
     abstract hourlyCpuUtilizationOverBusinessDay_percentage: number[];
     abstract hourlyCpuUtilizationOverNonBusinessDay_percentage: number[];
     abstract traffic_gbPerBusinessDay: number;
-    abstract replication_factor: number;
     abstract instances_number: number;
     abstract ssdStorage_gb: number;
     abstract hddStorage_gb: number;
@@ -80,7 +78,7 @@ export abstract class Machine implements IMachine {
     powerUsageEffectiveness_factor: number = 2.1;
     ssdCoefficient_whPerTBh: number = AZURE_CLOUD_CONSTANTS.SSDCOEFFICIENT!;
     hddCoefficient_whPerTBh: number = AZURE_CLOUD_CONSTANTS.HDDCOEFFICIENT!;
-    memoryCoefficient_kWhPerGb: number = AZURE_CLOUD_CONSTANTS.MEMORY_COEFFICIENT!;
+    memoryCoefficient_kWhPerGb: number = AZURE_CLOUD_CONSTANTS.MEMORY_COEFFICIENT!; // 0.000392, // kWh / Gb
     networkingCoefficient_kWhPerGb: number = AZURE_CLOUD_CONSTANTS.NETWORKING_COEFFICIENT!;
 }
 

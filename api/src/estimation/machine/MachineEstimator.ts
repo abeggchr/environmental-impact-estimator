@@ -15,6 +15,7 @@ import {
     StorageEstimator,
     StorageUsage
 } from "@cloud-carbon-footprint/core";
+import {AZURE_CLOUD_CONSTANTS} from "@cloud-carbon-footprint/azure";
 import {convertGigaBytesToTerabyteHours} from "@cloud-carbon-footprint/common";
 import _ from "lodash";
 import {BUSINESS_DAYS_PER_YEAR, DAYS_PER_YEAR, HOURS_PER_DAY, HOURS_PER_YEAR} from "../common/Constants";
@@ -35,7 +36,7 @@ export class MachineEstimator {
             maxWatts: machine.maxWatts_W,
             minWatts: machine.minWatts_W,
             powerUsageEffectiveness: machine.powerUsageEffectiveness_factor,
-            replicationFactor: machine.replication_factor,
+            replicationFactor: AZURE_CLOUD_CONSTANTS.REPLICATION_FACTORS!.DEFAULT, // 1
         };
 
         if (machine.instances_number === undefined) {
@@ -103,7 +104,7 @@ export class MachineEstimator {
             terabyteHours: terabyteHours
         };
         const estimator = new StorageEstimator(coefficient);
-        const estimates = estimator.estimate([usage], this.REGION, emissionsFactors, constants);
+        const estimates = estimator.estimate([usage], this.REGION, emissionsFactors, {...constants, replicationFactor: AZURE_CLOUD_CONSTANTS.REPLICATION_FACTORS!.STORAGE_ZRS});
         return this.asImpact(estimates, 1 + machine.zombieServers_percentage, machine.instances_number);
     }
 

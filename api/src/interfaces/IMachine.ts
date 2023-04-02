@@ -40,12 +40,7 @@ export interface IMachine {
     scopeThreeEmissions_gC02eq: number;
 
     /**
-     * How often is memory, storage etc. replicated?
-     */
-    replication_factor: number;
-
-    /**
-     * How many instances of this VM are comissioned?
+     * How many instances of this VM are commissioned?
      */
     instances_number: number;
 
