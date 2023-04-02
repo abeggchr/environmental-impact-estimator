@@ -7,12 +7,13 @@ import {EatVegetarian} from "./EatVegetarian";
 
 describe('EatVegetarian', () => {
     test('decorates food_gCO2PerLunch', () => {
+        const before = testTeam.food_gCO2PerLunch;
         const sut = new EatVegetarian({
             teams: [testTeam],
             machines: [testMachine],
             usage: testUsage
         });
 
-        expect(sut.teams[0].food_gCO2PerLunch).toBeLessThan(testTeam.food_gCO2PerLunch);
+        expect(sut.teams[0].food_gCO2PerLunch).toBeLessThan(before);
     });
 });
