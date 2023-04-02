@@ -1,9 +1,10 @@
-import {IMachine} from "../interfaces/IMachine";
+import {IMachine} from "../../interfaces/IMachine";
 
 export const testMachine: IMachine = {
+    instances_number: 19,
     networkingCoefficient_kWhPerGb: 18,
     duration_years: 1,
-    embodiedEmissions_gC02eq: 2,
+    scopeThreeEmissions_gC02eq: 2,
     emissionFactor_gC02eqPerkWh: 3,
     hourlyCpuUtilizationOverBusinessDay_percentage: Array(24).fill(1),
     hourlyCpuUtilizationOverNonBusinessDay_percentage: Array(24).fill(0),

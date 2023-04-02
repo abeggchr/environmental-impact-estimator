@@ -1,4 +1,4 @@
-import {IUsage} from "../interfaces/IUsage";
+import {IUsage} from "../../interfaces/IUsage";
 
 export const testUsage: IUsage = {
     workplacePowerUsage_W: 11,

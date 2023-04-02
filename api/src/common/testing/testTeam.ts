@@ -1,6 +1,7 @@
-import {ITeam} from "../interfaces/ITeam";
+import {ITeam} from "../../interfaces/ITeam";
 
 export const testTeam: ITeam = {
+    food_gCO2PerLunch: 15,
     videoconference_gC02eqPerHour: 14,
     videoconference_hoursPerVideoconferenceDayAndTeamMember: 13,
     teamName: "test",
