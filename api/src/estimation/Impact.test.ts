@@ -23,9 +23,9 @@ describe("Impact", () => {
       });
 
       test("prints path, value, formula and percentage", () => {
-        expect(sut.print("root")).toBe(`root,10,100%,
-root > a,4,40%,F4
-root > b,6,60%,F6`);
+        expect(sut.print("root")).toBe(`root;10;100%;
+root > a;4;40%;F4
+root > b;6;60%;F6`);
       });
     });
 
@@ -64,7 +64,7 @@ root > b,6,60%,F6`);
     });
 
     test("prints path, values and formula", () => {
-      expect(sut.print("root")).toBe("root,2,100%,F2");
+      expect(sut.print("root")).toBe("root;2;100%;F2");
     });
   });
 });
