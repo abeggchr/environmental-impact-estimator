@@ -4,17 +4,17 @@ import {Machine, SeriesName, UsageType} from "../scenario/machine/Machine";
 import {VIRTUAL_MACHINE_TYPE_SERIES_MAPPING} from "@cloud-carbon-footprint/azure/dist/lib/VirtualMachineTypes";
 import _ from "lodash";
 
-export class DoubleUtilization extends ProjectDecorator {
+export class ReduceMemoryBy50Percent extends ProjectDecorator {
 
     protected decorateMachine(machine: IMachine): IMachine {
-        return Object.assign(HalfPowerfulMachine.create(machine as Machine), {
+        return Object.assign(HalfMemoryMachine.create(machine as Machine), {
             hourlyCpuUtilizationOverNonBusinessDay_percentage: machine.hourlyCpuUtilizationOverNonBusinessDay_percentage.map(u => u * 2),
             hourlyCpuUtilizationOverBusinessDay_percentage: machine.hourlyCpuUtilizationOverBusinessDay_percentage.map(u => u * 2)
         });
     }
 }
 
-class HalfPowerfulMachine extends Machine {
+class HalfMemoryMachine extends Machine {
 
     /**
      * Searches for a half as powerful usageType in the same series.
@@ -26,29 +26,29 @@ class HalfPowerfulMachine extends Machine {
             throw new Error(`not implemented for ${machine.machineName}, only implemented for instances of type Machine`);
         }
 
-        const newVirtualCPUs_number = machine.virtualCPUs_number / 2;
-        let newUsageTypeCandidates = [] as { usageType: UsageType, memory: number }[];
+        const newMemory_gb = machine.memory_gb / 2;
+        let newUsageTypeCandidates = [] as { usageType: UsageType, vcpu: number }[];
         const series = VIRTUAL_MACHINE_TYPE_SERIES_MAPPING[seriesName];
         _.forOwn(series, (value, usageType) => {
-            if (newVirtualCPUs_number === value[Machine.VIRTUAL_MACHINE_INDEX.VCPU]) {
+            if (newMemory_gb === value[Machine.VIRTUAL_MACHINE_INDEX.MEMORY]) {
                 newUsageTypeCandidates.push({
                     usageType: usageType as UsageType,
-                    memory: value[Machine.VIRTUAL_MACHINE_INDEX.MEMORY]
+                    vcpu: value[Machine.VIRTUAL_MACHINE_INDEX.VCPU]
                 });
             }
         });
         if (!newUsageTypeCandidates.length) {
-            throw new Error(`no usageType with ${newVirtualCPUs_number} vCPUs in series ${seriesName}`);
+            throw new Error(`no usageType with ${newMemory_gb} gb memory in series ${seriesName}`);
         }
 
         // take the candidate with the same number of vcpus
-        let newUsageType = newUsageTypeCandidates.find(m => m.memory === machine.memory_gb);
+        let newUsageType = newUsageTypeCandidates.find(m => m.vcpu === machine.virtualCPUs_number);
         if (!newUsageType) {
-            // take the candidate with the most memory
-            newUsageType = newUsageTypeCandidates.reduce((previous, current) => previous.memory > current.memory ? previous : current);
+            // take the candiate with the most number of vcpus
+            newUsageType = newUsageTypeCandidates.reduce((previous, current) => previous.vcpu > current.vcpu ? previous : current);
         }
 
-        return new HalfPowerfulMachine(seriesName, newUsageType.usageType, machine);
+        return new HalfMemoryMachine(seriesName, newUsageType.usageType, machine);
     }
 
     constructor(public seriesName: SeriesName, public usageType: UsageType, private original: Machine) {

@@ -48,4 +48,10 @@ export interface IMachine {
      * the number of vcpu from the largest instance type in the family of VMs
      */
     largestInstanceVirtualCPUs_number: number;
+
+    /**
+     * only the first instance is calculating,
+     * second instance has utilization 0.
+     */
+    hasHotStandby_bool: boolean;
 }

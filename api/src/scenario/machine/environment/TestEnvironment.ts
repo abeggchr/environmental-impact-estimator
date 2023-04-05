@@ -20,4 +20,5 @@ export class TestEnvironment extends Machine {
     ssdStorage_gb = 32;
     traffic_gbPerBusinessDay = 1;
     instances_number = 3;
+    hasHotStandby_bool = false;
 }

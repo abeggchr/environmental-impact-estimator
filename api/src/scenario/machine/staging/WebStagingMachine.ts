@@ -7,4 +7,5 @@ export class WebStagingMachine extends WebProductionMachine {
     hourlyCpuUtilizationOverNonBusinessDay_percentage = Array(24).fill(0);
     duration_years = 10;
     instances_number = 1;
+    hasHotStandby_bool = false;
 }

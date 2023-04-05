@@ -10,12 +10,41 @@ describe('NoHotStandby', () => {
             teams: [testTeam],
             machines: [{
                 ...testMachine,
-                machineName: "some-production-machine",
-                instances_number: 2
+                instances_number: 2,
+                hasHotStandby_bool: true
             }],
             usage: testUsage
         });
 
         expect(sut.machines[0].instances_number).toBe(1);
+    });
+
+    test('decorates hasHotStandby_bool', () => {
+        const sut = new NoHotStandby({
+            teams: [testTeam],
+            machines: [{
+                ...testMachine,
+                instances_number: 2,
+                hasHotStandby_bool: true
+            }],
+            usage: testUsage
+        });
+
+        expect(sut.machines[0].hasHotStandby_bool).toBe(false);
+    });
+
+    test('decorates nothing if no hot standby', () => {
+        const sut = new NoHotStandby({
+            teams: [testTeam],
+            machines: [{
+                ...testMachine,
+                instances_number: 2,
+                hasHotStandby_bool: false
+            }],
+            usage: testUsage
+        });
+
+        expect(sut.machines[0].instances_number).toBe(2);
+        expect(sut.machines[0].hasHotStandby_bool).toBe(false);
     });
 });

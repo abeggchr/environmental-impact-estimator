@@ -32,6 +32,7 @@ export abstract class Machine implements IMachine {
     abstract machineName: string;
     abstract hourlyCpuUtilizationOverBusinessDay_percentage: number[];
     abstract hourlyCpuUtilizationOverNonBusinessDay_percentage: number[];
+    abstract hasHotStandby_bool: boolean;
     abstract traffic_gbPerBusinessDay: number;
     abstract instances_number: number;
     abstract ssdStorage_gb: number;

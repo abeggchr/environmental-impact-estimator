@@ -65,4 +65,5 @@ class UnitTestMachine extends Machine {
     ssdStorage_gb = 2;
     traffic_gbPerBusinessDay = 1;
     instances_number = 4;
+    hasHotStandby_bool = false;
 }

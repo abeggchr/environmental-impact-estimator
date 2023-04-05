@@ -34,9 +34,8 @@ export abstract class ProductionMachine extends Machine {
     hourlyCpuUtilizationOverBusinessDay_percentage = [...Array(12).fill(0), ...Array(9).fill(0.1), ...Array(3).fill(0.2)];
 
     hourlyCpuUtilizationOverNonBusinessDay_percentage = Array(24).fill(0);
-
-    /**
-     * hot standby
-     */
+    
     instances_number = 2;
+
+    hasHotStandby_bool = true;
 }

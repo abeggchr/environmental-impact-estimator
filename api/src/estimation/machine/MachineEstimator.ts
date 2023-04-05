@@ -61,21 +61,55 @@ export class MachineEstimator {
 
     private estimateComputeUsage(hourlyCpuUtilizationOverDay_percentage: number[], daysPerYear: number, machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants) {
         const usagesPerDay: ComputeUsage[] = [];
-        _.forOwn(_.groupBy(hourlyCpuUtilizationOverDay_percentage), (value: number[]) => {
-            usagesPerDay.push({
-                cpuUtilizationAverage: value[0] * 100, // cpuUtilization is a whole number (i.e. 50 and not 0.5)
-                vCpuHours: machine.virtualCPUs_number * value.length,
-                usesAverageCPUConstant: false, // no impact on estimation, just wired through
+
+        if (machine.hasHotStandby_bool) {
+            const hourlyCpuUtilizationOverDayWithStandby_percentage = [...hourlyCpuUtilizationOverDay_percentage, ...hourlyCpuUtilizationOverDay_percentage.map(u => 0)];
+            if (machine.instances_number == 2) {
+                _.
+                forOwn(_.groupBy(hourlyCpuUtilizationOverDayWithStandby_percentage), (value: number[]) => {
+                    usagesPerDay.push({
+                        cpuUtilizationAverage: value[0] * 100, // cpuUtilization is a whole number (i.e. 50 and not 0.5)
+                        vCpuHours: machine.virtualCPUs_number * value.length,
+                        usesAverageCPUConstant: false, // no impact on estimation, just wired through
+                    });
+                });
+            } else {
+                throw new Error(`not implemented: ${machine.instances_number} instances with hot standby for machine ${machine.machineName}`);
+            }
+        } else {
+            _.
+            forOwn(_.groupBy(hourlyCpuUtilizationOverDay_percentage), (value: number[]) => {
+                usagesPerDay.push({
+                    cpuUtilizationAverage: value[0] * 100, // cpuUtilization is a whole number (i.e. 50 and not 0.5)
+                    vCpuHours: machine.virtualCPUs_number * value.length * machine.instances_number,
+                    usesAverageCPUConstant: false, // no impact on estimation, just wired through
+                });
             });
-        });
+        }
+
+        switch (machine.instances_number) {
+            case 1:
+            _.
+                forOwn(_.groupBy(hourlyCpuUtilizationOverDay_percentage), (value: number[]) => {
+                    usagesPerDay.push({
+                        cpuUtilizationAverage: value[0] * 100, // cpuUtilization is a whole number (i.e. 50 and not 0.5)
+                        vCpuHours: machine.virtualCPUs_number * value.length,
+                        usesAverageCPUConstant: false, // no impact on estimation, just wired through
+                    });
+                });
+            break;
+
+            case 2:
+                // second machine
+        }
 
         const estimator = new ComputeEstimator();
         const estimates = estimator.estimate(usagesPerDay, this.REGION, emissionsFactors, constants);
         const zombieFactor = 1 + machine.zombieServers_percentage;
         const instancesFactor = machine.instances_number;
-        const usagesFormula = usagesPerDay.map(u => `(${u.cpuUtilizationAverage}% [avgUtilization], ${u.vCpuHours}h [vCPUh])`).join(', ');
-        const formula = `estimation by cloud carbon footprint tool with: {${usagesFormula} [usages/d]}, ${constants.minWatts}W [min], ${constants.maxWatts}W [max], ${constants.powerUsageEffectiveness}% [pue], ${constants.replicationFactor} [replication factor], ${zombieFactor} [zombie factor], ${instancesFactor} [instances], ${emissionsFactors[this.REGION]}gCO2eq/kWh [emission factor], ${machine.duration_years}y, ${daysPerYear}d/y`
-        return this.asImpact(estimates, zombieFactor * daysPerYear * machine.duration_years, machine.instances_number, formula);
+        const usagesFormula = usagesPerDay.map(u => `(${u.vCpuHours}h [vCPUh] per day with ${u.cpuUtilizationAverage}% [utilization])`).join(' and ');
+        const formula = `estimation by cloud carbon footprint tool with: ${instancesFactor} instances with ${machine.virtualCPUs_number}vCPUs each (${machine.hasHotStandby_bool ? "with" : "no"} hot standby) > ${usagesFormula}, ${constants.minWatts}W [min], ${constants.maxWatts}W [max], ${constants.powerUsageEffectiveness}% [pue], ${constants.replicationFactor} [replication factor], ${zombieFactor} [zombie factor], ${emissionsFactors[this.REGION]}gCO2eq/kWh [emission factor], ${machine.duration_years}y, ${daysPerYear}d/y`
+        return this.asImpact(estimates, zombieFactor * daysPerYear * machine.duration_years, 1, formula);
     }
 
     private estimateSsdStorage(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors, constants: CloudConstants, uptime_avgHoursPerDay: number) {
@@ -115,7 +149,9 @@ export class MachineEstimator {
         const coefficient = machine.memoryCoefficient_kWhPerGb; // for Azure: 0.000392 kWh / Gb, see AZURE_CLOUD_CONSTANTS.MEMORY_COEFFICIENT
         const estimator = new MemoryEstimator(coefficient!);
         const estimates = estimator.estimate([usage], this.REGION, emissionsFactors, constants);
-        return this.asImpact(estimates, 1 + machine.zombieServers_percentage, machine.instances_number);
+        const zombieFactor = 1 + machine.zombieServers_percentage;
+        const formula = `estimation by cloud carbon footprint tool with: ${machine.memory_gb}gb/machine * ${machine.duration_years}y * ${DAYS_PER_YEAR}d/y * ${uptime_avgHoursPerDay}h/d [uptime] = ${usage.gigabyteHours}gigabytehours [total per instance], ${machine.instances_number} [instances], ${machine.memoryCoefficient_kWhPerGb}kwh/gb, ${constants.powerUsageEffectiveness}% [pue], ${constants.replicationFactor} [replication factor], ${zombieFactor} [zombie factor], ${emissionsFactors[this.REGION]}gCO2eq/kWh [emission factor], `
+        return this.asImpact(estimates, zombieFactor, machine.instances_number, formula);
     }
 
     private estimateEmbodiedEmissions(machine: IMachine, emissionsFactors: CloudConstantsEmissionsFactors) {
