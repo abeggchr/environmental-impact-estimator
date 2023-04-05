@@ -42,6 +42,7 @@
 * land
 * pollution
 * water
+* resource extraction
 
 #### Simulation: 
 

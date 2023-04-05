@@ -31,6 +31,7 @@
 * land
 * pollution
 * water
+* resource extraction
 
 #### Reduction measures
 
