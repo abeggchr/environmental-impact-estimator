@@ -61,7 +61,7 @@ export class DevelopmentTeam implements ITeam {
 
     emissionFactor_gC02eqPerKWh = {mainLocation: EmissionFactor.SWITZERLAND_CONSUMPTION, remoteLocation: EmissionFactor.BULGARIA};
 
-    workLocation_percentage = {office: 0.5, home: 0.5};
+    workLocation_percentage = {office: 0.8, home: 0.2};
 
     workingHours_perDay = 8.4;
 

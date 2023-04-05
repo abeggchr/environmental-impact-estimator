@@ -2,11 +2,11 @@ import {describe, expect, test} from 'vitest'
 import {testTeam} from "../common/testing/testTeam";
 import {testMachine} from "../common/testing/testMachine";
 import {testUsage} from "../common/testing/testUsage";
-import {OnlyHomeOffice} from "./OnlyHomeOffice";
+import {IncreaseHomeOfficeTo80Percent} from "./IncreaseHomeOfficeTo80Percent";
 
-describe('OnlyHomeOffice', () => {
+describe('IncreaseHomeOfficeTo80Percent', () => {
     test('decorates workLocation_percentage', () => {
-        const sut = new OnlyHomeOffice({
+        const sut = new IncreaseHomeOfficeTo80Percent({
             teams: [{
                 ...testTeam, workLocation_percentage: {
                     home: 0.5,
