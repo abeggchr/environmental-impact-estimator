@@ -13,7 +13,13 @@ export class BaselineUsage implements IUsage {
     workplaceEmbodiedEmissions_gC02eq = this.developmentTeam.workplaceEmbodiedEmissions_gCO2eq;
     workplaceExpectedLifespan_years = this.developmentTeam.workplaceExpectedLifespan_years;
     initialRequest_gb = 0.0035; // 3.5mb
-    trafficCoefficient_kWhPerGb = 0.06;  // Source: https://www.cloudcarbonfootprint.org/docs/methodology/#appendix-iv-recent-networking-studies
+
+    /**
+     * Sources:
+     * [1] https://www.cloudcarbonfootprint.org/docs/methodology/#appendix-iv-recent-networking-studies: 0.06
+     * [2] http://www.vs.inf.ethz.ch/publ/papers/Coroama2021_InternetEnergy.pdf: 0.02 - 0.7
+     */
+    trafficCoefficient_kWhPerGb = 0.06;
     trafficEmissionFactor_gC02eqPerKWh = EmissionFactor.EUROPE;
     usagePerUserAndBusinessDay_h = 1; // application is used 1 hour
     requestsPerBusinessDayAndUser_nr = 3 * 60 * 1; // 3 request per minute and user during 1h of usage
