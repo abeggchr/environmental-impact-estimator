@@ -2,7 +2,7 @@ import {ProjectDecorator} from "./ProjectDecorator";
 import {ITeam} from "../interfaces/ITeam";
 import {IMachine} from "../interfaces/IMachine";
 import {IUsage} from "../interfaces/IUsage"
-import {EmissionFactor} from "../common/testing/EmissionFactor";
+import {EmissionFactor} from "../common/EmissionFactor";
 
 export class EatVegetarian extends ProjectDecorator {
 

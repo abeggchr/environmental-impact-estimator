@@ -1,5 +1,5 @@
 import {UseCloud} from "./UseCloud";
-import {DoubleUtilization} from "./DoubleUtilization";
+import {ReduceCoresAndMemoryBy50Percent} from "./ReduceCoresAndMemoryBy50Percent";
 import {ExtendHardwareLifespanBy1Year} from "./ExtendHardwareLifespanBy1Year";
 import {NoDistributedDevelopment} from "./NoDistributedDevelopment";
 import {NoZombieServers} from "./NoZombieServers";
@@ -11,6 +11,5 @@ import {UseGreenEnergy} from "./UseGreenEnergy";
 import {UseContinuousIntegrationAsService} from "./UseContinuousIntegrationAsService";
 import {NoHotStandby} from "./NoHotStandby";
 import {EatVegetarian} from "./EatVegetarian";
-import {ReduceMemoryBy50Percent} from "./ReduceMemoryBy50Percent";
 
-export const allDecorators = [ReduceMemoryBy50Percent, EatVegetarian, NoHotStandby, UseContinuousIntegrationAsService, UseCloud, DoubleUtilization, ExtendHardwareLifespanBy1Year, NoDistributedDevelopment, NoZombieServers, OnlyHomeOffice, ReduceIndividualTrafficBy25Percent, ReduceInternetTrafficBy25Percent, ScaleToZero, UseGreenEnergy];
+export const allDecorators = [EatVegetarian, NoHotStandby, UseContinuousIntegrationAsService, UseCloud, ReduceCoresAndMemoryBy50Percent, ExtendHardwareLifespanBy1Year, NoDistributedDevelopment, NoZombieServers, OnlyHomeOffice, ReduceIndividualTrafficBy25Percent, ReduceInternetTrafficBy25Percent, ScaleToZero, UseGreenEnergy];

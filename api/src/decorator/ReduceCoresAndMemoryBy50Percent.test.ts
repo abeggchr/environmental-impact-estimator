@@ -2,13 +2,13 @@ import {describe, expect, test} from 'vitest'
 import {testTeam} from "../common/testing/testTeam";
 import {testUsage} from "../common/testing/testUsage";
 import {Machine, SeriesName, UsageType} from "../scenario/machine/Machine";
-import {DoubleUtilization} from "./DoubleUtilization";
+import {ReduceCoresAndMemoryBy50Percent} from "./ReduceCoresAndMemoryBy50Percent";
 
-describe('DoubleUtilization', () => {
+describe('ReduceCoresAndMemoryBy50Percent', () => {
     test('creates a machine half as powerful as the given machine with the most RAM', () => {
         const machine = new UnitTestMachine("Av2 Standard", "A4m v2");
 
-        const sut = new DoubleUtilization({
+        const sut = new ReduceCoresAndMemoryBy50Percent({
             teams: [testTeam],
             machines: [machine],
             usage: testUsage
@@ -23,7 +23,7 @@ describe('DoubleUtilization', () => {
     test('doubles utilization', () => {
         const machine = new UnitTestMachine("Av2 Standard", "A4m v2");
 
-        const sut = new DoubleUtilization({
+        const sut = new ReduceCoresAndMemoryBy50Percent({
             teams: [testTeam],
             machines: [machine],
             usage: testUsage
@@ -37,7 +37,7 @@ describe('DoubleUtilization', () => {
     test('does not change other attributes', () => {
         const machine = new UnitTestMachine("Av2 Standard", "A4m v2");
 
-        const sut = new DoubleUtilization({
+        const sut = new ReduceCoresAndMemoryBy50Percent({
             teams: [testTeam],
             machines: [machine],
             usage: testUsage

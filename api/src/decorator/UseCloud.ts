@@ -1,7 +1,7 @@
 import {ProjectDecorator} from "./ProjectDecorator";
 import {IMachine} from "../interfaces/IMachine";
 import {AZURE_CLOUD_CONSTANTS} from "@cloud-carbon-footprint/azure";
-import {EmissionFactor} from "../common/testing/EmissionFactor";
+import {EmissionFactor} from "../common/EmissionFactor";
 
 /**
  * Hosting the virtual machines in the Azure cloud.

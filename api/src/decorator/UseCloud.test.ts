@@ -4,7 +4,7 @@ import {testMachine} from "../common/testing/testMachine";
 import {testUsage} from "../common/testing/testUsage";
 import {UseCloud} from "./UseCloud";
 import {AZURE_CLOUD_CONSTANTS} from "@cloud-carbon-footprint/azure";
-import {EmissionFactor} from "../common/testing/EmissionFactor";
+import {EmissionFactor} from "../common/EmissionFactor";
 
 describe('UseCloud', () => {
     test('decorates machine pue', () => {

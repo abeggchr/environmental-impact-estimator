@@ -1,7 +1,7 @@
 import {IUsage} from "../../interfaces/IUsage";
 import {DevelopmentTeam} from "../team/DevelopmentTeam";
 import {MaintenanceTeam} from "../team/MaintenanceTeam";
-import {EmissionFactor} from "../../common/testing/EmissionFactor";
+import {EmissionFactor} from "../../common/EmissionFactor";
 
 export class BaselineUsage implements IUsage {
 

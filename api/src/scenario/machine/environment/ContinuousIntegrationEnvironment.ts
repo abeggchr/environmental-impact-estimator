@@ -13,7 +13,7 @@ export class ContinuousIntegrationEnvironment extends Machine {
     public static MACHINE_NAME = 'ci-environment';
 
     constructor() {
-        super('Av2 Standard', 'A2m v2');
+        super('Av2 Standard', 'A8 v2');
     }
 
     /**

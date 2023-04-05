@@ -1,5 +1,5 @@
 import {ITeam} from "../../interfaces/ITeam";
-import {EmissionFactor} from "../../common/testing/EmissionFactor";
+import {EmissionFactor} from "../../common/EmissionFactor";
 
 export class DevelopmentTeam implements ITeam {
 
