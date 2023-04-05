@@ -3,7 +3,7 @@ import {BUSINESS_DAYS_PER_YEAR} from "../common/Constants";
 import {IUsage} from "../../interfaces/IUsage";
 import {wattHoursToKiloWattHours} from "../../common/testing/unitConversion";
 
-export class WorkEstimator {
+export class ElectricityEstimator {
 
     public estimate(usage: IUsage): Impact {
         const gC02eq = wattHoursToKiloWattHours((usage.workplacePowerUsage_W  * BUSINESS_DAYS_PER_YEAR * usage.duration_years * usage.usagePerUserAndBusinessDay_h)) *  usage.users_nr * usage.workplaceEmissionFactor_gC02eqPerKWh;

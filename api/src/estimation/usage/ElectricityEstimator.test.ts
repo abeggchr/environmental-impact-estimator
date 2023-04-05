@@ -1,13 +1,13 @@
 import {describe, expect, test} from "vitest";
-import {WorkEstimator} from "./WorkEstimator";
+import {ElectricityEstimator} from "./ElectricityEstimator";
 import {BUSINESS_DAYS_PER_YEAR} from "../common/Constants";
 import {testUsage} from "../../common/testing/testUsage";
 import {wattHoursToKiloWattHours} from "../../common/testing/unitConversion";
 
-describe("WorkEstimator", () => {
+describe("ElectricityEstimator", () => {
     
     test("estimates main location impact", () => {
-        const actual = new WorkEstimator().estimate({
+        const actual = new ElectricityEstimator().estimate({
             ...testUsage
         });
 
