@@ -11,5 +11,6 @@ import {UseGreenEnergy} from "./UseGreenEnergy";
 import {UseContinuousIntegrationAsService} from "./UseContinuousIntegrationAsService";
 import {NoHotStandby} from "./NoHotStandby";
 import {EatVegetarian} from "./EatVegetarian";
+import {ApplyCarbonAwareness} from "./ApplyCarbonAwareness";
 
-export const allDecorators = [EatVegetarian, NoHotStandby, UseContinuousIntegrationAsService, UseCloud, ReduceCoresAndMemoryBy50Percent, ExtendHardwareLifespanBy1Year, NoDistributedDevelopment, NoZombieServers, IncreaseHomeOfficeTo60Percent, ReduceIndividualTrafficBy25Percent, ReduceInternetTrafficBy25Percent, ScaleToZero, UseGreenEnergy];
+export const allDecorators = [EatVegetarian, NoHotStandby, UseContinuousIntegrationAsService, UseCloud, ReduceCoresAndMemoryBy50Percent, ExtendHardwareLifespanBy1Year, NoDistributedDevelopment, NoZombieServers, ApplyCarbonAwareness, IncreaseHomeOfficeTo60Percent, ReduceIndividualTrafficBy25Percent, ReduceInternetTrafficBy25Percent, ScaleToZero, UseGreenEnergy];

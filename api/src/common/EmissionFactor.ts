@@ -27,4 +27,6 @@ export class EmissionFactor {
 
     static GREEN_VIDEOCONFERENCE_EMISSION_FACTOR = 40; // Source: https://www.mobitool.ch/de/tools/mobitool-faktoren-v2-1-25.html?tag=3
     static VIDEOCONFERENCE_EMISSION_FACTOR = 45; // Source: https://www.mobitool.ch/de/tools/mobitool-faktoren-v2-1-25.html?tag=3
+
+    static CARBON_AWARE = 10;
 }
