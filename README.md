@@ -3,7 +3,7 @@
 ## Purpose
 
 This tool estimates the carbon footprint for an average enterprise software project.
-A set of decorates allows to play around to see the impact of different optimization measures.
+A set of decorates allows to play around to see the impact of different emission reduction measures.
 
 ## Getting started
 
@@ -17,7 +17,7 @@ The easiest way to start is to run and adopt `MasterTest` in the `api` project.
 
 ### Starting the web frontend
 
-There's a frontend, but not much visible there. Lot's of ideas though!
+There's a frontend, but not much visible there.
 
 1. Clone repo
 2. `cd api`
@@ -39,6 +39,8 @@ The maintenance team does not use near-shoring.
 
 The software is used by 9000 users distributed across Europe.
 Each user uses the software during 1h per business day during 8 years.
+
+![team structure](./api/src/scenario/team/team.png)
 
 The usage is equally distributed over the day - except for the time between 11 and 14 o'clock where the load is doubled.
 

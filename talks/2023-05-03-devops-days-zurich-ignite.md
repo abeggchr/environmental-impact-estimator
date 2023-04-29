@@ -112,7 +112,7 @@ After that, for the following 8 years, the software is maintained by 2 engineers
 The simulation led to an estimated amount of greenhouse gas emissions of roughly 100t
 in the areas we as engineers can directly influence. 
 
-That is the volume of 14'000 fire extinguishers.
+That can be packed into 300'000 fire extinguishers. // Note: showing an extinguisher with a volume of 1l, a 2kg C02 fire extinguisher has a volume of 6l, so 1l takes 0.33kg of C02, so for 100t it takes 300'000l
 And it would require 2 football pitches full of trees to remove the emissions from the atmosphere.
 
 Now, let's reduce these emissions by applying the various measures - ordered by their impact.
@@ -120,22 +120,21 @@ First: All engineers are working in the same country and thus avoiding flights, 
 
 Second: Cutting the cores and the memory used by the VM in half decreases emissions by 15%
 
-Third: Increasing the power usage efficiency in the data center by moving to a hyperscaler 
-and profiting from its better emission factor - 8%
+Third: Increasing the power usage efficiency in the data center by moving to a hyperscaler and profiting from its lower emission factor, 8%
 
-Forth: Studies say that 30% of the resources are zombie resources. Let's remove them and gain 7%.
+Four: Studies say that 30% of the resources unused over months, they are comatose. Let's decomission these zombie resources and gain 7%.
 
 Five: Switching servers off when the application is not used outside of business hours - 8%
-Seven: Using a cloud-hosted continuous integration solution instead of our own - 7%
+Six: Using a cloud-hosted continuous integration solution instead of our own - 7%
 
-Eight: Using to a green electricity product - 7%
-Nine: Increaseing home office from 1 to 3 days - 7%
+Seven: Using to a green electricity product - 7%
+Eigth: Increasing home office from 1 to 3 days - 7%
 
-Ten: Relaxing hot-standby requirements and use an infrastructure as code approach to quickly recover - 1%
-Eleven: Reducing the internet traffic by a quarter reduces the emissions by another 5%
+Nine: Eating vegeratian lunches - 6%
+Ten: Extending the lifespan of dev boxes and servers by one year - 5%
 
 You see, we have a lot of possibilities. 
-And with all of them combined we were able to reduce the simulated projects emissions by 3 quarters.
+And with all of them combined we were able to reduce the simulated projects emissions - in the area we can directly influence - by 3 quarters.
 
 Now, you probably can not apply all the measures in your projects.
 But even if everybody in this room applies one of the measures we can already save tons of emissions.
