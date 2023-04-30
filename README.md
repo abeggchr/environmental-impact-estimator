@@ -7,12 +7,12 @@ A set of decorates allows to play around to see the impact of different emission
 
 ## Getting started
 
-The easiest way to start is to run and adopt `MasterTest` in the `api` project.
+The easiest way to start is to run and adopt `AllDecorators` in the `api` project.
 
 1. Clone repo
 2. `cd api`
 3. `npm i`
-4. `npm run test -- Master.test.ts`
+4. `npm run test -- AllDecorators.test.ts`
 5. Inspect the console log. You'll see the estimates for the baseline plus the decorated (aka. optimized) version. It's a CSV, so for advanced analysis, copy it to Excel.
 
 ### Starting the web frontend
