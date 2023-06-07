@@ -2,8 +2,13 @@
 
 ## Purpose
 
-This tool estimates the carbon footprint for an average enterprise software project.
-A set of decorates allows to play around to see the impact of different emission reduction measures.
+This tool estimates the carbon footprint for a hypothetical, average business software project.
+A set of decorators allows to play around to see the impact of different emission reduction measures.
+
+## Disclaimer
+
+This estimator uses a pragmatic approach to get a rough understanding.
+Is is in no way intended to be scientific and might have major flaws.
 
 ## Getting started
 
