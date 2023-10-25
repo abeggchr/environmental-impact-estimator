@@ -37,7 +37,7 @@ embodied emissions
 travel
 
 #### Wordcloud End
-
+ 
 mainly: power, travel, embodied emissions, lifespan
 less: green coding, sustainable ux, data reduction, 
 
